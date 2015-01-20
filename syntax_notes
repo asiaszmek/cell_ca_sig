@@ -1,0 +1,23 @@
+*action species[(state)] face action
+	species: all
+	face: front, back, both
+	action: reflect, absorb, transmit, jump, port, periodic
+
+*rate species[(state)] state1 state2 value [new_spec]
+	species: all
+	state1/state2: fsoln, bsoln, front, back, up, down
+	value: rate constant or rate coefficient
+
+*polygon face drawmode
+	face:front, back, both
+	drawmode:none, vertex, edge, face
+
+*panel shape float ... float
+ 	shape:rect, tri, sp, cyl, hemi, disk
+	panel rect +/-axis corner_point corner_point corner_point axes_dim axes_dim		
+	panel tri corner0 corner0 corner0 corner1 corner1 corner1 corner2 corner2 corner2
+	panel sph center center center raidu slices(longitude) stacks(latitude)
+	panel cyl axis_start axis_start axis_start axis_end axis_end axis_end radius slices stacks 
+	panel hemi center center center radius out_vec out_vec out_vec
+	panel disk center center center radius vec vec vec slices
+
