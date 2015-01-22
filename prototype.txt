@@ -10,18 +10,21 @@ units: nm us
 #how to code geometry of the nanodomain
 #multiple sources of ca (more than one channels)
 #get rid of the black edged box
+#how to make the graphics interactive?
 
 #-------------General parameters-------
 
 graphics opengl
 graphic_iter 1
+frame_thickness 0
+frame_color 1 1 1
 
 dim 3
 accuracy 5
 
-boundaries 0 -100 100
-boundaries 1 -100 100
-boundaries 2 -100 100
+boundaries 0 -5000 5000
+boundaries 1 -5000 5000
+boundaries 2 -5000 5000
 
 time_start 0
 time_stop  1000
@@ -33,57 +36,67 @@ species ca
 species cam-ca
 
 display_size ca 1
-display_size cam 3
-display_size cam-ca 3
+display_size cam 2
+display_size cam-ca 2
 color ca red
 color cam black
-color cam-ca blue
+color cam-ca cyan
 
 difc ca		600	#nm^2 us^(-1)
 difc cam	50
-difc cam-ca 	50
+difc cam-ca 	50	#assumption	
 
-mol 100 ca 0 10 10
-mol 100 ca 10 0 10
-mol 25 cam  u 1 10
-mol 0  cam-ca  u u u
 #------------surfaces------------------
 start_surface cell
-action both ca reflect
-action both cam transmit
-action both cam-ca transmit
-color both none
+action both all reflect
+color both grey 0.05
 polygon both edge 
-panel s 0 0 0 60 100 100
-
-surface_mol 100 ca 0 60 0
-surface_mol 100 ca 0 0 60
-
+#cell membrane
+panel s 0 0 0 4000 100 100 membrane
 end_surface
 
 start_surface nucleus
-action all transmit
-colot both grey
+action all both transmit
+color both grey 0.1
 polygon both edge
-panel s 0 0 0 20 30 30
+panel s 0 0 0 1500 50 50
+end_surface
+
+start_surface shell
+action all both transmit
+color both grey 0.05
+polygon both edge
+panel s 0 0 0 3500 80 80
 end_surface
 
 start_compartment nucleus
 surface nucleus
-point 0 0 0
+point 0 0 1000
 end_compartment
 
-start_compartment cell
+start_compartment shell
 surface cell
-point 0 0 0
+point 0 0 3600
+end_compartment
+
+start_compartment cytosol
+surface shell
 compartment andnot nucleus
 end_compartment
 
-compartment_mol 
-
 #-----------reactions------------------
-reaction bound	ca + cam -> cam-ca	1.309*1000	#nm^3 us^(-1)	
-reaction unbound	cam-ca -> ca + cam	0.16		#us^(-1)
+reaction_cmpt shell bound	ca + cam -> cam-ca	1.309*1000	#nm^3 us^(-1)	
+reaction_cmpt shell unbound	cam-ca -> ca + cam	0.16		#us^(-1)
+
+#------------molecules in compartment--
+#two ca channels
+#surface_mol 100 ca(front) cell s membrane 0 60 0 
+#surface_mol 100 ca(front) cell s membrane 0 0 60
+mol 500 ca 0 4000 0
+mol 500 ca 0 0 4000
+mol 500 ca 4000 0 0
+compartment_mol 25 cam shell
+compartment_mol 0  cam-ca  shell
 
 #------------commands------------------
 #cmd e pointsource ca 50 10 10 10
