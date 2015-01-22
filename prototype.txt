@@ -14,13 +14,17 @@ units: nm us
 
 #-------------General parameters-------
 
-graphics opengl
+graphics opengl_good
 graphic_iter 1
 frame_thickness 0
 frame_color 1 1 1
 
+#grid_thickness 1
+
 dim 3
-accuracy 5
+accuracy 10
+
+boxsize 100
 
 boundaries 0 -5000 5000
 boundaries 1 -5000 5000
@@ -55,6 +59,13 @@ polygon both edge
 panel s 0 0 0 4000 100 100 membrane
 end_surface
 
+start_surface nano
+action both all transmit
+color both grey 0.05
+polygon both edge
+panel s 0 4000 0 50 10 10 nano0
+end_surface
+
 start_surface nucleus
 action all both transmit
 color both grey 0.1
@@ -79,11 +90,24 @@ surface cell
 point 0 0 3600
 end_compartment
 
+/*
 start_compartment cytosol
+surface nucleus
+#compartment andnot nucleus
 surface shell
-compartment andnot nucleus
+end_compartment
+*/
+
+start_compartment nano
+surface nano
+point 0 4000 0
 end_compartment
 
+start_compartment nano0
+surface nano
+surface cell
+point 0 3995 0
+end_compartment
 #-----------reactions------------------
 reaction_cmpt shell bound	ca + cam -> cam-ca	1.309*1000	#nm^3 us^(-1)	
 reaction_cmpt shell unbound	cam-ca -> ca + cam	0.16		#us^(-1)
@@ -95,8 +119,8 @@ reaction_cmpt shell unbound	cam-ca -> ca + cam	0.16		#us^(-1)
 mol 500 ca 0 4000 0
 mol 500 ca 0 0 4000
 mol 500 ca 4000 0 0
-compartment_mol 25 cam shell
-compartment_mol 0  cam-ca  shell
+compartment_mol 25 cam nano0
+compartment_mol 0  cam-ca  nano0
 
 #------------commands------------------
 #cmd e pointsource ca 50 10 10 10
