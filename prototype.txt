@@ -24,11 +24,11 @@ frame_color 1 1 1
 dim 3
 accuracy 10
 
-boxsize 100
+boxsize 1
 
-boundaries 0 -5000 5000
-boundaries 1 -5000 5000
-boundaries 2 -5000 5000
+boundaries 0 -50 50 	#-5000 5000
+boundaries 1 -50 50	#-5000 5000
+boundaries 2 -50 50	#-5000 5000
 
 time_start 0
 time_stop  1000
@@ -39,40 +39,44 @@ species cam
 species ca
 species cam-ca
 
-display_size ca 1
-display_size cam 2
-display_size cam-ca 2
+display_size ca 0.1
+display_size cam 0.5
+display_size cam-ca 0.5
 color ca red
 color cam black
 color cam-ca cyan
 
-difc ca		600	#nm^2 us^(-1)
+difc ca		60	#nm^2 us^(-1)
 difc cam	50
 difc cam-ca 	50	#assumption	
 
 #------------surfaces------------------
 start_surface cell
 action both all reflect
-color both grey 0.05
-polygon both edge 
+color both grey 0.1
+polygon both face 
 #cell membrane
-panel s 0 0 0 4000 100 100 membrane
+#panel s 0 0 0 4000 100 100 membrane
+panel r +0 0 -500 -500 1000 1000 membrane
 end_surface
 
 start_surface nano
-action both all transmit
-color both grey 0.05
+action both all t
+color both grey 1
 polygon both edge
-panel s 0 4000 0 50 10 10 nano0
+#panel s 0 4000 0 50 10 10 nano0
+panel s 0 0 0 10 10 10 nano0
 end_surface
 
+/*
 start_surface nucleus
 action all both transmit
 color both grey 0.1
 polygon both edge
 panel s 0 0 0 1500 50 50
 end_surface
-
+*/
+/*
 start_surface shell
 action all both transmit
 color both grey 0.05
@@ -80,15 +84,19 @@ polygon both edge
 panel s 0 0 0 3500 80 80
 end_surface
 
+/*
 start_compartment nucleus
 surface nucleus
 point 0 0 1000
 end_compartment
+*/
 
+/*
 start_compartment shell
 surface cell
 point 0 0 3600
 end_compartment
+*/
 
 /*
 start_compartment cytosol
@@ -100,30 +108,32 @@ end_compartment
 
 start_compartment nano
 surface nano
-point 0 4000 0
+point 0 0 0
 end_compartment
 
 start_compartment nano0
 surface nano
 surface cell
-point 0 3995 0
+point 0 0 1
 end_compartment
 #-----------reactions------------------
-reaction_cmpt shell bound	ca + cam -> cam-ca	1.309*1000	#nm^3 us^(-1)	
-reaction_cmpt shell unbound	cam-ca -> ca + cam	0.16		#us^(-1)
+reaction_cmpt nano0 bound	ca + cam -> cam-ca	1.309*1000	#nm^3 us^(-1)	
+reaction_cmpt nano0 unbound	cam-ca -> ca + cam	0.16		#us^(-1)
 
 #------------molecules in compartment--
 #two ca channels
 #surface_mol 100 ca(front) cell s membrane 0 60 0 
 #surface_mol 100 ca(front) cell s membrane 0 0 60
-mol 500 ca 0 4000 0
-mol 500 ca 0 0 4000
-mol 500 ca 4000 0 0
+#mol 500 ca 0 0 0
 compartment_mol 25 cam nano0
 compartment_mol 0  cam-ca  nano0
 
 #------------commands------------------
-#cmd e pointsource ca 50 10 10 10
+cmd e pointsource ca 5 0 0 0
+text_display ca
+text_display cam
+text_display cam-ca
 cmd b pause
 
+tiff_name prototype
 end_file
