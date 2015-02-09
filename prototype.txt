@@ -26,9 +26,9 @@ accuracy 10
 
 boxsize 1
 
-boundaries 0 -50 50 	#-5000 5000
-boundaries 1 -50 50	#-5000 5000
-boundaries 2 -50 50	#-5000 5000
+boundaries 0 -20 20 	#-5000 5000
+boundaries 1 -20 20	#-5000 5000
+boundaries 2 -20 20	#-5000 5000
 
 time_start 0
 time_stop  1000
@@ -57,7 +57,8 @@ color both grey 0.1
 polygon both face 
 #cell membrane
 #panel s 0 0 0 4000 100 100 membrane
-panel r +0 0 -500 -500 1000 1000 membrane
+#panel r +0 0 -500 -500 1000 1000 membrane
+read_file Plane
 end_surface
 
 start_surface nano
@@ -65,17 +66,11 @@ action both all t
 color both grey 1
 polygon both edge
 #panel s 0 4000 0 50 10 10 nano0
-panel s 0 0 0 10 10 10 nano0
+#panel s 0 0 0 10 10 10 nano0
+read_file Sphere
 end_surface
 
-/*
-start_surface nucleus
-action all both transmit
-color both grey 0.1
-polygon both edge
-panel s 0 0 0 1500 50 50
-end_surface
-*/
+
 /*
 start_surface shell
 action all both transmit
@@ -84,32 +79,11 @@ polygon both edge
 panel s 0 0 0 3500 80 80
 end_surface
 
-/*
-start_compartment nucleus
-surface nucleus
-point 0 0 1000
-end_compartment
-*/
-
-/*
-start_compartment shell
-surface cell
-point 0 0 3600
-end_compartment
-*/
-
-/*
-start_compartment cytosol
-surface nucleus
-#compartment andnot nucleus
-surface shell
-end_compartment
-*/
-
 start_compartment nano
 surface nano
 point 0 0 0
 end_compartment
+*/
 
 start_compartment nano0
 surface nano

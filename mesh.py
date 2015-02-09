@@ -1,7 +1,7 @@
 import numpy as np
 vertex=[]
 flag=0
-f=open("mesh.obj","r")
+f=open("mesh_v1.obj","r")
 fw=""
 
 for line in f:
