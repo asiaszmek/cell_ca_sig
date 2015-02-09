@@ -90,7 +90,7 @@ reaction_cmpt nano  n_unbound	cam-ca -> ca_nano + cam	0.16		#us^(-1)
 
 reaction_surface shell 	ca_diff	ca_nano -> ca_cytol
 reaction_cmpt cytol c_bound  	ca_cytol + cam -> cam-ca 1.309/1000000 
-reaction_cmpt cytol c_unbound	cam-ca -> ca_cytol + cam 0.16	
+reaction_cmpt cytol c_unbound	cam-ca -> ca_cytol + cam 	
 #------------molecules in compartment--
 
 mol 1000 ca_nano 0 	 0     4.99
