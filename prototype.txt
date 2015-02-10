@@ -61,14 +61,14 @@ difc ca_cytol   600/1000000
 #------------surfaces------------------
 start_surface cell
 action both all reflect
-color both black 0.1
+color both black 0
 polygon both edge 
 #cell membrane
 read_file cell
 end_surface
 
 start_surface shell
-action both all t
+action both all r #t
 color both grey 0.5
 polygon both edge
 read_file shell
@@ -77,7 +77,13 @@ end_surface
 start_compartment nano
 surface shell
 surface cell
-point 0 0 4.95
+point 0		0 		4.95
+point 0 	4.95  	0
+point 4.95	0		0
+point 0		0		-4.95
+point 0		-4.95	0
+point -4.95	0		0
+
 end_compartment
 
 start_compartment cytol
@@ -93,11 +99,14 @@ reaction_cmpt cytol c_bound  	ca_cytol + cam -> cam-ca 1.309/1000000
 reaction_cmpt cytol c_unbound	cam-ca -> ca_cytol + cam 0.16	
 #------------molecules in compartment--
 
-mol 1000 ca_nano 0 	 0     4.99
-mol 1000 ca_nano 0 	 4.99  0
-mol 1000 ca_nano 4.99 0     0
+mol 1000 ca_nano  0 	 0     4.99
+mol 1000 ca_nano  0 	 4.99  0
+mol 1000 ca_nano  4.99 	 0     0
+mol 1000 ca_nano  0 	 0	  -4.99
+mol 1000 ca_nano  0		-4.99  0
+mol 1000 ca_nano -4.99	 0 	   0 
 
-compartment_mol 250 cam nano
+compartment_mol 150 cam nano
 compartment_mol 0  cam-ca  nano
 
 #------------commands------------------
