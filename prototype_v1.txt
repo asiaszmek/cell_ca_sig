@@ -29,7 +29,7 @@ dim 3
 accuracy 10
 
 #boxsize 0.5
-molperbox 3.5
+molperbox 1
 
 boundaries 0 -6 6 	#-5000 5000
 boundaries 1 -6 6	#-5000 5000
@@ -64,22 +64,30 @@ difc cam-ca 		50*10e-6	#assumption
 difc calbindin		50*10e-6
 difc calbindin-ca	50*10e-6
 
-define cam_kon		7.7*0.17*10e-6 
-define cam_koff		0.16
+define camNT_kon		7.7*0.17*10e-6 	#um^3 us^(-1)
+define camNT_koff			0.16		#us^(-1)
+define camNR_kon
+define camNR_koff
+define camCT_kon
+define camCT_koff
+define camCR_kon
+define camCR_koff
+
+
 define calbin_kon	7.5*0.17*10e-7
 define calbin_koff	29.5*10e-6
 
 #------------surfaces------------------
 start_surface cell
 action both all reflect
-color both black 0.3
+color both black 0
 polygon both edge 
 #cell membrane
 read_file cell
 end_surface
 
 start_surface shell
-action both all r #t
+action both all t
 color both grey 0.5
 polygon both edge
 read_file shell
@@ -99,28 +107,30 @@ end_compartment
 
 start_compartment cytol
 surface shell
+surface cell
+#compartment andnot nano
 point 0 0 0
 end_compartment
 #-----------reactions------------------
-reaction   cam1	ca + cam -> cam-ca	cam_kon			#nm^3 us^(-1)	
-reaction   cam2	cam-ca -> ca + cam	cam_koff		#us^(-1)
+reaction   cam1	ca + cam -> cam-ca	cam_kon				
+reaction   cam2	cam-ca -> ca + cam	cam_koff		
 
 reaction_cmpt cytol calbin1 ca + calbindin -> calbindin-ca	calbin_kon 
 reaction_cmpt cytol calbin2 calbindin-ca -> ca + calbindin  	calbin_koff
 #------------molecules in compartment--
 
-mol 100 ca  0 	   0     4.99
-mol 100 ca  0 	   4.99  0
-mol 100 ca  4.99  0     0
-mol 100 ca  0 	   0	 -4.99
-mol 100 ca  0	  -4.99  0
-mol 100 ca -4.99  0 	 0 	 
+mol 1000  ca  0 	   0     4.99
+mol 1000  ca  0 	   4.99  0
+mol 1000  ca  4.99  0     0
+mol 1000  ca  0 	   0	 -4.99
+mol 1000  ca  0	  -4.99  0
+mol 1000  ca -4.99  0 	 0 	 
 
 compartment_mol 150 cam 		nano
 compartment_mol 0   cam-ca  		nano
-compartment_mol 0 calbindin 		cytol
+compartment_mol 500 calbindin 		cytol
 compartment_mol 0   calbindin-ca  	cytol
-compartment_mol 0 cam			cytol
+compartment_mol 500 cam			cytol
 #------------commands------------------
 #cmd e pointsource ca 5 0 0 4.99 
 #cmd e pointsource ca 5 0 4.99 0
@@ -131,8 +141,13 @@ text_display cam
 text_display cam-ca
 text_display calbindin
 text_display calbindin-ca
+
 cmd b pause
+output_root results/
+output_files nanomols.txt
+output_files cytolmols.txt
+cmd e molcountincmpt nano nanomols.txt
+cmd e molcountincmpts cytol cytolmols.txt
 
 #tiff_name prototype
-
 end_file
