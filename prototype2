@@ -16,12 +16,9 @@ units: um us
 #how to create multiple nanodomains?
 #depending on the size of nanodomain (cluster), ca2+ will choose to spread horizontally or radially
 
-#compartment specific diffuion? or adding calbindin molecules
-# molecule numbers in compartments.
-
 #-------------General parameters-------
 
-graphics opengl
+graphics opengl_good
 graphic_iter 1
 frame_thickness 0
 frame_color 1 1 1
@@ -31,8 +28,7 @@ frame_color 1 1 1
 dim 3
 accuracy 10
 
-#boxsize 0.2
-molperbox 5  #this runs faster
+boxsize 0.2
 
 boundaries 0 -6 6 	#-5000 5000
 boundaries 1 -6 6	#-5000 5000
@@ -43,24 +39,20 @@ time_stop  1000
 time_step  0.001
 
 #-------------Molecules----------------
-species ca_nano
-species ca_cytol
+species ca
 species cam
 species cam-ca
 
-display_size ca_nano 0.02
-display_size ca_cytol 0.02
+display_size ca 0.02
 display_size cam 0.02
 display_size cam-ca 0.02
-color ca_nano red
+color ca red
 color cam black
 color cam-ca cyan
-color ca_cytol green
 
-difc ca_nano		0.01/1000000	#um^2 us^(-1)
+difc ca		60/1000000	#nm^2 us^(-1)
 difc cam	50/1000000
 difc cam-ca 	50/1000000	#assumption	
-difc ca_cytol   600/1000000
 
 #------------surfaces------------------
 start_surface cell
@@ -93,29 +85,21 @@ end_compartment
 start_compartment cytol
 surface shell
 point 0 0 0
-
 end_compartment
 #-----------reactions------------------
-reaction_cmpt nano  n_bound	ca_nano + cam -> cam-ca	 1.309/1000000	#nm^3 us^(-1)	
-reaction_cmpt nano  n_unbound	cam-ca -> ca_nano + cam	  0.16		#us^(-1)
-reaction_cmpt nano	ca_diff1	ca_cytol -> ca_nano 60/1000000
+reaction   n_bound	ca + cam -> cam-ca	1.309/1000000	#nm^3 us^(-1)	
+reaction   n_unbound	cam-ca -> ca + cam	  0.16		#us^(-1)
 
-reaction_cmpt cytol 	ca_diff0	ca_nano -> ca_cytol 600/1000000
-reaction_probability ca_diff0 1
-reaction_probability ca_diff1 1
-reaction_cmpt cytol c_bound  	ca_cytol + cam -> cam-ca 1.309/1000000 
-reaction_cmpt cytol c_unbound	cam-ca -> ca_cytol + cam   0.16	
 #------------molecules in compartment--
 
-mol 1000 ca_nano  0 	 0     4.99 
-mol 1000 ca_nano  0 	 4.99  0
-mol 1000 ca_nano  4.99 	 0     0
-mol 1000 ca_nano  0 	 0	  -4.99
-mol 1000 ca_nano  0		-4.99  0
-mol 1000 ca_nano -4.99	 0 	   0 
+mol 1000 ca  0 	 0     4.99
+mol 1000 ca  0 	 4.99  0
+mol 1000 ca  4.99 	 0     0
+mol 1000 ca  0 	 0	  -4.99
+mol 1000 ca  0		-4.99  0
+mol 1000 ca -4.99	 0 	   0 
 
-compartment_mol 150 cam nano
-mol 500 cam 0 0 0
+compartment_mol 25 cam nano
 compartment_mol 0  cam-ca  nano
 
 #------------commands------------------
@@ -123,13 +107,10 @@ compartment_mol 0  cam-ca  nano
 #cmd e pointsource ca 5 0 4.99 0
 #cmd e pointsource ca 5 4.99 0 0
 
-text_display ca_nano
-text_display ca_cytol
+text_display ca
 text_display cam
 text_display cam-ca
 cmd b pause
-cmd n 5 molcountincmpt cytol cytolmols
-cmd n 5 molcountincmpt nano nanomols
 
 #tiff_name prototype
 end_file

@@ -16,9 +16,6 @@ units: um us
 #how to create multiple nanodomains?
 #depending on the size of nanodomain (cluster), ca2+ will choose to spread horizontally or radially
 
-#compartment specific diffuion? or adding calbindin molecules
-# molecule numbers in compartments.
-
 #-------------General parameters-------
 
 graphics opengl
