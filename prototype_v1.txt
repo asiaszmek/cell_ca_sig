@@ -15,11 +15,15 @@ units: um ms
 #how to view radial diffusion of ca2+?
 #how to create multiple nanodomains?
 #depending on the size of nanodomain (cluster), ca2+ will choose to spread horizontally or radially
+#molecule lists can speed up simulation?
+#wild card?
+#there will be 2^4/2 states if specify binding to C and N lobes
 
 #-------------General parameters-------
 
-graphics opengl_good
-graphic_iter 1
+#graphics opengl_good
+#graphic_iter 1
+graphics none
 frame_thickness 0
 frame_color 1 1 1
 
@@ -29,7 +33,7 @@ dim 3
 accuracy 10
 
 #boxsize 0.5
-molperbox 1
+molperbox 5
 
 boundaries 0 -6 6 	#-5000 5000
 boundaries 1 -6 6	#-5000 5000
@@ -42,40 +46,51 @@ time_step  0.001
 #-------------Molecules----------------
 species ca
 species cam
-species cam-ca
-species calbindin
-species calbindin-ca
+species cam-ca1
+species cam-ca2	
+species cam-ca3
+species cam-ca4
 
-display_size ca 0.02
-display_size cam 0.02
-display_size cam-ca 0.02
-display_size calbindin 0.02
-display_size calbindin-ca 0.02
+#species calbindin
+#species calbindin-ca
 
-color ca  red
-color cam black
-color cam-ca cyan
-color calbindin green
-color calbindin-ca pink
+molecule_lists calst camlst #calbinlst
+mol_list ca 	  calst
+mol_list cam* 	  camlst
+#mol_list calbin*  calbinlst
+
+display_size all 0.02
+
+color ca  			red
+color cam 			black
+color cam-*  		cyan
+#color calbindin 	green
+#color calbindin-ca 	pink
 
 difc ca			60*10e-3	#um^2 ms^(-1)
-difc cam		50*10e-3
-difc cam-ca 		50*10e-3	#assumption	
-difc calbindin		50*10e-3
-difc calbindin-ca	50*10e-3
+difc cam*		50*10e-3
+#difc calbin*	50*10e-3
 
-define camNT_kon		7.7*0.17*10e-3 	#um^3 ms^(-1)
-define camNT_koff			160		#us^(-1)
-define camNR_kon
-define camNR_koff
-define camCT_kon
-define camCT_koff
-define camCR_kon
-define camCR_koff
+define NT_on	2*7.7*0.17*10e-3 	#um^3 ms^(-1)
+define NT_off	160					#us^(-1)
+define NR_on	3.2*0.17*10e-1		
+define NR_off	2*22
+define CT_on	2*8.4*0.17*10e-4
+define CT_off	2.6
+define CR_on	2.5*0.17*10e-4
+define CR_off	2*6.5*10e-3
 
+define cam1_on		NT_on+CT_on
+define cam1_off 	NT_off+CT_off
+define cam2_on		NT_on+NR_on+CT_on+CR_on
+define cam2_off		NT_off+NR_off+CT_off+CR_off
+define cam3_on		NR_on+CR_on
+define cam3_off		NR_off+CR_off
+define cam4_on		NR_on+CR_on
+define cam4_off		NR_off+CR_off
 
-define calbin_kon	7.5*0.17*10e-4
-define calbin_koff	29.5*10e-3
+#define calbin_kon	7.5*0.17*10e-4
+#define calbin_koff	29.5*10e-3
 
 #------------surfaces------------------
 start_surface cell
@@ -112,11 +127,17 @@ surface cell
 point 0 0 0
 end_compartment
 #-----------reactions------------------
-reaction   cam1	ca + cam -> cam-ca	cam_kon				
-reaction   cam2	cam-ca -> ca + cam	cam_koff		
+reaction	cam1	ca + cam -> cam-ca1			cam1_on				
+reaction	cam1r   cam-ca1 -> ca + cam			cam1_off
+reaction	cam2	ca + cam-ca1 -> cam-ca2		cam2_on
+reaction	cam2r	cam-ca2 -> ca + cam-ca1		cam2_off
+reaction	cam3	ca + cam-ca2 -> cam-ca3		cam3_on
+reaction	cam3r	cam-ca3 -> ca + cam-ca2		cam3_off
+reaction 	cam4	ca + cam-ca3 -> cam-ca4		cam4_on
+reaction 	cam4r	cam-ca4 -> ca + cam-ca3		cam4_off
 
-reaction_cmpt cytol calbin1 ca + calbindin -> calbindin-ca	calbin_kon 
-reaction_cmpt cytol calbin2 calbindin-ca -> ca + calbindin  	calbin_koff
+#reaction_cmpt cytol calbin1 	ca + calbindin -> calbindin-ca		calbin_kon 
+#reaction_cmpt cytol calbin2 	calbindin-ca -> ca + calbindin  	calbin_koff
 #------------molecules in compartment--
 
 #mol 1000  ca  0 	   0     4.99
@@ -126,24 +147,35 @@ reaction_cmpt cytol calbin2 calbindin-ca -> ca + calbindin  	calbin_koff
 #mol 1000  ca  0	  -4.99  0
 #mol 1000  ca -4.99  0 	 0 	 
 
-compartment_mol 150 cam 		nano
-compartment_mol 0   cam-ca  		nano
-compartment_mol 500 calbindin 		cytol
-compartment_mol 0   calbindin-ca  	cytol
-compartment_mol 500 cam			cytol
+#assume [cam]=1mM, r_nano=100nm
+compartment_mol 1256*6 	cam 			nano
+compartment_mol 0   	cam-ca1	  		nano
+compartment_mol 0		cam-ca2			nano
+compartment_mol 0   	cam-ca3	  		nano
+compartment_mol 0   	cam-ca4	  		nano
+
+#compartment_mol 500 	calbindin 		cytol
+#compartment_mol 0   	calbindin-ca  	cytol
+
+#assume [cam]=25uM
+compartment_mol 295534 	cam				cytol
 #------------commands------------------
-cmd e pointsource ca 1 0 0 4.99   #single ca channel 0.1872 /usec ~ 0.03 pA
-cmd e pointsource ca 1 0 4.99 0
-cmd e pointsource ca 1 4.99 0 0
+cmd e pointsource ca 1 	0		0		4.99   #single ca channel 0.1872 /usec ~ 0.03 pA
+cmd e pointsource ca 1 	0		4.99	0
+cmd e pointsource ca 1 	4.99 	0		0
+cmd e pointsource ca 1 	0 		0		-4.99
+cmd e pointsource ca 1 	0		-4.99	0
+cmd e pointsource ca 1	-4.99	0		0
 
+#text_display ca
+#text_display cam
+#text_display cam-ca2
+#text_display cam-ca4
 
-text_display ca
-text_display cam
-text_display cam-ca
-text_display calbindin
-text_display calbindin-ca
+#text_display calbindin
+#text_display calbindin-ca
 
-cmd b pause
+#cmd b pause
 output_root results/
 output_files nanomols.txt
 output_files cytolmols.txt
