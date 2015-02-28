@@ -19,13 +19,16 @@ units: um ms
 #wild card?
 #there will be 2^4/2 states if specify binding to C and N lobes
 
+#put CaMKII in
+#how to simplify the mesh?
+
 #-------------General parameters-------
 
 #graphics opengl_good
 #graphic_iter 1
 graphics none
-frame_thickness 0
-frame_color 1 1 1
+#frame_thickness 0
+#frame_color 1 1 1
 
 #grid_thickness 1
 
@@ -40,7 +43,7 @@ boundaries 1 -6 6	#-5000 5000
 boundaries 2 -6 6	#-5000 5000
 
 time_start 0
-time_stop  1000
+time_stop  0.005
 time_step  0.001
 
 #-------------Molecules----------------
@@ -95,15 +98,16 @@ define cam4_off		NR_off+CR_off
 #------------surfaces------------------
 start_surface cell
 action both all reflect
-color both black 0
+#color both black 0
 polygon both edge 
 #cell membrane
-read_file cell
+#read_file cell
+panel sph 0 0 0 5 20 20
 end_surface
 
 start_surface shell
 action both all t
-color both grey 0.5
+#color both grey 0.5
 polygon both edge
 read_file shell
 end_surface
