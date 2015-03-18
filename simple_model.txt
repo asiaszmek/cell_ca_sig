@@ -1,0 +1,132 @@
+/* exmpales followed:
+	/S7_surfaces/signal.txt
+	/S7_surfaces/unbounded_diffusion/emitter1.txt
+	/S99_more/neuron/neuron.txt
+
+units: nm ms
+*/
+
+#-------------General parameters-------
+
+graphics opengl_good
+graphic_iter 1
+frame_thickness 0
+frame_color 1 1 1
+
+#grid_thickness 1
+
+dim 3
+accuracy 10
+
+molperbox 2
+#boxsize 0.5
+
+boundaries 0 -100 100
+boundaries 1 -100 100
+boundaries 2 -100 100
+
+time_start 0
+time_stop  5
+time_step  0.001
+
+#-------------Molecules----------------
+species ca
+species cam
+species cam-ca1
+species cam-ca2	
+species cam-ca3
+species cam-ca4
+
+molecule_lists calst camlst
+mol_list ca 	  calst
+mol_list cam* 	  camlst
+
+display_size all 0.1
+
+color ca  			red
+color cam 			black
+color cam-*  		cyan
+
+difc ca			200*10e-3		#nm^2 ms^(-1)
+difc cam*		0	#50*10e-3
+
+define NT_on	2*7.7*0.17*10e-12 	#nm^3 ms^(-1)
+define NT_off	0.16*10e-3
+define NR_on	3.2*0.17*10e-1		
+define NR_off	2*0.022*10e-3
+define CT_on	2*8.4*0.17*10e-10
+define CT_off	2.6*10e-6
+define CR_on	2.5*0.17*10e-10
+define CR_off	2*6.5*10e-9
+
+define cam1_on		NT_on+CT_on
+define cam1_off 	NT_off+CT_off
+define cam2_on		NT_on+NR_on+CT_on+CR_on
+define cam2_off		NT_off+NR_off+CT_off+CR_off
+define cam3_on		NR_on+CR_on
+define cam3_off		NR_off+CR_off
+define cam4_on		NR_on+CR_on
+define cam4_off		NR_off+CR_off
+
+#------------surfaces------------------
+start_surface cell
+action both all t #reflect
+color both black 0.5
+polygon both edge 
+#cell membrane
+panel sph 0 0 0 100 20 20	#cell radius 1000nm
+end_surface
+
+start_surface shell
+action both all t
+color both grey 0.5
+polygon both edge
+panel sph 0 0 0 10 20 20 #nanodomain radius 10nm
+end_surface
+
+start_compartment nano
+surface shell
+point 0	0 0
+end_compartment
+
+start_compartment cytol
+surface shell
+surface cell
+#compartment andnot nano
+point 0	0	20	
+end_compartment
+#-----------reactions------------------
+reaction	cam1	ca + cam -> cam-ca1			cam1_on				
+reaction	cam1r   cam-ca1 -> ca + cam			cam1_off
+reaction	cam2	ca + cam-ca1 -> cam-ca2		cam2_on
+reaction	cam2r	cam-ca2 -> ca + cam-ca1		cam2_off
+reaction	cam3	ca + cam-ca2 -> cam-ca3		cam3_on
+reaction	cam3r	cam-ca3 -> ca + cam-ca2		cam3_off
+reaction 	cam4	ca + cam-ca3 -> cam-ca4		cam4_on
+reaction 	cam4r	cam-ca4 -> ca + cam-ca3		cam4_off
+
+#------------molecules in compartment--
+
+compartment_mol 25	 	cam 			nano
+compartment_mol 0   	cam-ca1	  		nano
+compartment_mol 0		cam-ca2			nano
+compartment_mol 0   	cam-ca3	  		nano
+compartment_mol 0   	cam-ca4	  		nano
+
+#------------commands------------------
+cmd i 0 2 0.001 "cmd e pointsource ca 1 0 0 0"   #single ca channel 0.1872 /usec ~ 0.03 pA
+#cmd e pointsource ca 1 0 0 0
+
+text_display ca
+text_display cam
+text_display cam-ca2
+text_display cam-ca4
+
+cmd b pause
+output_root results/
+output_files simplemodel_nano.txt
+output_files simplemodel_cytol.txt
+cmd e molcountincmpt nano simplemodel_nano.txt
+cmd e molcountincmpt cytol simplemodel_cytol.txt
+
+end_file
