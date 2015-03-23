@@ -6,6 +6,11 @@
 units: nm ms
 */
 
+
+define ca_src 3
+define dfc_ca 6*100000
+define rm_camca
+
 #-------------General parameters-------
 
 graphics opengl_good
@@ -26,7 +31,7 @@ boundaries 1 -50 50
 boundaries 2 -50 50
 
 time_start 0
-time_stop  4
+time_stop  10
 time_step  0.001
 
 #-------------Molecules----------------
@@ -47,17 +52,17 @@ color ca  			red
 color cam 			black
 color cam-*  		cyan
 
-difc ca			200		#nm^2 ms^(-1)
-difc cam*		50
+difc ca			dfc_ca		#   nm^2 us^(-1)
+difc cam*		50000		#50 nm^2 us^(-1) -> 50000 nm^2 ms^(-1)
 
-define NT_on	2*7.7*0.17*10 	#nm^3 ms^(-1)
-define NT_off	0.16*10e3
-define NR_on	3.2*0.17*10e2*10		
-define NR_off	2*0.022*10e3
-define CT_on	2*8.4*0.17*10e-1*10
+define NT_on	2*7.7*0.17 	#nm^3 ms^(-1)
+define NT_off	0.16*1000 	 	#10e3
+define NR_on	3.2*0.17*100 	#10e2		
+define NR_off	2*0.022*1000 	#10e3
+define CT_on	2*8.4*0.17*0.1	#10e-1
 define CT_off	2.6
-define CR_on	2.5*0.17*10e-1*10
-define CR_off	2*6.5*10e-3
+define CR_on	2.5*0.17*0.1	#10e-1
+define CR_off	2*6.5*0.001		#10e-3
 
 define cam1_on		NT_on+CT_on
 define cam1_off 	NT_off+CT_off
@@ -108,7 +113,7 @@ reaction 	cam4r	cam-ca4 -> ca + cam-ca3		cam4_off
 
 #------------molecules in compartment--
 
-compartment_mol 50	cam 			nano
+compartment_mol 25	cam 			nano
 compartment_mol 0   	cam-ca1	  		nano
 compartment_mol 0	cam-ca2			nano
 compartment_mol 0   	cam-ca3	  		nano
@@ -116,8 +121,7 @@ compartment_mol 0   	cam-ca4	  		nano
 
 #------------commands------------------
 #cmd i 0 2 0.001 "cmd e pointsource ca 1 0 0 0"   #single ca channel 0.1872 /usec ~ 0.03 pA
-cmd e pointsource ca 1 0 0 0
-
+cmd e pointsource ca ca_src 0 0 0
 text_display ca
 text_display cam
 text_display cam-ca1
@@ -126,7 +130,7 @@ text_display cam-ca3
 text_display cam-ca4
 
 cmd b pause
-output_root results/
+output_root results9/
 output_files simplemodel_nano.txt
 #output_files simplemodel_cytol.txt
 output_files ca_track.txt
@@ -142,6 +146,9 @@ cmd e trackmol 1 ca_track.txt
 #cmd e molcountspace ca y -50 50 25 -10 10 -10 10 0 ca_molct_y.txt
 #cmd e molcountspace ca z -50 50 25 -10 10 -10 10 0 ca_molct_z.txt
 
-cmd e writeVTK vtk/simplemodl
+cmd e writeVTK ../vtk/simplemodl
+ifdefine rm_camca
+	cmd e killmol cam-ca4
+endif
 
 end_file
