@@ -7,18 +7,26 @@ units: nm ms
 */
 
 
-define ca_src 3
-define dfc_ca 6*100000
-define rm_camca
+define ca_src  1
+define ca_int  100	# 1 ca2+ per usec
+define cam_src 25
+define dfc_ca 600000
+define stimtime 5
+#define rm_camca
+#define graph_on
 
 #-------------General parameters-------
 
-graphics opengl_good
-graphic_iter 1
-frame_thickness 0
-frame_color 1 1 1
+ifdefine graph_on
+	graphics opengl_good
+	graphic_iter 1
+	frame_thickness 0
+	frame_color 1 1 1
+	#grid_thickness 1
+else
+	graphics none
+endif
 
-#grid_thickness 1
 
 dim 3
 accuracy 10
@@ -31,8 +39,8 @@ boundaries 1 -50 50
 boundaries 2 -50 50
 
 time_start 0
-time_stop  10
-time_step  0.001
+time_stop  stimtime
+time_step  0.00001  #0.01 usec
 
 #-------------Molecules----------------
 species ca
@@ -46,41 +54,35 @@ molecule_lists calst camlst
 mol_list ca 	  calst
 mol_list cam* 	  camlst
 
-display_size all 0.1
-
-color ca  			red
-color cam 			black
-color cam-*  		cyan
+ifdefine graph_on
+	display_size all 0.1
+	color ca  			red
+	color cam 			black
+	color cam-*  		cyan
+endif
 
 difc ca			dfc_ca		#   nm^2 us^(-1)
 difc cam*		50000		#50 nm^2 us^(-1) -> 50000 nm^2 ms^(-1)
 
-define NT_on	2*7.7*0.17 	#nm^3 ms^(-1)
-define NT_off	0.16*1000 	 	#10e3
-define NR_on	3.2*0.17*100 	#10e2		
-define NR_off	2*0.022*1000 	#10e3
-define CT_on	2*8.4*0.17*0.1	#10e-1
+define NT_on	2618000	 	#nm^3 us^(-1)
+define NT_off	160 	 	
+define NR_on	54400000	 		
+define NR_off	44		 	
+define CT_on	285600		
 define CT_off	2.6
-define CR_on	2.5*0.17*0.1	#10e-1
-define CR_off	2*6.5*0.001		#10e-3
+define CR_on	42500		
+define CR_off	0.0130		
 
-define cam1_on		NT_on+CT_on
-define cam1_off 	NT_off+CT_off
-define cam2_on		NT_on+NR_on+CT_on+CR_on
-define cam2_off		NT_off+NR_off+CT_off+CR_off
-define cam3_on		NR_on+CR_on
-define cam3_off		NR_off+CR_off
-define cam4_on		NR_on+CR_on
-define cam4_off		NR_off+CR_off
+define cam1_on		57018000 		#NT_on+CT_on
+define cam1_off 	162.6			#NT_off+CT_off
+define cam2_on		57346100 		#NT_on+NR_on+CT_on+CR_on
+define cam2_off		206.6130		#NT_off+NR_off+CT_off+CR_off
+define cam3_on		328100			#NR_on+CR_on
+define cam3_off		44.0130			#NR_off+CR_off
+define cam4_on		328100			#NR_on+CR_on
+define cam4_off		44.0130			#NR_off+CR_off
 
 #------------surfaces------------------
-#start_surface cell
-#action both all t #reflect
-#color both black 0.5
-#polygon both edge 
-##cell membrane
-#panel sph 0 0 0 100 20 20	#cell radius 1000nm
-#end_surface
 
 start_surface shell
 action both ca t
@@ -95,12 +97,6 @@ surface shell
 point 0	0 0
 end_compartment
 
-#start_compartment cytol
-#surface shell
-#surface cell
-#compartment andnot nano
-#point 0	0	20	
-#end_compartment
 #-----------reactions------------------
 reaction	cam1	ca + cam -> cam-ca1			cam1_on				
 reaction	cam1r   cam-ca1 -> ca + cam			cam1_off
@@ -111,35 +107,40 @@ reaction	cam3r	cam-ca3 -> ca + cam-ca2		cam3_off
 reaction 	cam4	ca + cam-ca3 -> cam-ca4		cam4_on
 reaction 	cam4r	cam-ca4 -> ca + cam-ca3		cam4_off
 
+binding_radius cam1 6.98
+binding_radius cam2 7.02
+binding_radius cam3 0.040168
+binding_radius cam4 0.040168
+
 #------------molecules in compartment--
 
-compartment_mol 25	cam 			nano
+compartment_mol cam_src	cam 			nano
 compartment_mol 0   	cam-ca1	  		nano
-compartment_mol 0	cam-ca2			nano
+compartment_mol 0		cam-ca2			nano
 compartment_mol 0   	cam-ca3	  		nano
 compartment_mol 0   	cam-ca4	  		nano
 
 #------------commands------------------
-#cmd i 0 2 0.001 "cmd e pointsource ca 1 0 0 0"   #single ca channel 0.1872 /usec ~ 0.03 pA
-cmd e pointsource ca ca_src 0 0 0
-text_display ca
-text_display cam
-text_display cam-ca1
-text_display cam-ca2
-text_display cam-ca3
-text_display cam-ca4
+cmd i 0 stimtime ca_int pointsource ca ca_src 0 0 0   #single ca channel 0.0936 /usec ~ 0.03 pA#
+#cmd e pointsource ca ca_src 0 0 0
+ifdefine graph_on
+	text_display ca
+	text_display cam
+	text_display cam-ca1
+	text_display cam-ca2
+	text_display cam-ca3
+	text_display cam-ca4
+	cmd b pause
+endif
 
-cmd b pause
-output_root results9/
+output_root results_nokill/
 output_files simplemodel_nano.txt
-#output_files simplemodel_cytol.txt
 output_files ca_track.txt
 output_files ca_molpos.txt
 #output_files ca_molct_x.txt
 #output_files ca_molct_y.txt
 #output_files ca_molct_z.txt
 cmd e molcountincmpt nano simplemodel_nano.txt
-#cmd e molcountincmpt cytol simplemodel_cytol.txt
 cmd e molpos ca ca_molpos.txt
 cmd e trackmol 1 ca_track.txt
 #cmd e molcountspace ca x -50 50 25 -10 10 -10 10 0 ca_molct_x.txt
