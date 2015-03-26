@@ -1,3 +1,4 @@
+#calcium diffusion only, no reaction
 /* exmpales followed:
 	/S7_surfaces/signal.txt
 	/S7_surfaces/unbounded_diffusion/emitter1.txt
@@ -9,7 +10,7 @@ units: nm ms
 
 define ca_src  1
 define ca_int  0.0001	#0.1 ca2+ per usec
-define cam_src 25
+define cam_src 0
 define dfc_ca 600000
 define stimtime 5
 #define rm_camca
@@ -133,7 +134,7 @@ ifdefine graph_on
 	cmd b pause
 endif
 
-output_root results_nokill/
+output_root results_dif/
 output_files simplemodel_nano.txt
 output_files simplemodel.txt
 output_files ca_track.txt

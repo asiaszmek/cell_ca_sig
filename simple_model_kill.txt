@@ -12,7 +12,7 @@ define ca_int  0.0001	#0.1 ca2+ per usec
 define cam_src 25
 define dfc_ca 600000
 define stimtime 5
-#define rm_camca
+define rm_camca
 #define graph_on
 
 #-------------General parameters-------
@@ -133,7 +133,7 @@ ifdefine graph_on
 	cmd b pause
 endif
 
-output_root results_nokill/
+output_root results_kill/
 output_files simplemodel_nano.txt
 output_files simplemodel.txt
 output_files ca_track.txt
