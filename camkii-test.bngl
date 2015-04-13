@@ -6,42 +6,47 @@ begin parameters
 	V  f*3e-12	# cytoplasmic volume (L)
 	
 	#  initial amounts
-	CaMCa4_init	
-	bCaMKII_init
+	CaMCa4_init	20
+	CaMKII_init	20
 
 	#  Rate constants
-	kf1	# Cuu -> Cb
-	kr1
-	kf2	# Cb -> Cbp
-	kr2	
-	kf3	# Cbp -> Cpu
-	kr3	
-	kf4	# Cpu -> Cuu
-	kr4	
+	kf1		30
+	kr1		2
+	kf2		1
+	kf3		0.8
+	kf4		10
+	kr4		0.08
+	kf5		10	
 	
 end parameters
 
 begin molecule types
-	CaMCa4 (CmK)
-	bCaMKII(x~Cuu~Cb~Cbp~Cpu, x~Cuu~Cb~Cbp~Cpu, x~Cuu~Cb~Cbp~Cpu, x~Cuu~Cb~Cbp~Cpu)
-	
+	CaMCa4(cmk)
+	CaMKII(x~Duu~Cb~Cp~Cpu,x~Duu~Cb~Cp~Cpu,x~Duu~Cb~Cp~Cpu,x~Duu~Cb~Cp~Cpu)	
 end molecule types
 
 begin seed species
-	CaMCa4(CmK)	CaMCa4_init
-	bCaMKII(x~Cuu, x~Cuu, x~Cuu, x~Cuu)	bCaMKII_init
+	CaMCa4(cmk)  CaMCa4_init
+	CaMKII(x~Duu,x~Duu,x~Duu,x~Duu)	CaMKII_init
 end seed species
 
 begin observables
-	01: Molecules bCaMKII_autoinhibit	bCaMKII(x~Cuu, x~Cuu, x~Cuu, x~Cuu)
-	02: Molecules bCaMKII_bound		bCaMKII(x~Cb)
+	01: Molecules CaMKII_autoinhibit	CaMKII(x~Duu,x~Duu,x~Duu,x~Duu)
+	02: Molecules CaMKII_bound			CaMKII(x~Cb)
+	03: Molecules CaMKII_phosph			CaMKII(x~Cp)
 end observables
 
 begin reaction rules
-	R1: bCaMKII(x~Cuu) + CaMCa4(CmK) <-> bCaMKII(x~Cb)  kf1,kr1
-	R2: bCaMKII(x~Cb, x~Cb~Cbp~Cpu) <-> bCaMKII(x~Cbp) kf2,kr2
-	R3: bCaMKII(x~Cb~Cbp~Cpu, x~Cb) <-> bCaMKII(x~Cbp) kf2,kr2
-	R4: bCaMKII(x~Cbp) <-> bCaMKII(x~Cpu) kf3,kr3
-	R5: bCaMKII(x~Cpu) <-> bCaMKII(x~Cuu) kf4,kr4
+	# CaMCa4 binding
+	R1: CaMKII(x~Duu) + CaMCa4(cmk) <-> CaMKII(x~Cb!1).CaMCa4(cmk!1)  kf1,kr1
+	#autophosphorylation	
+	R2: CaMKII(x~Cb!1,x~Cb!2) -> CaMKII(x~Cp,x~Cp) kf2
+	R3: CaMKII(x~Cp,x~Cb!2) -> CaMKII(x~Cp,x~Cp) kf3
+	R4: CaMKII(x~Cb!1,x~Cp) -> CaMKII(x~Cp,x~Cp) kf3
+	# CaMCa4 unbinding	
+	R5: CaMKII(x~Cp) <-> CaMKII(x~Cpu) kf4,kr4
+	# dephosphorylation
+	R6: CaMKII(x~Cpu) -> CaMKII(x~Duu) kf5
 end reaction rules
 end model
+generate_network({overwrite=>1})
