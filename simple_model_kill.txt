@@ -12,7 +12,7 @@ define ca_int  0.0001	#0.1 ca2+ per usec
 define cam_src 25
 define dfc_ca 600000
 define stimtime 5
-#define rm_camca
+define rm_camca
 #define graph_on
 
 #-------------General parameters-------
@@ -133,11 +133,11 @@ ifdefine graph_on
 	cmd b pause
 endif
 
-output_root results_nokill/
+output_root results_kill/
 output_files simplemodel_nano.txt
 output_files simplemodel.txt
 output_files ca_track.txt
-#output_files ca_molpos.txt
+output_files ca_molpos.txt
 #output_files ca_molct_x.txt
 #output_files ca_molct_y.txt
 #output_files ca_molct_z.txt
@@ -149,7 +149,7 @@ cmd e trackmol 1 ca_track.txt
 #cmd e molcountspace ca y -50 50 25 -10 10 -10 10 0 ca_molct_y.txt
 #cmd e molcountspace ca z -50 50 25 -10 10 -10 10 0 ca_molct_z.txt
 
-#cmd e writeVTK ../vtk/simplemodl
+cmd e writeVTK ../vtk/simplemodl
 ifdefine rm_camca
 	cmd e killmol cam-ca4
 endif
