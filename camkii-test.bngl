@@ -39,14 +39,15 @@ end observables
 begin reaction rules
 	# CaMCa4 binding
 	R1: CaMKII(x~Duu) + CaMCa4(cmk) <-> CaMKII(x~Cb!1).CaMCa4(cmk!1)  kf1,kr1
+
 	#autophosphorylation	
-	R2: CaMKII(x~Cb!1,x~Cb!2) -> CaMKII(x~Cp,x~Cp) kf2
-	R3: CaMKII(x~Cp,x~Cb!2) -> CaMKII(x~Cp,x~Cp) kf3
-	R4: CaMKII(x~Cb!1,x~Cp) -> CaMKII(x~Cp,x~Cp) kf3
-	# CaMCa4 unbinding	
-	R5: CaMKII(x~Cp) <-> CaMKII(x~Cpu) kf4,kr4
-	# dephosphorylation
-	R6: CaMKII(x~Cpu) -> CaMKII(x~Duu) kf5
+	R2: CaMKII(x~Cb!1,x~Cb!2) -> CaMKII(x~Cp!1,x~Cp!2) kf2
+#	R3: CaMKII(x~Cp!1,x~Cb!2) -> CaMKII(x~Cp!1,x~Cp!2) kf3
+#	R4: CaMKII(x~Cb!1,x~Cp!2) -> CaMKII(x~Cp!1,x~Cp!2) kf3
+#	# CaMCa4 unbinding	
+#	R5: CaMKII(x~Cp!1) <-> CaMKII(x~Cpu)+CaMCa4(cmk) kf4,kr4
+#	# dephosphorylation
+#	R6: CaMKII(x~Cpu) -> CaMKII(x~Duu) kf5
 end reaction rules
 end model
 generate_network({overwrite=>1})
