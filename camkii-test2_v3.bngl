@@ -1,0 +1,54 @@
+begin model
+begin parameters
+	#  initial amounts
+	CaMCa4_init	13
+	CaMKII_init	1
+
+	#  Rate constants
+	kf1		1/10000
+	kr1		1
+	kf2		1
+	kf3		1
+	kf4		1
+	kr4		1
+	kf5		1	
+	
+end parameters
+
+begin molecule types
+	CaMCa4(cmk)
+	bCaMKII(T~0~p,C~0~b,T~0~p,C~0~b,L,R)
+	gCaMKII(T~0~p,C~0~b,S~0~p,T~0~p,C~0~b,S~0~p,L,R)
+
+end molecule types
+
+begin seed species
+	CaMCa4(cmk)  CaMCa4_init
+	bCaMKII(T~0,C~0,T~0,C~0,L!1,R!2).bCaMKII(T~0,C~0,T~0,C~0,L!2,R!3).bCaMKII(T~0,C~0,T~0,C~0,L!3,R!1) 	CaMKII_init
+	gCaMKII(T~0,C~0,T~0,C~0,S~p,S~p,L!1,R!2).gCaMKII(T~0,C~0,T~0,C~0,S~p,S~p,L!2,R!3).gCaMKII(T~0,C~0,T~0,C~0,S~p,S~p,L!3,R!1) 	CaMKII_init
+end seed species
+
+begin reaction rules
+	# CaMCa4 binding
+	# R1 works good; seems BioNetGen knows which graph patterns are isomorphic; can test it by set max_iter=1, 2
+	R1: bCaMKII(T~0,C~0) + CaMCa4(cmk) -> bCaMKII(T~0,C~b)  kf1 
+
+	# autophosphorylation	
+	R2: bCaMKII(T~0,C~b,T~0,C~b)-> bCaMKII(T~p,C~b,T~p,C~b) kf2
+	R4: bCaMKII(T~p) -> bCaMKII(T~0)  kf4 
+	R5: bCaMKII(C~b) -> bCaMKII(C~0)  kf5 
+
+	#========================================================================
+	R6: gCaMKII(T~0,C~0) + CaMCa4(cmk) -> gCaMKII(T~0,C~b)  kf1 
+	R7: gCaMKII(T~p) -> gCaMKII(T~0)  kf4 
+	R8: gCaMKII(C~b) -> gCaMKII(C~0)  kf5 	
+	R9:	gCaMKII(S~p) -> gCaMKII(S~0)  kf2
+
+	#==========================================================================
+	R27: bCaMKII(T~p)+gCaMKII(T~0,C~b)-> bCaMKII(T~p)+gCaMKII(T~p,C~b) kf2
+
+
+end reaction rules
+end model
+#generate_network({overwrite=>1,max_iter=>2})
+generate_network({overwrite=>1})

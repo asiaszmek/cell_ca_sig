@@ -1,48 +1,36 @@
 begin model
 begin parameters
 	#  initial amounts
-	CaMCa4_init	25
-	CaMKII_init	2
+	CaMCa4_init	2
+	CaMKII_init	1
 
 	#  Rate constants
-	kf1		1/10000*2/3
-	kr1		1
+	kf1		1/10000
 	kf2		1
-	kf3		1
 	kf4		1
-	kr4		1
-	kf5		1	
-	
+	kf5		1
+
 end parameters
 
 begin molecule types
 	CaMCa4(cmk)
 	#CaMKII as a pseudo dimer
-	CaMKII(T286~0~p,CaM~0~b,x~0~1,y~0~1,L,R)
+	CaMKII(T~0~p,C~0~b,L,R) 
 end molecule types
 
 begin seed species
 	CaMCa4(cmk)  CaMCa4_init
-	CaMKII(T286~0,CaM~0,x~0,y~0,L!6,R!1).CaMKII(T286~0,CaM~0,x~1,y~0,L!1,R!2).CaMKII(T286~0,CaM~0,x~0,y~0,L!2,R!3).CaMKII(T286~0,CaM~0,x~1,y~0,L!3,R!4).CaMKII(T286~0,CaM~0,x~0,y~0,L!4,R!5).CaMKII(T286~0,CaM~0,x~1,y~0,L!5,R!6) 	CaMKII_init
+	CaMKII(T~0,C~0,L!1,R!2).CaMKII(T~0,C~0,L!2,R!3).CaMKII(T~0,C~0,L!3,R!4).CaMKII(T~0,C~0,L!4,R!5).CaMKII(T~0,C~0,L!5,R!6).CaMKII(T~0,C~0,L!6,R!1) 	CaMKII_init
 end seed species
-
-begin observables
-	01: Molecules CaMKII_inhibit		CaMKII(T286~0,CaM~0)
-	02: Molecules CaMKII_bound		CaMKII(CaM~b)
-	03: Molecules CaMKII_phosph		CaMKII(T286~p)
-	Q4: Molecules CaMCa4_unbound		CaMCa4(cmk)
-end observables
 
 begin reaction rules
 	# CaMCa4 binding
-	R1: CaMKII(T286~0,CaM~0,L!+,R!+) + CaMCa4(cmk) -> CaMKII(T286~0,CaM~b,L!+,R!+)  kf1
-
-	# asymetric autophosphorylation	
-#	R2: CaMKII(T286~0,CaM~b,x~0,y~0).CaMKII(T286~0,CaM~b,x~1,y~0)-> CaMKII(T286~p,CaM~b,x~0,y~0).CaMKII(T286~p,CaM~b,x~1,y~0) kf2
-
-#	R4: CaMKII(T286~p)-> CaMKII(T286~0)  kf4
-#	R5: CaMKII(CaM~0)-> CaMKII(CaM~0)    kf5
-
+	# R1 works good; seems BioNetGen knows which graph patterns are isomorphic; can test it by set max_iter=1, 2
+	R1: CaMKII(T~0,C~0) + CaMCa4(cmk) -> CaMKII(T~0,C~b)  kf1 
+	R2: CaMKII(T~0,C~b,L!5,R!6).CaMKII(T~0,C~b,L!6,R!1)-> CaMKII(T~p,C~b,L!5,R!6).CaMKII(T~p,C~b,L!6,R!1) kf2
+	R4: CaMKII(T~p) -> CaMKII(T~0)  kf4 
+	R5: CaMKII(C~b) -> CaMKII(C~0)  kf5 
 end reaction rules
 end model
-generate_network({overwrite=>1,max_iter=>2})
+#generate_network({overwrite=>1,max_iter=>5})
+generate_network({overwrite=>1})

@@ -1,0 +1,80 @@
+begin model
+begin parameters
+	#  initial amounts
+	CaMCa4_init	13
+	CaMKII_init	5
+
+	#  Rate constants
+	kf1		1/10000
+	kr1		1
+	kf2		1
+	kf3		1
+	kf4		1
+	kr4		1
+	kf5		1	
+	
+end parameters
+
+begin molecule types
+	CaMCa4(cmk)
+	bCaMKII(T1~0~p,C1~0~b,T2~0~p,C2~0~b,T3~0~p,C3~0~b,T4~0~p,C4~0~b,T5~0~p,C5~0~b,T6~0~p,C6~0~b)
+	gCaMKII(T~0~p,C~0~b,S~0~p,T~0~p,C~0~b,S~0~p,T~0~p,C~0~b,S~0~p,T~0~p,C~0~b,S~0~p,T~0~p,C~0~b,S~0~p,T~0~p,C~0~b,S~0~p)
+
+end molecule types
+
+begin seed species
+	CaMCa4(cmk)  CaMCa4_init
+	bCaMKII(T1~0,C1~0,T2~0,C2~0,T3~0,C3~0,T4~0,C4~0,T5~0,C5~0,T6~0,C6~0) 	CaMKII_init
+	gCaMKII(T~0,C~0,S~p,T~0,C~0,S~p,T~0,C~0,S~p,T~0,C~0,S~p,T~0,C~0,S~p,T~0,C~0,S~p) 	CaMKII_init
+end seed species
+
+begin reaction rules
+	# CaMCa4 binding
+	# R1 works good; seems BioNetGen knows which graph patterns are isomorphic; can test it by set max_iter=1, 2
+	R1_1: bCaMKII(T1~0,C1~0) + CaMCa4(cmk) -> bCaMKII(T1~0,C1~b)  kf1 
+	R1_2: bCaMKII(T2~0,C2~0) + CaMCa4(cmk) -> bCaMKII(T2~0,C2~b)  kf1
+	R1_3: bCaMKII(T3~0,C3~0) + CaMCa4(cmk) -> bCaMKII(T3~0,C3~b)  kf1 
+	R1_4: bCaMKII(T4~0,C4~0) + CaMCa4(cmk) -> bCaMKII(T4~0,C4~b)  kf1
+	R1_5: bCaMKII(T5~0,C5~0) + CaMCa4(cmk) -> bCaMKII(T5~0,C5~b)  kf1 
+	R1_6: bCaMKII(T6~0,C6~0) + CaMCa4(cmk) -> bCaMKII(T6~0,C6~b)  kf1
+
+	# autophosphorylation	
+	R2_1: bCaMKII(T1~0,C1~b,T2~0,C2~b)-> bCaMKII(T1~p,C1~b,T2~p,C2~b) kf2
+	R2_2: bCaMKII(T2~0,C2~b,T3~0,C3~b)-> bCaMKII(T2~p,C2~b,T3~p,C3~b) kf2
+	R2_3: bCaMKII(T3~0,C3~b,T4~0,C4~b)-> bCaMKII(T3~p,C3~b,T4~p,C4~b) kf2
+	R2_4: bCaMKII(T4~0,C4~b,T5~0,C5~b)-> bCaMKII(T4~p,C4~b,T5~p,C5~b) kf2
+	R2_5: bCaMKII(T5~0,C5~b,T6~0,C6~b)-> bCaMKII(T5~p,C5~b,T6~p,C6~b) kf2
+	R2_6: bCaMKII(T6~0,C6~b,T1~0,C1~b)-> bCaMKII(T6~p,C6~b,T1~p,C1~b) kf2	
+
+	R4_1: bCaMKII(T1~p) -> bCaMKII(T1~0)  kf4 
+	R4_2: bCaMKII(T2~p) -> bCaMKII(T2~0)  kf4
+	R4_3: bCaMKII(T3~p) -> bCaMKII(T3~0)  kf4 
+	R4_4: bCaMKII(T4~p) -> bCaMKII(T4~0)  kf4
+	R4_5: bCaMKII(T5~p) -> bCaMKII(T5~0)  kf4 
+	R4_6: bCaMKII(T6~p) -> bCaMKII(T6~0)  kf4
+
+	R5_1: bCaMKII(C1~b) -> bCaMKII(C1~0)  kf5 
+	R5_2: bCaMKII(C2~b) -> bCaMKII(C2~0)  kf5
+	R5_3: bCaMKII(C3~b) -> bCaMKII(C3~0)  kf5 
+	R5_4: bCaMKII(C4~b) -> bCaMKII(C4~0)  kf5
+	R5_5: bCaMKII(C5~b) -> bCaMKII(C5~0)  kf5 
+	R5_6: bCaMKII(C6~b) -> bCaMKII(C6~0)  kf5
+
+	#========================================================================
+	R6: gCaMKII(T~0,C~0) + CaMCa4(cmk) -> gCaMKII(T~0,C~b)  kf1 
+	R7: gCaMKII(T~p) -> gCaMKII(T~0)  kf4 
+	R8: gCaMKII(C~b) -> gCaMKII(C~0)  kf5 	
+	R9:	gCaMKII(S~p) -> gCaMKII(S~0)  kf2
+
+	#==========================================================================
+	R27: bCaMKII(T1~p)+gCaMKII(T~0,C~b)-> bCaMKII(T1~p)+gCaMKII(T~p,C~b) kf2
+	R27: bCaMKII(T2~p)+gCaMKII(T~0,C~b)-> bCaMKII(T2~p)+gCaMKII(T~p,C~b) kf2
+	R27: bCaMKII(T3~p)+gCaMKII(T~0,C~b)-> bCaMKII(T3~p)+gCaMKII(T~p,C~b) kf2
+	R27: bCaMKII(T4~p)+gCaMKII(T~0,C~b)-> bCaMKII(T4~p)+gCaMKII(T~p,C~b) kf2
+	R27: bCaMKII(T5~p)+gCaMKII(T~0,C~b)-> bCaMKII(T5~p)+gCaMKII(T~p,C~b) kf2
+	R27: bCaMKII(T6~p)+gCaMKII(T~0,C~b)-> bCaMKII(T6~p)+gCaMKII(T~p,C~b) kf2	
+
+
+end reaction rules
+end model
+generate_network({overwrite=>1})
