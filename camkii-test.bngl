@@ -17,19 +17,19 @@ end parameters
 
 begin molecule types
 	CaMCa4(cmk)
-	CaMKII(T286~0~p,CaM~0~b,x~1~2~3~4,L,R)
-
+	CaMKII(T286~0~p,CaM~0~b,x~1~2~3~4~5~6~7~8~9~10~11~12,L,R)
 end molecule types
 
 begin seed species
 	CaMCa4(cmk)  CaMCa4_init
-	CaMKII(T286~0,CaM~0,x~1,L!1,R!2).CaMKII(T286~0,CaM~0,x~2,L!2,R!3).CaMKII(T286~0,CaM~0,x~3,L!3,R!4).CaMKII(T286~0,CaM~0,x~4,L!4,R!1)	CaMKII_init
+	CaMKII(T286~0,CaM~0,x~1,L!1,R!2).CaMKII(T286~0,CaM~0,x~2,L!2,R!3).CaMKII(T286~0,CaM~0,x~3,L!3,R!4).CaMKII(T286~0,CaM~0,x~4,L!4,R!5).CaMKII(T286~0,CaM~0,x~5,L!5,R!6).CaMKII(T286~0,CaM~0,x~6,L!6,R!7).CaMKII(T286~0,CaM~0,x~7,L!7,R!8).CaMKII(T286~0,CaM~0,x~8,L!8,R!9).CaMKII(T286~0,CaM~0,x~9,L!9,R!10).CaMKII(T286~0,CaM~0,x~10,L!10,R!11).CaMKII(T286~0,CaM~0,x~11,L!11,R!12).CaMKII(T286~0,CaM~0,x~12,L!12,R!1)	CaMKII_init
+
 end seed species
 
 begin observables
-	01: Molecules CaMKII_autoinhibit	CaMKII(T286~0,CaM~0,x,L,R)
-	02: Molecules CaMKII_bound			CaMKII(CaM~b)
-	03: Molecules CaMKII_phosph			CaMKII(T286~p)
+	01: Molecules CaMKII_inhibit		CaMKII(T286~0,CaM~0,x,L,R)
+	02: Molecules CaMKII_bound		CaMKII(CaM~b)
+	03: Molecules CaMKII_phosph		CaMKII(T286~p)
 end observables
 
 begin reaction rules
@@ -37,23 +37,48 @@ begin reaction rules
 	R1: CaMKII(T286~0,CaM~0) + CaMCa4(cmk) -> CaMKII(T286~0,CaM~b)  kf1
 
 	#autophosphorylation	
+
 	R2: CaMKII(T286~0,CaM~b,x~1).CaMKII(T286~0,CaM~b,x~2) -> CaMKII(T286~p,CaM~b,x~1).CaMKII(T286~p,CaM~b,x~2) kf2
 	R2: CaMKII(T286~0,CaM~b,x~2).CaMKII(T286~0,CaM~b,x~3) -> CaMKII(T286~p,CaM~b,x~2).CaMKII(T286~p,CaM~b,x~3) kf2
 	R2: CaMKII(T286~0,CaM~b,x~3).CaMKII(T286~0,CaM~b,x~4) -> CaMKII(T286~p,CaM~b,x~3).CaMKII(T286~p,CaM~b,x~4) kf2
-	R2: CaMKII(T286~0,CaM~b,x~4).CaMKII(T286~0,CaM~b,x~1) -> CaMKII(T286~p,CaM~b,x~4).CaMKII(T286~p,CaM~b,x~1) kf2
+	R2: CaMKII(T286~0,CaM~b,x~4).CaMKII(T286~0,CaM~b,x~5) -> CaMKII(T286~p,CaM~b,x~4).CaMKII(T286~p,CaM~b,x~5) kf2
+	R2: CaMKII(T286~0,CaM~b,x~5).CaMKII(T286~0,CaM~b,x~6) -> CaMKII(T286~p,CaM~b,x~5).CaMKII(T286~p,CaM~b,x~6) kf2
+	R2: CaMKII(T286~0,CaM~b,x~6).CaMKII(T286~0,CaM~b,x~7) -> CaMKII(T286~p,CaM~b,x~6).CaMKII(T286~p,CaM~b,x~7) kf2
+	R2: CaMKII(T286~0,CaM~b,x~7).CaMKII(T286~0,CaM~b,x~8) -> CaMKII(T286~p,CaM~b,x~7).CaMKII(T286~p,CaM~b,x~8) kf2
+	R2: CaMKII(T286~0,CaM~b,x~8).CaMKII(T286~0,CaM~b,x~9) -> CaMKII(T286~p,CaM~b,x~8).CaMKII(T286~p,CaM~b,x~9) kf2
+	R2: CaMKII(T286~0,CaM~b,x~9).CaMKII(T286~0,CaM~b,x~10) ->CaMKII(T286~p,CaM~b,x~9).CaMKII(T286~p,CaM~b,x~10) kf2
+	R2: CaMKII(T286~0,CaM~b,x~10).CaMKII(T286~0,CaM~b,x~11) -> CaMKII(T286~p,CaM~b,x~10).CaMKII(T286~p,CaM~b,x~11) kf2
+	R2: CaMKII(T286~0,CaM~b,x~11).CaMKII(T286~0,CaM~b,x~12) -> CaMKII(T286~p,CaM~b,x~11).CaMKII(T286~p,CaM~b,x~12) kf2
+	R2: CaMKII(T286~0,CaM~b,x~12).CaMKII(T286~0,CaM~b,x~1) -> CaMKII(T286~p,CaM~b,x~12).CaMKII(T286~p,CaM~b,x~1) kf2
 	
 	R3: CaMKII(T286~0,CaM~b,x~1).CaMKII(T286~p,CaM~b,x~2) -> CaMKII(T286~p,CaM~b,x~1).CaMKII(T286~p,CaM~b,x~2) kf3
 	R3: CaMKII(T286~0,CaM~b,x~2).CaMKII(T286~p,CaM~b,x~3) -> CaMKII(T286~p,CaM~b,x~2).CaMKII(T286~p,CaM~b,x~3) kf3
 	R3: CaMKII(T286~0,CaM~b,x~3).CaMKII(T286~p,CaM~b,x~4) -> CaMKII(T286~p,CaM~b,x~3).CaMKII(T286~p,CaM~b,x~4) kf3
-	R3: CaMKII(T286~0,CaM~b,x~4).CaMKII(T286~p,CaM~b,x~1) -> CaMKII(T286~p,CaM~b,x~4).CaMKII(T286~p,CaM~b,x~1) kf3
+	R3: CaMKII(T286~0,CaM~b,x~4).CaMKII(T286~p,CaM~b,x~5) -> CaMKII(T286~p,CaM~b,x~4).CaMKII(T286~p,CaM~b,x~5) kf3
+	R3: CaMKII(T286~0,CaM~b,x~5).CaMKII(T286~p,CaM~b,x~6) -> CaMKII(T286~p,CaM~b,x~5).CaMKII(T286~p,CaM~b,x~6) kf3
+	R3: CaMKII(T286~0,CaM~b,x~6).CaMKII(T286~p,CaM~b,x~7) -> CaMKII(T286~p,CaM~b,x~6).CaMKII(T286~p,CaM~b,x~7) kf3
+	R3: CaMKII(T286~0,CaM~b,x~7).CaMKII(T286~p,CaM~b,x~8) -> CaMKII(T286~p,CaM~b,x~7).CaMKII(T286~p,CaM~b,x~8) kf3
+	R3: CaMKII(T286~0,CaM~b,x~8).CaMKII(T286~p,CaM~b,x~9) -> CaMKII(T286~p,CaM~b,x~8).CaMKII(T286~p,CaM~b,x~9) kf3
+	R3: CaMKII(T286~0,CaM~b,x~9).CaMKII(T286~p,CaM~b,x~10) ->CaMKII(T286~p,CaM~b,x~9).CaMKII(T286~p,CaM~b,x~10) kf3
+	R3: CaMKII(T286~0,CaM~b,x~10).CaMKII(T286~p,CaM~b,x~11) -> CaMKII(T286~p,CaM~b,x~10).CaMKII(T286~p,CaM~b,x~11) kf3
+	R3: CaMKII(T286~0,CaM~b,x~11).CaMKII(T286~p,CaM~b,x~12) -> CaMKII(T286~p,CaM~b,x~11).CaMKII(T286~p,CaM~b,x~12) kf3
+	R3: CaMKII(T286~0,CaM~b,x~12).CaMKII(T286~p,CaM~b,x~1) -> CaMKII(T286~p,CaM~b,x~12).CaMKII(T286~p,CaM~b,x~1) kf3
 
 	R3: CaMKII(T286~p,CaM~b,x~1).CaMKII(T286~0,CaM~b,x~2) -> CaMKII(T286~p,CaM~b,x~1).CaMKII(T286~p,CaM~b,x~2) kf3
 	R3: CaMKII(T286~p,CaM~b,x~2).CaMKII(T286~0,CaM~b,x~3) -> CaMKII(T286~p,CaM~b,x~2).CaMKII(T286~p,CaM~b,x~3) kf3
 	R3: CaMKII(T286~p,CaM~b,x~3).CaMKII(T286~0,CaM~b,x~4) -> CaMKII(T286~p,CaM~b,x~3).CaMKII(T286~p,CaM~b,x~4) kf3
-	R3: CaMKII(T286~p,CaM~b,x~4).CaMKII(T286~0,CaM~b,x~1) -> CaMKII(T286~p,CaM~b,x~4).CaMKII(T286~p,CaM~b,x~1) kf3
+	R3: CaMKII(T286~p,CaM~b,x~4).CaMKII(T286~0,CaM~b,x~5) -> CaMKII(T286~p,CaM~b,x~4).CaMKII(T286~p,CaM~b,x~5) kf3
+	R3: CaMKII(T286~p,CaM~b,x~5).CaMKII(T286~0,CaM~b,x~6) -> CaMKII(T286~p,CaM~b,x~5).CaMKII(T286~p,CaM~b,x~6) kf3
+	R3: CaMKII(T286~p,CaM~b,x~6).CaMKII(T286~0,CaM~b,x~7) -> CaMKII(T286~p,CaM~b,x~6).CaMKII(T286~p,CaM~b,x~7) kf3
+	R3: CaMKII(T286~p,CaM~b,x~7).CaMKII(T286~0,CaM~b,x~8) -> CaMKII(T286~p,CaM~b,x~7).CaMKII(T286~p,CaM~b,x~8) kf3
+	R3: CaMKII(T286~p,CaM~b,x~8).CaMKII(T286~0,CaM~b,x~9) -> CaMKII(T286~p,CaM~b,x~8).CaMKII(T286~p,CaM~b,x~9) kf3
+	R3: CaMKII(T286~p,CaM~b,x~9).CaMKII(T286~0,CaM~b,x~10) ->CaMKII(T286~p,CaM~b,x~9).CaMKII(T286~p,CaM~b,x~10) kf3
+	R3: CaMKII(T286~p,CaM~b,x~10).CaMKII(T286~0,CaM~b,x~11) -> CaMKII(T286~p,CaM~b,x~10).CaMKII(T286~p,CaM~b,x~11) kf3
+	R3: CaMKII(T286~p,CaM~b,x~11).CaMKII(T286~0,CaM~b,x~12) -> CaMKII(T286~p,CaM~b,x~11).CaMKII(T286~p,CaM~b,x~12) kf3
+	R3: CaMKII(T286~p,CaM~b,x~12).CaMKII(T286~0,CaM~b,x~1) -> CaMKII(T286~p,CaM~b,x~12).CaMKII(T286~p,CaM~b,x~1) kf3
 
 	R4: CaMKII(T286~p)-> CaMKII(T286~0)  kf4
-	R5: CaMKII(CaM~0)-> CaMKII(CaM~0)	 kf5
+	R5: CaMKII(CaM~0)-> CaMKII(CaM~0)    kf5
 
 end reaction rules
 end model

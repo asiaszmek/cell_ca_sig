@@ -1,0 +1,48 @@
+begin model
+begin parameters
+	#  initial amounts
+	CaMCa4_init	5
+	CaMKII_init	1
+
+	#  Rate constants
+	kf1		1/10000
+	kr1		1
+	kf2		1
+	kf3		1
+	kf4		1
+	kr4		0.08
+	kf5		10	
+	
+end parameters
+
+begin molecule types
+	CaMCa4(cmk)
+	#CaMKII as a pseudo dimer
+	CaMKII(T286~0~p,CaM~0~b,x~1~2,x~1~2)
+end molecule types
+
+begin seed species
+	CaMCa4(cmk)  CaMCa4_init
+	CaMKII(T286~0,CaM~0,x~1!1,x~2!2).CaMKII(T286~0,CaM~0,x~2!2,x~1!3).CaMKII(T286~0,CaM~0,x~1!3,x~2!4).CaMKII(T286~0,CaM~0,x~2!4,x~1!1) 	CaMKII_init
+end seed species
+
+begin observables
+	01: Molecules CaMKII_inhibit		CaMKII(T286~0,CaM~0)
+	02: Molecules CaMKII_bound		CaMKII(CaM~b)
+	03: Molecules CaMKII_phosph		CaMKII(T286~p)
+end observables
+
+begin reaction rules
+	# CaMCa4 binding
+	R1: CaMKII(T286~0,CaM~0) + CaMCa4(cmk) -> CaMKII(T286~0,CaM~b)  kf1
+
+	# asymetric autophosphorylation	
+
+	R2: CaMKII(T286~0,CaM~b,x~1!+,x~2!+).CaMKII(T286~0,CaM~0)-> CaMKII(T286~p,CaM~b,x~1!+,x~2!+).CaMKII(T286~0,CaM~0) kf2
+
+#	R4: CaMKII(T286~p)-> CaMKII(T286~0)  kf4
+#	R5: CaMKII(CaM~0)-> CaMKII(CaM~0)    kf5
+
+end reaction rules
+end model
+generate_network({overwrite=>1})
