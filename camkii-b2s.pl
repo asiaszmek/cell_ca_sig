@@ -113,8 +113,9 @@ foreach $each_obs(@spd_obs){
 	for($i = 0; $i < scalar(@spd_species); $i++){
 		print OBS ' '.$m[$i]; 
 		# added
+		$species{1}="cam-ca4";
 		if($m[$i]==1) { $species{$i+1}=$spe_obs[1]; }
-
+		
 	}
 		
 	print OBS "\n"; }
@@ -160,14 +161,15 @@ foreach $each_rxn(@spd_rxn){
 	$rate_c = $rate_c * $c;
 	$rxn_smol .= ' '.$rate_c;
 	$rxn_smol .= ' '.$c;
+
 	#$rxn_smol .= ' '.$rxn_now.' '.$rxn_pre;
-	#if ($print_flag==0){
-	#	$tmp='reaction rxn'.$spe_rxn[0].' '.$rxn_smol."   ".$spe_rxn[4]."\n";
-	#}
-	#if($print_flag==1){
+	if ($print_flag==0){
+		$tmp_pre='reaction rxn'.$spe_rxn[0].' '.$rxn_smol."   ".$spe_rxn[4]."\n";
+	}
+	if($print_flag==1){
 		print OUTPUT 'reaction rxn'.$spe_rxn[0].' '.$rxn_smol."   ".$spe_rxn[4]."\n";
-		#print OUTPUT $tmp.' '.$rxn_smol."\n";
-	#}
+		print OUTPUT 'tmp_pre: '.$tmp_pre."\n";
+	}
 }
 
 print OUTPUT "\nend_file\n";
