@@ -52,7 +52,7 @@ begin observables
 	05: Species bCaMKII_b4		bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~0).bCaMKII(C~0)
 	06: Species bCaMKII_b5		bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~0)
 	07: Species bCaMKII_b6		bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b).bCaMKII(C~b)
- 	08: Species bCaMKII_p_ub	bCaMKII(T~p,C~0).bCaMKII(C~0).bCaMKII(C~0).bCaMKII(C~0).bCaMKII(C~0).bCaMKII(C~0)
+ 	08: Species bCaMKII_p_ub	bCaMKII(T~p,C~0).bCaMKII(T~0,C~0).bCaMKII(T~0,C~0).bCaMKII(T~0,C~0).bCaMKII(T~0,C~0).bCaMKII(T~0,C~0)
 end observables
 
 begin reaction rules

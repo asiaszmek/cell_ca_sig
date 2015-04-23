@@ -1,0 +1,158 @@
+/* exmpales followed:
+	/S7_surfaces/signal.txt
+	/S7_surfaces/unbounded_diffusion/emitter1.txt
+	/S99_more/neuron/neuron.txt
+
+units: nm ms
+*/
+
+define ca_src  1
+#define ca_int  0.0001	#0.1 ca2+ per usec
+define ca_int  0.001
+#define cam_src 75398220
+define dfc_ca 500000
+define stimtime 5
+define graph_on
+
+#-------------General parameters-------
+
+ifdefine graph_on
+	graphics opengl_good
+	graphic_iter 1
+	frame_thickness 0
+	frame_color 1 1 1
+	#grid_thickness 1
+else
+	graphics none
+endif
+
+
+dim 3
+accuracy 10
+
+molperbox 3
+#boxsize 1
+
+boundaries 0 -6000 6000
+boundaries 1 -6000 6000
+boundaries 2 -6000 6000 
+
+time_start 0
+time_stop  stimtime
+time_step  0.00001  #0.01 usec
+
+#-------------Molecules----------------
+species ca
+species cam
+species cam-ca1
+species cam-ca2	
+species cam-ca3
+#species cam-ca4
+
+read_file camkii-test2.txt
+
+molecule_lists calst camlst camkii
+mol_list ca 	  calst
+mol_list cam* 	  camlst
+mol_list s*		  camkii
+
+define cam1_on		57018000 		#NT_on+CT_on
+define cam1_off 	162.6			#NT_off+CT_off
+define cam2_on		57346100 		#NT_on+NR_on+CT_on+CR_on
+define cam2_off		206.6130		#NT_off+NR_off+CT_off+CR_off
+define cam3_on		328100			#NR_on+CR_on
+define cam3_off		44.0130			#NR_off+CR_off
+define cam4_on		328100			#NR_on+CR_on
+define cam4_off		44.0130			#NR_off+CR_off
+
+reaction	cam1	ca + cam -> cam-ca1			cam1_on				
+reaction	cam1r   cam-ca1 -> ca + cam			cam1_off
+reaction	cam2	ca + cam-ca1 -> cam-ca2		cam2_on
+reaction	cam2r	cam-ca2 -> ca + cam-ca1		cam2_off
+reaction	cam3	ca + cam-ca2 -> cam-ca3		cam3_on
+reaction	cam3r	cam-ca3 -> ca + cam-ca2		cam3_off
+reaction 	cam4	ca + cam-ca3 -> cam-ca4		cam4_on
+reaction 	cam4r	cam-ca4 -> ca + cam-ca3		cam4_off
+
+
+difc ca			dfc_ca		#   nm^2 us^(-1)
+difc cam*		50000		#50 nm^2 us^(-1) -> 50000 nm^2 ms^(-1)
+difc s*			5000
+difc s2			0
+
+#------------------Surfaces------------
+start_surface membrane
+action both all r
+color both grey 0.2
+polygon both edge
+panel sph 0 0 0 5000 20 20 #5 micron
+end_surface
+
+start_surface n_membrane
+action both ca t
+action both cam* t
+action both s*	r 
+color both grey 0.5
+polygon both edge
+panel sph 0 0 0 2500 20 20 #2.5 micron
+end_surface
+
+start_surface shell
+action both all t
+color both grey 0.5
+polygon both edge
+panel sph 0 0 0 4900 20 20 #2.5 micron
+end_surface
+
+start_compartment nano
+surface shell
+surface membrane
+point 4950 0 0
+end_compartment
+
+start_compartment cytol
+surface shell
+surface n_membrane
+point 4800 0 0
+end_compartment
+
+start_compartment nucleus
+surface n_membrane
+point 0 0 0
+end_compartment
+
+
+#------------molecules in compartment--
+
+compartment_mol 1847507	cam 		nano	#100 uM
+compartment_mol 0   	cam-ca1	  	nano
+compartment_mol 0		cam-ca2		nano
+compartment_mol 0   	cam-ca3	  	nano
+compartment_mol 0   	cam-ca4	  	nano
+compartment_mol	7692428 cam cytol  #30 uM
+
+compartment_mol 258651   s2 nano		#14 uM
+compartment_mol 3589799  s2 cytol	#14 uM
+
+compartment_mol 184750	ca nano		#10 uM
+compartment_mol 2564142	ca cytol	#10 uM
+
+
+#------------commands------------------
+cmd i 0 stimtime ca_int pointsource ca ca_src 4999 0 0   #single ca channel 0.0936 /usec ~ 0.03 pA#
+
+ifdefine graph_on
+	display_size all 0.5
+	color ca  			red
+	color cam* 			blue
+	color s*	  		black	
+
+	text_display ca
+	text_display cam
+	text_display cam-ca4
+	text_display s2
+	text_display s3
+	cmd b pause
+endif
+
+end_file
