@@ -1,0 +1,183 @@
+/* exmpales followed:
+	/S7_surfaces/signal.txt
+	/S7_surfaces/unbounded_diffusion/emitter1.txt
+	/S99_more/neuron/neuron.txt
+
+units: nm ms
+*/
+
+define ca_src  1
+#define ca_int  0.0001	#0.1 ca2+ per usec
+define ca_int  0.001
+define dfc_ca 500000
+define stimtime 5
+define graph_on
+
+#-------------General parameters-------
+
+ifdefine graph_on
+	graphics opengl_good
+	graphic_iter 1
+	frame_thickness 0
+	frame_color 1 1 1
+	#grid_thickness 1
+else
+	graphics none
+endif
+
+dim 3
+accuracy 10
+
+molperbox 3
+#boxsize 1
+
+boundaries 0 -600 600
+boundaries 1 -600 600
+boundaries 2 -10  5100  
+
+time_start 0
+time_stop  stimtime
+time_step  0.00001  #0.01 usec
+
+#-------------Molecules----------------
+species ca
+species cam
+species cam-ca1
+species cam-ca2	
+species cam-ca3
+#species cam-ca4
+
+read_file camkii-test2.txt
+
+molecule_lists calst camlst camkii
+mol_list ca 	  calst
+mol_list cam* 	  camlst
+
+define cam1_on		57018000 		#NT_on+CT_on
+define cam1_off 	162.6			#NT_off+CT_off
+define cam2_on		57346100 		#NT_on+NR_on+CT_on+CR_on
+define cam2_off		206.6130		#NT_off+NR_off+CT_off+CR_off
+define cam3_on		328100			#NR_on+CR_on
+define cam3_off		44.0130			#NR_off+CR_off
+define cam4_on		328100			#NR_on+CR_on
+define cam4_off		44.0130			#NR_off+CR_off
+
+reaction	cam1	ca + cam -> cam-ca1			cam1_on				
+reaction	cam1r   cam-ca1 -> ca + cam			cam1_off
+reaction	cam2	ca + cam-ca1 -> cam-ca2		cam2_on
+reaction	cam2r	cam-ca2 -> ca + cam-ca1		cam2_off
+reaction	cam3	ca + cam-ca2 -> cam-ca3		cam3_on
+reaction	cam3r	cam-ca3 -> ca + cam-ca2		cam3_off
+reaction 	cam4	ca + cam-ca3 -> cam-ca4		cam4_on
+reaction 	cam4r	cam-ca4 -> ca + cam-ca3		cam4_off
+
+difc ca			dfc_ca		#   nm^2 us^(-1)
+difc cam*		50000		#50 nm^2 us^(-1) -> 50000 nm^2 ms^(-1)
+difc b*			5000
+difc g*			50000
+difc g3			0
+difc b2			0
+
+#------------------Surfaces------------
+start_surface membrane
+action both all r
+color both grey 0.2
+polygon both edge
+panel rect +2 -250 -250 5000 500 500 #5 micron
+end_surface
+
+start_surface n_membrane
+action both ca t
+action both cam* t
+action both b* r
+action both g* t 
+color both grey 0.5
+polygon both edge
+panel rect +2 -125 -125 2500 250 250 #2.5 micron
+
+end_surface
+
+start_surface shell
+action both all t
+color both grey 0.5
+polygon both edge
+panel rect +2 -245 -245 4900 490 490 #0.1 micron
+
+end_surface
+
+start_surface boundary1
+action both all periodic
+color both grey 0.5
+polygon both edge
+#panel tri -250 -250 5000 250 -250 5000 0 0 0 tri1
+#panel tri 250 -250 5000 250 250 5000 0 0 0 tri2
+#panel tri 250 250 5000 -250 250 5000 0 0 0 tri3
+#panel tri -250 250 5000 -250 -250 5000 0 0 0 tri4
+
+#example/S7/jump3.txt, P37 jumping panels should be parallel?
+#jump tri1 front <-> tri3 front
+#jump tri1 back <-> tri3 back
+#jump tri2 front <-> tri4 front
+#jump tri2 back <-> tri4 back
+end_surface
+
+start_compartment nano
+surface shell
+surface membrane
+surface boundary1
+point 0 0 4950
+end_compartment
+
+start_compartment cytol
+surface shell
+surface n_membrane
+surface boundary1
+point 0 0 4800
+end_compartment
+
+start_compartment nucleus
+surface n_membrane
+surface boundary1
+point 0 0 0
+end_compartment
+
+
+#------------molecules in compartment--
+
+compartment_mol 1471	cam 	nano	#1 mM
+compartment_mol	204		cam 	cytol  
+
+compartment_mol 30		b2 		nano	#10 uM
+compartment_mol 408     b2		cytol	#10 uM
+
+compartment_mol 90		g3 		nano	#10 uM
+compartment_mol 1224    g3		cytol	#10 uM
+
+compartment_mol 15		ca 		nano		#10 uM
+compartment_mol 204		ca 		cytol	#10 uM
+
+
+#------------commands------------------
+cmd i 0 stimtime ca_int pointsource ca ca_src 4999 0 0   #single ca channel 0.0936 /usec ~ 0.03 pA#
+
+ifdefine graph_on
+	display_size all 0.8
+	color ca  			red
+	color cam* 			blue
+	color b*		  black	
+	color g*		  purple
+
+	text_display ca
+	text_display cam-ca1
+	text_display cam-ca2
+	text_display cam-ca3
+	text_display cam-ca4
+	text_display b2
+	text_display b4
+	text_display g3
+	text_display g5
+	text_display time
+	cmd b pause
+endif
+
+end_file

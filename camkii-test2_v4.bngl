@@ -1,0 +1,116 @@
+begin model
+begin parameters
+	#  initial amounts
+	Ca_init		200
+	CaM_init	100
+	bCaMKII_init 10
+	gCaMKII_init 10
+
+	#  Rate constants
+	kf_N1			2618000
+	kr_N1			160
+	kf_N2			54400000
+	kr_N2			44
+	kf_C1			285600
+	kr_C1			2.6
+	kf_C2			42500
+	kr_C2			0.0130
+	
+	kf_CaM0			374006.46
+	kr_CaM0			0.0735
+	kf_CaM2			188768
+	kr_CaM2			0.0425
+	kf_CaM4			51000 #msec^(-1)
+	kr_CaM4			0.002
+	kf_pT286		0.01 #0.001 trapping rate 10 s^-1
+	kf_pT286_bg		85000  # 50 uM^-1 s^-1
+	kf_pT286_g		10625  #1/8 of kf_pT286_bg according to Fig 7 in Gaertner_etal_2004
+	#kr_pT286_bg		1	   #1000 s^-1
+	#kr_pT286
+	
+	kf_ubCaM4		0.00008
+	kr_ubCaM4		17000
+
+	kr_CaM0_g		0.01973346
+	kr_CaM2_g		0.01141050
+	kr_CaM4_g		0.00053696
+	
+	#kf_depho_PP1	0.00172
+	kf_depho_PP1	0.0001
+	#kf_depho_CaN	0.00172
+	#kr_depho_CaN	116.96
+	
+end parameters
+
+begin molecule types
+	cam
+	camca2
+	camca4
+	bCaMKII(T~0~b~p,K~0~1,L,R) 
+	gCaMKII(T~0~p,C~0~b)
+end molecule types
+
+begin seed species
+	cam  CaM_init
+	camca2 CaM_init
+	camca4 CaM_init
+	bCaMKII(T~0,K~0,L!1,R!2).bCaMKII(T~0,K~0,L!2,R!3).bCaMKII(T~0,K~0,L!3,R!4).bCaMKII(T~0,K~0,L!4,R!5).bCaMKII(T~0,K~0,L!5,R!6).bCaMKII(T~0,K~0,L!6,R!1) bCaMKII_init
+	gCaMKII(T~0,C~0) gCaMKII_init
+end seed species
+
+begin observables
+	01: Species bCaMKII_K0		bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0)
+	01: Species bCaMKII_K1		bCaMKII(K~1).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0)
+	02: Species bCaMKII_K2		bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0)
+	03: Species bCaMKII_K3		bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~0).bCaMKII(K~0).bCaMKII(K~0)
+	04: Species bCaMKII_K4		bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~0).bCaMKII(K~0)
+	05: Species bCaMKII_K5		bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~0).bCaMKII(K~0)
+	06: Species bCaMKII_K6		bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1).bCaMKII(K~1)
+	07: Species bCaMKII_T0		bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0)
+	08: Species bCaMKII_T1		bCaMKII(T~p).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0)
+	09: Species bCaMKII_T2		bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0)
+	10:	Species bCaMKII_T3		bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~0).bCaMKII(T~0).bCaMKII(T~0)
+	11:	Species bCaMKII_T4		bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~0).bCaMKII(T~0)
+	12: Species bCaMKII_T5		bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~0)
+	13: Species bCaMKII_T6		bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p).bCaMKII(T~p)
+end observables
+
+begin reaction rules
+	
+	#cam binding
+	#R_1: bCaMKII(T~0,K~0) + cam <-> bCaMKII(T~0,K~1)	kf_CaM0,kr_CaM0
+	#R_2: gCaMKII(T~0,C~0) + cam <-> gCaMKII(T~0,C~b)	kf_CaM0,kr_CaM0_g
+
+	#camca2 binding
+	#R0_1: bCaMKII(T~0,K~0) + camca2 <-> bCaMKII(T~0,K~1)  kf_CaM2,kr_CaM2
+	#R0_2: gCaMKII(T~0,C~0) + camca2 <-> gCaMKII(T~0,C~b)  kf_CaM2,kr_CaM2_g
+
+	# CaMCa4 binding
+	R1_1: bCaMKII(T~0,K~0) + camca4 <-> bCaMKII(T~0,K~1)  kf_CaM4,kr_CaM4
+	R1_2: gCaMKII(T~0,C~0) + camca4 <-> gCaMKII(T~0,C~b)  kf_CaM4,kr_CaM4_g
+
+	#autophosphorylation	
+	R2_1: bCaMKII(K~1,L!5,R!6).bCaMKII(T~0,K~1,L!6,R!1) -> bCaMKII(K~1,L!5,R!6).bCaMKII(T~p,K~1,L!6,R!1) kf_pT286
+	#R2_2: gCaMKII(T~0,C~b,L!5,R!6).gCaMKII(T~0,C~b,L!6,R!1)-> gCaMKII(T~p,C~b,L!5,R!6).gCaMKII(T~p,C~b,L!6,R!1) kf2
+	R2_3: bCaMKII(K~1) + gCaMKII(T~0,C~b) -> bCaMKII(K~1) + gCaMKII(T~p,C~b)	kf_pT286_bg #,kr_pT286_bg
+	R2_4: gCaMKII(C~b) + gCaMKII(T~0) -> gCaMKII(C~b) + gCaMKII(T~p) kf_pT286_g #,kr_pT286_g
+
+	#trapping
+	#R3_1: bCaMKII(C~b,T~p,K~1) <-> bCaMKII(C~0,T~p,K~1) + camca4 	kf_ubCaM4,kr_ubCaM4
+	#R3_1: bCaMKII(T~p,K~1) <-> bCaMKII(T~b,K~1) + camca4 	kf_ubCaM4,kr_ubCaM4
+	R3_2: gCaMKII(C~b,T~p) <-> gCaMKII(C~0,T~p) + camca4 	kf_ubCaM4,kr_ubCaM4
+
+	R4_1: bCaMKII(T~p,K~1) -> bCaMKII(T~0,K~0)+camca4  kf_depho_PP1
+	R4_2: gCaMKII(T~p) -> gCaMKII(T~0)  		kf_depho_PP1
+ 
+	#R5_1: bCaMKII(T~0,C~b,L!5,R!6).bCaMKII(T~p,C~b,L!6,R!1) -> bCaMKII(T~p,C~b,L!5,R!6).bCaMKII(T~p,C~b,L!6,R!1) kf_pT286
+	#R5_2: gCaMKII(T~0,C~b,L!5,R!6).gCaMKII(T~p,C~b,L!6,R!1)-> gCaMKII(T~p,C~b,L!5,R!6).gCaMKII(T~p,C~b,L!6,R!1) kf5
+	#R6_1: bCaMKII(C~b,T~0) -> bCaMKII(C~0,T~0) + CaM(N~1,N~1,C~1,C~1) kf6
+	#R6_2: gCaMKII(C~b,T~0) -> gCaMKII(C~0,T~0) + CaM(N~1,N~1,C~1,C~1) kf6
+
+	#R7:	  gCaMKII(S~p) -> gCaMKII(S~0)	kf7
+	 
+end reaction rules
+end model
+#generate_network({overwrite=>1,max_iter=>6})
+generate_network({overwrite=>1})

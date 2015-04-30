@@ -1,0 +1,37 @@
+# Smoldyn reaction list converted automatically from BioNetGen output
+
+species bCaMKII_up_ub
+species bCaMKII_b1
+species bCaMKII_b2
+species bCaMKII_b3
+species bCaMKII_b4
+species bCaMKII_b5
+species bCaMKII_b6
+species bCaMKII_p_ub
+species cam-ca4
+
+reaction rxn0 cam-ca4 + bCaMKII_up_ub -> bCaMKII_b1 306000
+reaction rxn1 bCaMKII_up_ub -> bCaMKII_p_ub 0.01032
+reaction rxn2 cam-ca4 + bCaMKII_b1 -> bCaMKII_b2 10880000
+reaction rxn3 cam-ca4 + bCaMKII_p_ub -> bCaMKII_b1 2550000
+reaction rxn4 bCaMKII_b1 -> cam-ca4 + bCaMKII_up_ub 0.002
+reaction rxn5 bCaMKII_p_ub -> bCaMKII_up_ub 265.81817
+#reaction rxn6 bCaMKII_b1 -> bCaMKII_b1 51037.4188799999
+#reaction rxn7 bCaMKII_p_ub -> bCaMKII_p_ub 10898.60689
+reaction rxn8 cam-ca4 + bCaMKII_b2 -> bCaMKII_b3 22304000
+reaction rxn9 bCaMKII_b2 -> cam-ca4 + bCaMKII_b1 0.341120000000003
+reaction rxn10 bCaMKII_b1 -> cam-ca4 + bCaMKII_p_ub 0.06456
+#reaction rxn11 bCaMKII_b2 -> bCaMKII_b2 130783.41788
+reaction rxn12 cam-ca4 + bCaMKII_b3 -> bCaMKII_b4 22032000
+reaction rxn13 bCaMKII_b3 -> cam-ca4 + bCaMKII_b2 0.673919999999994
+#reaction rxn14 bCaMKII_b3 -> bCaMKII_b3 172251.416720001
+reaction rxn15 cam-ca4 + bCaMKII_b4 -> bCaMKII_b5 11152000
+reaction rxn16 bCaMKII_b4 -> cam-ca4 + bCaMKII_b3 0.682239999999994
+#reaction rxn17 bCaMKII_b4 -> bCaMKII_b4 130783.58188
+reaction rxn18 cam-ca4 + bCaMKII_b5 -> bCaMKII_b6 2176000
+reaction rxn19 bCaMKII_b5 -> cam-ca4 + bCaMKII_b4 0.332800000000003
+#reaction rxn20 bCaMKII_b5 -> bCaMKII_b5 51037.5468799998
+reaction rxn21 bCaMKII_b6 -> cam-ca4 + bCaMKII_b5 0.08736
+#reaction rxn22 bCaMKII_b6 -> bCaMKII_b6 11164.47738
+
+end_file

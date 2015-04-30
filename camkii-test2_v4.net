@@ -1,0 +1,1190 @@
+# Created by BioNetGen UNKNOWN
+begin parameters
+    1 Ca_init       200  # Constant
+    2 CaM_init      100  # Constant
+    3 bCaMKII_init  10  # Constant
+    4 gCaMKII_init  10  # Constant
+    5 kf_N1         2618000  # Constant
+    6 kr_N1         160  # Constant
+    7 kf_N2         54400000  # Constant
+    8 kr_N2         44  # Constant
+    9 kf_C1         285600  # Constant
+   10 kr_C1         2.6  # Constant
+   11 kf_C2         42500  # Constant
+   12 kr_C2         0.0130  # Constant
+   13 kf_CaM0       374006.46  # Constant
+   14 kr_CaM0       0.0735  # Constant
+   15 kf_CaM2       188768  # Constant
+   16 kr_CaM2       0.0425  # Constant
+   17 kf_CaM4       51000  # Constant
+   18 kr_CaM4       0.002  # Constant
+   19 kf_pT286      0.01  # Constant
+   20 kf_pT286_bg   85000  # Constant
+   21 kf_pT286_g    10625  # Constant
+   22 kf_ubCaM4     0.00008  # Constant
+   23 kr_ubCaM4     17000  # Constant
+   24 kr_CaM0_g     0.01973346  # Constant
+   25 kr_CaM2_g     0.01141050  # Constant
+   26 kr_CaM4_g     0.00053696  # Constant
+   27 kf_depho_PP1  0.0001  # Constant
+end parameters
+begin species
+    1 cam() CaM_init
+    2 camca2() CaM_init
+    3 camca4() CaM_init
+    4 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~0,L!6,R!1,T~0) bCaMKII_init
+    5 gCaMKII(C~0,T~0) gCaMKII_init
+    6 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~0) 0
+    7 gCaMKII(C~b,T~0) 0
+    8 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!5,R!6,T~0) 0
+    9 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!6,R!1,T~0) 0
+   10 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!6,R!1,T~0) 0
+   11 gCaMKII(C~b,T~p) 0
+   12 gCaMKII(C~0,T~p) 0
+   13 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!4,R!6,T~0) 0
+   14 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!5,R!6,T~0) 0
+   15 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!5,R!6,T~0) 0
+   16 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!6,R!1,T~0) 0
+   17 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   18 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!3,R!6,T~0) 0
+   19 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!4,R!6,T~0) 0
+   20 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!4,R!6,T~0) 0
+   21 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!6,R!5,T~p) 0
+   22 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   23 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   24 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   25 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   26 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~0) 0
+   27 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!3,R!6,T~0).bCaMKII(K~1,L!6,R!5,T~p) 0
+   28 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!6,R!5,T~p) 0
+   29 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!6,R!5,T~p) 0
+   30 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   31 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   32 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   33 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!5,R!6,T~p) 0
+   34 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   35 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   36 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   37 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   38 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~0) 0
+   39 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!6,R!5,T~p) 0
+   40 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!3,R!6,T~0).bCaMKII(K~1,L!6,R!5,T~p) 0
+   41 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!6,R!5,T~p) 0
+   42 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   43 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!4,R!6,T~p) 0
+   44 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!5,R!6,T~p) 0
+   45 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!5,R!6,T~p) 0
+   46 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!3,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!5,R!1,T~p) 0
+   47 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!6,R!1,T~p) 0
+   48 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!4,T~0).bCaMKII(K~1,L!3,R!6,T~0).bCaMKII(K~1,L!5,R!1,T~p) 0
+   49 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!3,R!5,T~0).bCaMKII(K~1,L!6,R!4,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   50 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   51 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   52 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   53 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!6,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!4,T~p) 0
+   54 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!1,T~p) 0
+   55 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!6,R!5,T~p) 0
+   56 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!3,R!6,T~p) 0
+   57 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!4,R!6,T~p) 0
+   58 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!4,R!6,T~p) 0
+   59 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!4,R!1,T~p) 0
+   60 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!6,R!4,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   61 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!3,R!5,T~0).bCaMKII(K~1,L!6,R!4,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   62 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   63 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+   64 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   65 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   66 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!4,T~p) 0
+   67 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!6,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!4,T~p) 0
+   68 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+   69 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!6,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!4,T~p) 0
+   70 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!4,R!5,T~p) 0
+   71 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!1,T~p) 0
+   72 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+   73 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~p) 0
+   74 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!6,R!4,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   75 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+   76 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+   77 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+   78 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!4,T~p) 0
+   79 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+   80 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!4,R!5,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+   81 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+   82 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!4,T~p).bCaMKII(K~1,L!3,R!5,T~p) 0
+   83 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!4,R!5,T~p) 0
+   84 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!2,R!6,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!5,T~p) 0
+   85 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!3,R!4,T~p).bCaMKII(K~1,L!6,R!1,T~p) 0
+   86 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!2,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+   87 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+   88 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~0,L!3,R!6,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!4,T~p) 0
+   89 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!2,R!5,T~0).bCaMKII(K~0,L!4,R!6,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!1,T~p) 0
+   90 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+   91 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   92 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+   93 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!5,R!4,T~0).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!2,R!6,T~p) 0
+   94 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!6,R!1,T~p) 0
+   95 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!6,R!4,T~p).bCaMKII(K~1,L!2,R!5,T~p) 0
+   96 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!4,R!6,T~0).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!6,R!5,T~p) 0
+   97 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!2,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+   98 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!2,R!5,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!4,R!6,T~p).bCaMKII(K~1,L!5,R!3,T~p) 0
+   99 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+  100 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!2,R!5,T~0).bCaMKII(K~1,L!6,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  101 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~0).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+  102 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  103 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  104 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  105 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  106 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!4,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+  107 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  108 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!5,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  109 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+  110 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+  111 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!6,R!5,T~0).bCaMKII(K~1,L!2,R!6,T~p).bCaMKII(K~1,L!4,R!1,T~p) 0
+  112 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!6,R!1,T~0).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  113 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~0).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!2,R!6,T~p) 0
+  114 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  115 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!4,T~p).bCaMKII(K~1,L!2,R!6,T~p) 0
+  116 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!2,R!4,T~p).bCaMKII(K~1,L!6,R!3,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  117 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!5,T~0).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p).bCaMKII(K~1,L!2,R!6,T~p) 0
+  118 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+  119 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!2,R!5,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  120 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~0,L!4,R!5,T~0).bCaMKII(K~1,L!3,R!4,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!5,R!6,T~p) 0
+  121 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+  122 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!2,R!3,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+  123 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  124 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  125 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~0).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  126 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!1,T~0).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  127 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!1,T~0).bCaMKII(K~1,L!4,R!3,T~p).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!2,R!6,T~p) 0
+  128 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!6,T~0).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+  129 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  130 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!2,R!6,T~p) 0
+  131 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  132 bCaMKII(K~1,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+  133 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~0,L!5,R!6,T~0).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!6,R!3,T~p) 0
+  134 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!5,R!1,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  135 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~0,L!3,R!4,T~0).bCaMKII(K~1,L!5,R!3,T~p).bCaMKII(K~1,L!2,R!5,T~p).bCaMKII(K~1,L!6,R!1,T~p).bCaMKII(K~1,L!4,R!6,T~p) 0
+  136 bCaMKII(K~0,L!1,R!2,T~0).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+  137 bCaMKII(K~1,L!1,R!2,T~p).bCaMKII(K~1,L!2,R!3,T~p).bCaMKII(K~1,L!4,R!1,T~p).bCaMKII(K~1,L!5,R!4,T~p).bCaMKII(K~1,L!6,R!5,T~p).bCaMKII(K~1,L!3,R!6,T~p) 0
+end species
+begin reactions
+    1 3,4 6 6*kf_CaM4 #R1_1
+    2 3,5 7 kf_CaM4 #R1_2
+    3 3,6 8 2*kf_CaM4 #R1_1
+    4 3,6 9 2*kf_CaM4 #R1_1
+    5 3,6 10 kf_CaM4 #R1_1
+    6 6 3,4 kr_CaM4 #R1_1(reverse)
+    7 7 3,5 kr_CaM4_g #R1_2(reverse)
+    8 6,7 6,11 kf_pT286_bg #R2_3
+    9 5,7 7,12 kf_pT286_g #R2_4
+   10 7,7 7,11 kf_pT286_g #R2_4
+   11 3,8 13 2*kf_CaM4 #R1_1
+   12 3,8 14 kf_CaM4 #R1_1
+   13 3,8 15 kf_CaM4 #R1_1
+   14 3,9 13 kf_CaM4 #R1_1
+   15 3,9 15 kf_CaM4 #R1_1
+   16 3,9 16 kf_CaM4 #R1_1
+   17 3,9 14 kf_CaM4 #R1_1
+   18 3,10 14 2*kf_CaM4 #R1_1
+   19 3,10 15 2*kf_CaM4 #R1_1
+   20 8 3,6 2*kr_CaM4 #R1_1(reverse)
+   21 9 3,6 2*kr_CaM4 #R1_1(reverse)
+   22 10 3,6 2*kr_CaM4 #R1_1(reverse)
+   23 8 17 kf_pT286 #R2_1
+   24 7,8 8,11 kf_pT286_bg #R2_3
+   25 7,9 9,11 kf_pT286_bg #R2_3
+   26 7,10 10,11 kf_pT286_bg #R2_3
+   27 5,11 11,12 kf_pT286_g #R2_4
+   28 7,11 11,11 kf_pT286_g #R2_4
+   29 11 3,12 kf_ubCaM4 #R3_2
+   30 3,12 11 kr_ubCaM4 #R3_2(reverse)
+   31 11 7 kf_depho_PP1 #R4_2
+   32 12 5 kf_depho_PP1 #R4_2
+   33 3,13 18 2*kf_CaM4 #R1_1
+   34 3,13 19 kf_CaM4 #R1_1
+   35 3,14 18 kf_CaM4 #R1_1
+   36 3,14 20 kf_CaM4 #R1_1
+   37 3,14 19 kf_CaM4 #R1_1
+   38 3,15 19 kf_CaM4 #R1_1
+   39 3,15 20 kf_CaM4 #R1_1
+   40 3,15 18 kf_CaM4 #R1_1
+   41 3,16 19 3*kf_CaM4 #R1_1
+   42 3,17 21 kf_CaM4 #R1_1
+   43 3,17 22 kf_CaM4 #R1_1
+   44 3,17 23 kf_CaM4 #R1_1
+   45 3,17 24 kf_CaM4 #R1_1
+   46 13 3,8 2*kr_CaM4 #R1_1(reverse)
+   47 13 3,9 kr_CaM4 #R1_1(reverse)
+   48 14 3,8 kr_CaM4 #R1_1(reverse)
+   49 14 3,10 kr_CaM4 #R1_1(reverse)
+   50 14 3,9 kr_CaM4 #R1_1(reverse)
+   51 15 3,8 kr_CaM4 #R1_1(reverse)
+   52 15 3,9 kr_CaM4 #R1_1(reverse)
+   53 15 3,10 kr_CaM4 #R1_1(reverse)
+   54 16 3,9 3*kr_CaM4 #R1_1(reverse)
+   55 17 3,25 kr_CaM4 #R1_1(reverse)
+   56 13 24 kf_pT286 #R2_1
+   57 13 21 kf_pT286 #R2_1
+   58 14 22 kf_pT286 #R2_1
+   59 15 23 kf_pT286 #R2_1
+   60 7,13 11,13 kf_pT286_bg #R2_3
+   61 7,14 11,14 kf_pT286_bg #R2_3
+   62 7,15 11,15 kf_pT286_bg #R2_3
+   63 7,16 11,16 kf_pT286_bg #R2_3
+   64 7,17 11,17 kf_pT286_bg #R2_3
+   65 17 3,6 kf_depho_PP1 #R4_1
+   66 3,18 26 2*kf_CaM4 #R1_1
+   67 3,19 26 2*kf_CaM4 #R1_1
+   68 3,20 26 2*kf_CaM4 #R1_1
+   69 3,21 27 kf_CaM4 #R1_1
+   70 3,21 28 kf_CaM4 #R1_1
+   71 3,21 29 kf_CaM4 #R1_1
+   72 3,22 27 kf_CaM4 #R1_1
+   73 3,22 30 kf_CaM4 #R1_1
+   74 3,22 31 kf_CaM4 #R1_1
+   75 3,23 28 kf_CaM4 #R1_1
+   76 3,23 30 kf_CaM4 #R1_1
+   77 3,23 32 kf_CaM4 #R1_1
+   78 3,24 29 kf_CaM4 #R1_1
+   79 3,24 31 kf_CaM4 #R1_1
+   80 3,24 32 kf_CaM4 #R1_1
+   81 3,25 33 kf_CaM4 #R1_1
+   82 3,25 34 kf_CaM4 #R1_1
+   83 3,25 35 kf_CaM4 #R1_1
+   84 3,25 36 kf_CaM4 #R1_1
+   85 3,25 17 kf_CaM4 #R1_1
+   86 18 3,13 2*kr_CaM4 #R1_1(reverse)
+   87 18 3,14 kr_CaM4 #R1_1(reverse)
+   88 18 3,15 kr_CaM4 #R1_1(reverse)
+   89 19 3,13 kr_CaM4 #R1_1(reverse)
+   90 19 3,15 kr_CaM4 #R1_1(reverse)
+   91 19 3,16 kr_CaM4 #R1_1(reverse)
+   92 19 3,14 kr_CaM4 #R1_1(reverse)
+   93 20 3,14 2*kr_CaM4 #R1_1(reverse)
+   94 20 3,15 2*kr_CaM4 #R1_1(reverse)
+   95 21 3,17 kr_CaM4 #R1_1(reverse)
+   96 21 3,33 kr_CaM4 #R1_1(reverse)
+   97 22 3,17 kr_CaM4 #R1_1(reverse)
+   98 22 3,34 kr_CaM4 #R1_1(reverse)
+   99 23 3,17 kr_CaM4 #R1_1(reverse)
+  100 23 3,35 kr_CaM4 #R1_1(reverse)
+  101 24 3,17 kr_CaM4 #R1_1(reverse)
+  102 24 3,36 kr_CaM4 #R1_1(reverse)
+  103 18 32 kf_pT286 #R2_1
+  104 18 29 kf_pT286 #R2_1
+  105 18 27 kf_pT286 #R2_1
+  106 19 31 kf_pT286 #R2_1
+  107 19 28 kf_pT286 #R2_1
+  108 20 30 2*kf_pT286 #R2_1
+  109 21 37 kf_pT286 #R2_1
+  110 24 37 kf_pT286 #R2_1
+  111 7,18 11,18 kf_pT286_bg #R2_3
+  112 7,19 11,19 kf_pT286_bg #R2_3
+  113 7,20 11,20 kf_pT286_bg #R2_3
+  114 7,21 11,21 kf_pT286_bg #R2_3
+  115 7,22 11,22 kf_pT286_bg #R2_3
+  116 7,23 11,23 kf_pT286_bg #R2_3
+  117 7,24 11,24 kf_pT286_bg #R2_3
+  118 7,25 11,25 kf_pT286_bg #R2_3
+  119 21 3,9 kf_depho_PP1 #R4_1
+  120 22 3,10 kf_depho_PP1 #R4_1
+  121 23 3,9 kf_depho_PP1 #R4_1
+  122 24 3,8 kf_depho_PP1 #R4_1
+  123 25 3,4 kf_depho_PP1 #R4_1
+  124 3,26 38 kf_CaM4 #R1_1
+  125 3,27 39 kf_CaM4 #R1_1
+  126 3,27 40 kf_CaM4 #R1_1
+  127 3,28 39 kf_CaM4 #R1_1
+  128 3,28 41 kf_CaM4 #R1_1
+  129 3,29 40 kf_CaM4 #R1_1
+  130 3,29 41 kf_CaM4 #R1_1
+  131 3,30 39 kf_CaM4 #R1_1
+  132 3,30 42 kf_CaM4 #R1_1
+  133 3,31 40 kf_CaM4 #R1_1
+  134 3,31 42 kf_CaM4 #R1_1
+  135 3,32 41 kf_CaM4 #R1_1
+  136 3,32 42 kf_CaM4 #R1_1
+  137 3,33 43 kf_CaM4 #R1_1
+  138 3,33 44 kf_CaM4 #R1_1
+  139 3,33 45 kf_CaM4 #R1_1
+  140 3,33 21 kf_CaM4 #R1_1
+  141 3,34 43 kf_CaM4 #R1_1
+  142 3,34 46 kf_CaM4 #R1_1
+  143 3,34 47 kf_CaM4 #R1_1
+  144 3,34 22 kf_CaM4 #R1_1
+  145 3,35 44 kf_CaM4 #R1_1
+  146 3,35 46 kf_CaM4 #R1_1
+  147 3,35 48 kf_CaM4 #R1_1
+  148 3,35 23 kf_CaM4 #R1_1
+  149 3,36 45 kf_CaM4 #R1_1
+  150 3,36 47 kf_CaM4 #R1_1
+  151 3,36 48 kf_CaM4 #R1_1
+  152 3,36 24 kf_CaM4 #R1_1
+  153 3,37 49 kf_CaM4 #R1_1
+  154 3,37 50 kf_CaM4 #R1_1
+  155 3,37 51 kf_CaM4 #R1_1
+  156 26 3,18 2*kr_CaM4 #R1_1(reverse)
+  157 26 3,19 2*kr_CaM4 #R1_1(reverse)
+  158 26 3,20 kr_CaM4 #R1_1(reverse)
+  159 27 3,21 kr_CaM4 #R1_1(reverse)
+  160 27 3,22 kr_CaM4 #R1_1(reverse)
+  161 27 3,43 kr_CaM4 #R1_1(reverse)
+  162 28 3,21 kr_CaM4 #R1_1(reverse)
+  163 28 3,23 kr_CaM4 #R1_1(reverse)
+  164 28 3,44 kr_CaM4 #R1_1(reverse)
+  165 29 3,21 kr_CaM4 #R1_1(reverse)
+  166 29 3,24 kr_CaM4 #R1_1(reverse)
+  167 29 3,45 kr_CaM4 #R1_1(reverse)
+  168 30 3,22 kr_CaM4 #R1_1(reverse)
+  169 30 3,23 kr_CaM4 #R1_1(reverse)
+  170 30 3,46 kr_CaM4 #R1_1(reverse)
+  171 31 3,22 kr_CaM4 #R1_1(reverse)
+  172 31 3,24 kr_CaM4 #R1_1(reverse)
+  173 31 3,47 kr_CaM4 #R1_1(reverse)
+  174 32 3,23 kr_CaM4 #R1_1(reverse)
+  175 32 3,24 kr_CaM4 #R1_1(reverse)
+  176 32 3,48 kr_CaM4 #R1_1(reverse)
+  177 33 3,25 kr_CaM4 #R1_1(reverse)
+  178 34 3,25 kr_CaM4 #R1_1(reverse)
+  179 35 3,25 kr_CaM4 #R1_1(reverse)
+  180 36 3,25 kr_CaM4 #R1_1(reverse)
+  181 37 3,52 kr_CaM4 #R1_1(reverse)
+  182 26 42 kf_pT286 #R2_1
+  183 26 41 kf_pT286 #R2_1
+  184 26 40 kf_pT286 #R2_1
+  185 26 39 kf_pT286 #R2_1
+  186 27 53 kf_pT286 #R2_1
+  187 27 49 kf_pT286 #R2_1
+  188 28 50 kf_pT286 #R2_1
+  189 29 49 kf_pT286 #R2_1
+  190 29 51 kf_pT286 #R2_1
+  191 30 54 kf_pT286 #R2_1
+  192 31 50 kf_pT286 #R2_1
+  193 32 51 kf_pT286 #R2_1
+  194 32 53 kf_pT286 #R2_1
+  195 33 52 kf_pT286 #R2_1
+  196 7,26 11,26 kf_pT286_bg #R2_3
+  197 7,27 11,27 kf_pT286_bg #R2_3
+  198 7,28 11,28 kf_pT286_bg #R2_3
+  199 7,29 11,29 kf_pT286_bg #R2_3
+  200 7,30 11,30 kf_pT286_bg #R2_3
+  201 7,31 11,31 kf_pT286_bg #R2_3
+  202 7,32 11,32 kf_pT286_bg #R2_3
+  203 7,33 11,33 kf_pT286_bg #R2_3
+  204 7,34 11,34 kf_pT286_bg #R2_3
+  205 7,35 11,35 kf_pT286_bg #R2_3
+  206 7,36 11,36 kf_pT286_bg #R2_3
+  207 7,37 11,37 kf_pT286_bg #R2_3
+  208 27 3,15 kf_depho_PP1 #R4_1
+  209 28 3,16 kf_depho_PP1 #R4_1
+  210 29 3,14 kf_depho_PP1 #R4_1
+  211 30 3,14 kf_depho_PP1 #R4_1
+  212 31 3,15 kf_depho_PP1 #R4_1
+  213 32 3,13 kf_depho_PP1 #R4_1
+  214 33 3,6 kf_depho_PP1 #R4_1
+  215 34 3,6 kf_depho_PP1 #R4_1
+  216 35 3,6 kf_depho_PP1 #R4_1
+  217 36 3,6 kf_depho_PP1 #R4_1
+  218 37 3,17 kf_depho_PP1 #R4_1
+  219 37 3,36 kf_depho_PP1 #R4_1
+  220 3,39 55 kf_CaM4 #R1_1
+  221 3,40 55 kf_CaM4 #R1_1
+  222 3,41 55 kf_CaM4 #R1_1
+  223 3,42 55 kf_CaM4 #R1_1
+  224 3,43 56 kf_CaM4 #R1_1
+  225 3,43 57 kf_CaM4 #R1_1
+  226 3,43 27 kf_CaM4 #R1_1
+  227 3,44 56 kf_CaM4 #R1_1
+  228 3,44 58 kf_CaM4 #R1_1
+  229 3,44 28 kf_CaM4 #R1_1
+  230 3,45 57 kf_CaM4 #R1_1
+  231 3,45 58 kf_CaM4 #R1_1
+  232 3,45 29 kf_CaM4 #R1_1
+  233 3,46 56 kf_CaM4 #R1_1
+  234 3,46 59 kf_CaM4 #R1_1
+  235 3,46 30 kf_CaM4 #R1_1
+  236 3,47 57 kf_CaM4 #R1_1
+  237 3,47 59 kf_CaM4 #R1_1
+  238 3,47 31 kf_CaM4 #R1_1
+  239 3,48 58 kf_CaM4 #R1_1
+  240 3,48 59 kf_CaM4 #R1_1
+  241 3,48 32 kf_CaM4 #R1_1
+  242 3,49 60 kf_CaM4 #R1_1
+  243 3,49 61 kf_CaM4 #R1_1
+  244 3,50 60 kf_CaM4 #R1_1
+  245 3,50 62 kf_CaM4 #R1_1
+  246 3,51 61 kf_CaM4 #R1_1
+  247 3,51 62 kf_CaM4 #R1_1
+  248 3,52 63 kf_CaM4 #R1_1
+  249 3,52 64 kf_CaM4 #R1_1
+  250 3,52 65 kf_CaM4 #R1_1
+  251 3,52 37 kf_CaM4 #R1_1
+  252 3,53 66 kf_CaM4 #R1_1
+  253 3,53 67 kf_CaM4 #R1_1
+  254 3,54 68 2*kf_CaM4 #R1_1
+  255 38 3,26 6*kr_CaM4 #R1_1(reverse)
+  256 39 3,27 kr_CaM4 #R1_1(reverse)
+  257 39 3,28 kr_CaM4 #R1_1(reverse)
+  258 39 3,30 kr_CaM4 #R1_1(reverse)
+  259 39 3,56 kr_CaM4 #R1_1(reverse)
+  260 40 3,27 kr_CaM4 #R1_1(reverse)
+  261 40 3,29 kr_CaM4 #R1_1(reverse)
+  262 40 3,31 kr_CaM4 #R1_1(reverse)
+  263 40 3,57 kr_CaM4 #R1_1(reverse)
+  264 41 3,28 kr_CaM4 #R1_1(reverse)
+  265 41 3,29 kr_CaM4 #R1_1(reverse)
+  266 41 3,32 kr_CaM4 #R1_1(reverse)
+  267 41 3,58 kr_CaM4 #R1_1(reverse)
+  268 42 3,30 kr_CaM4 #R1_1(reverse)
+  269 42 3,31 kr_CaM4 #R1_1(reverse)
+  270 42 3,32 kr_CaM4 #R1_1(reverse)
+  271 42 3,59 kr_CaM4 #R1_1(reverse)
+  272 43 3,33 kr_CaM4 #R1_1(reverse)
+  273 43 3,34 kr_CaM4 #R1_1(reverse)
+  274 44 3,33 kr_CaM4 #R1_1(reverse)
+  275 44 3,35 kr_CaM4 #R1_1(reverse)
+  276 45 3,33 kr_CaM4 #R1_1(reverse)
+  277 45 3,36 kr_CaM4 #R1_1(reverse)
+  278 46 3,34 kr_CaM4 #R1_1(reverse)
+  279 46 3,35 kr_CaM4 #R1_1(reverse)
+  280 47 3,34 kr_CaM4 #R1_1(reverse)
+  281 47 3,36 kr_CaM4 #R1_1(reverse)
+  282 48 3,35 kr_CaM4 #R1_1(reverse)
+  283 48 3,36 kr_CaM4 #R1_1(reverse)
+  284 49 3,37 kr_CaM4 #R1_1(reverse)
+  285 49 3,63 kr_CaM4 #R1_1(reverse)
+  286 50 3,37 kr_CaM4 #R1_1(reverse)
+  287 50 3,64 kr_CaM4 #R1_1(reverse)
+  288 51 3,37 kr_CaM4 #R1_1(reverse)
+  289 51 3,65 kr_CaM4 #R1_1(reverse)
+  290 53 3,69 kr_CaM4 #R1_1(reverse)
+  291 53 3,70 kr_CaM4 #R1_1(reverse)
+  292 54 3,71 2*kr_CaM4 #R1_1(reverse)
+  293 38 55 6*kf_pT286 #R2_1
+  294 39 68 kf_pT286 #R2_1
+  295 39 66 kf_pT286 #R2_1
+  296 39 60 kf_pT286 #R2_1
+  297 40 60 kf_pT286 #R2_1
+  298 40 67 kf_pT286 #R2_1
+  299 40 61 kf_pT286 #R2_1
+  300 41 61 kf_pT286 #R2_1
+  301 41 66 kf_pT286 #R2_1
+  302 41 62 kf_pT286 #R2_1
+  303 42 62 kf_pT286 #R2_1
+  304 42 67 kf_pT286 #R2_1
+  305 42 68 kf_pT286 #R2_1
+  306 43 70 kf_pT286 #R2_1
+  307 43 63 kf_pT286 #R2_1
+  308 44 64 kf_pT286 #R2_1
+  309 45 65 kf_pT286 #R2_1
+  310 46 71 kf_pT286 #R2_1
+  311 48 69 kf_pT286 #R2_1
+  312 49 72 kf_pT286 #R2_1
+  313 51 72 kf_pT286 #R2_1
+  314 53 72 kf_pT286 #R2_1
+  315 7,38 11,38 kf_pT286_bg #R2_3
+  316 7,39 11,39 kf_pT286_bg #R2_3
+  317 7,40 11,40 kf_pT286_bg #R2_3
+  318 7,41 11,41 kf_pT286_bg #R2_3
+  319 7,42 11,42 kf_pT286_bg #R2_3
+  320 7,43 11,43 kf_pT286_bg #R2_3
+  321 7,44 11,44 kf_pT286_bg #R2_3
+  322 7,45 11,45 kf_pT286_bg #R2_3
+  323 7,46 11,46 kf_pT286_bg #R2_3
+  324 7,47 11,47 kf_pT286_bg #R2_3
+  325 7,48 11,48 kf_pT286_bg #R2_3
+  326 7,49 11,49 kf_pT286_bg #R2_3
+  327 7,50 11,50 kf_pT286_bg #R2_3
+  328 7,51 11,51 kf_pT286_bg #R2_3
+  329 7,52 11,52 kf_pT286_bg #R2_3
+  330 7,53 11,53 kf_pT286_bg #R2_3
+  331 7,54 11,54 kf_pT286_bg #R2_3
+  332 39 3,19 kf_depho_PP1 #R4_1
+  333 40 3,20 kf_depho_PP1 #R4_1
+  334 41 3,19 kf_depho_PP1 #R4_1
+  335 42 3,18 kf_depho_PP1 #R4_1
+  336 43 3,8 kf_depho_PP1 #R4_1
+  337 44 3,9 kf_depho_PP1 #R4_1
+  338 45 3,10 kf_depho_PP1 #R4_1
+  339 46 3,8 kf_depho_PP1 #R4_1
+  340 47 3,9 kf_depho_PP1 #R4_1
+  341 48 3,8 kf_depho_PP1 #R4_1
+  342 49 3,22 kf_depho_PP1 #R4_1
+  343 49 3,45 kf_depho_PP1 #R4_1
+  344 50 3,23 kf_depho_PP1 #R4_1
+  345 50 3,47 kf_depho_PP1 #R4_1
+  346 51 3,24 kf_depho_PP1 #R4_1
+  347 51 3,48 kf_depho_PP1 #R4_1
+  348 52 3,25 2*kf_depho_PP1 #R4_1
+  349 53 3,21 kf_depho_PP1 #R4_1
+  350 53 3,23 kf_depho_PP1 #R4_1
+  351 54 3,22 2*kf_depho_PP1 #R4_1
+  352 3,56 73 kf_CaM4 #R1_1
+  353 3,56 39 kf_CaM4 #R1_1
+  354 3,57 73 kf_CaM4 #R1_1
+  355 3,57 40 kf_CaM4 #R1_1
+  356 3,58 73 kf_CaM4 #R1_1
+  357 3,58 41 kf_CaM4 #R1_1
+  358 3,59 73 kf_CaM4 #R1_1
+  359 3,59 42 kf_CaM4 #R1_1
+  360 3,60 74 kf_CaM4 #R1_1
+  361 3,61 74 kf_CaM4 #R1_1
+  362 3,62 74 kf_CaM4 #R1_1
+  363 3,63 75 kf_CaM4 #R1_1
+  364 3,63 76 kf_CaM4 #R1_1
+  365 3,63 49 kf_CaM4 #R1_1
+  366 3,64 75 kf_CaM4 #R1_1
+  367 3,64 77 kf_CaM4 #R1_1
+  368 3,64 50 kf_CaM4 #R1_1
+  369 3,65 76 kf_CaM4 #R1_1
+  370 3,65 77 kf_CaM4 #R1_1
+  371 3,65 51 kf_CaM4 #R1_1
+  372 3,66 78 kf_CaM4 #R1_1
+  373 3,67 78 kf_CaM4 #R1_1
+  374 3,68 79 kf_CaM4 #R1_1
+  375 3,69 80 kf_CaM4 #R1_1
+  376 3,69 81 kf_CaM4 #R1_1
+  377 3,69 53 kf_CaM4 #R1_1
+  378 3,70 82 kf_CaM4 #R1_1
+  379 3,70 83 kf_CaM4 #R1_1
+  380 3,70 53 kf_CaM4 #R1_1
+  381 3,71 84 kf_CaM4 #R1_1
+  382 3,71 85 kf_CaM4 #R1_1
+  383 3,71 54 kf_CaM4 #R1_1
+  384 3,72 86 kf_CaM4 #R1_1
+  385 3,72 87 kf_CaM4 #R1_1
+  386 55 3,39 kr_CaM4 #R1_1(reverse)
+  387 55 3,40 kr_CaM4 #R1_1(reverse)
+  388 55 3,41 kr_CaM4 #R1_1(reverse)
+  389 55 3,42 kr_CaM4 #R1_1(reverse)
+  390 55 3,73 kr_CaM4 #R1_1(reverse)
+  391 56 3,43 kr_CaM4 #R1_1(reverse)
+  392 56 3,44 kr_CaM4 #R1_1(reverse)
+  393 56 3,46 kr_CaM4 #R1_1(reverse)
+  394 57 3,43 kr_CaM4 #R1_1(reverse)
+  395 57 3,45 kr_CaM4 #R1_1(reverse)
+  396 57 3,47 kr_CaM4 #R1_1(reverse)
+  397 58 3,44 kr_CaM4 #R1_1(reverse)
+  398 58 3,45 kr_CaM4 #R1_1(reverse)
+  399 58 3,48 kr_CaM4 #R1_1(reverse)
+  400 59 3,46 kr_CaM4 #R1_1(reverse)
+  401 59 3,47 kr_CaM4 #R1_1(reverse)
+  402 59 3,48 kr_CaM4 #R1_1(reverse)
+  403 60 3,49 kr_CaM4 #R1_1(reverse)
+  404 60 3,50 kr_CaM4 #R1_1(reverse)
+  405 60 3,75 kr_CaM4 #R1_1(reverse)
+  406 61 3,49 kr_CaM4 #R1_1(reverse)
+  407 61 3,51 kr_CaM4 #R1_1(reverse)
+  408 61 3,76 kr_CaM4 #R1_1(reverse)
+  409 62 3,50 kr_CaM4 #R1_1(reverse)
+  410 62 3,51 kr_CaM4 #R1_1(reverse)
+  411 62 3,77 kr_CaM4 #R1_1(reverse)
+  412 63 3,52 kr_CaM4 #R1_1(reverse)
+  413 64 3,52 kr_CaM4 #R1_1(reverse)
+  414 65 3,52 kr_CaM4 #R1_1(reverse)
+  415 66 3,53 kr_CaM4 #R1_1(reverse)
+  416 66 3,80 kr_CaM4 #R1_1(reverse)
+  417 66 3,82 kr_CaM4 #R1_1(reverse)
+  418 67 3,53 kr_CaM4 #R1_1(reverse)
+  419 67 3,81 kr_CaM4 #R1_1(reverse)
+  420 67 3,83 kr_CaM4 #R1_1(reverse)
+  421 68 3,54 kr_CaM4 #R1_1(reverse)
+  422 68 3,84 kr_CaM4 #R1_1(reverse)
+  423 68 3,85 kr_CaM4 #R1_1(reverse)
+  424 69 3,88 kr_CaM4 #R1_1(reverse)
+  425 70 3,88 kr_CaM4 #R1_1(reverse)
+  426 71 3,89 kr_CaM4 #R1_1(reverse)
+  427 72 3,90 kr_CaM4 #R1_1(reverse)
+  428 55 74 2*kf_pT286 #R2_1
+  429 55 78 2*kf_pT286 #R2_1
+  430 55 79 kf_pT286 #R2_1
+  431 56 85 kf_pT286 #R2_1
+  432 56 82 kf_pT286 #R2_1
+  433 56 75 kf_pT286 #R2_1
+  434 57 83 kf_pT286 #R2_1
+  435 57 76 kf_pT286 #R2_1
+  436 58 80 kf_pT286 #R2_1
+  437 58 77 kf_pT286 #R2_1
+  438 59 81 kf_pT286 #R2_1
+  439 59 84 kf_pT286 #R2_1
+  440 60 91 kf_pT286 #R2_1
+  441 60 86 kf_pT286 #R2_1
+  442 61 86 kf_pT286 #R2_1
+  443 61 87 kf_pT286 #R2_1
+  444 62 87 kf_pT286 #R2_1
+  445 62 92 kf_pT286 #R2_1
+  446 63 90 kf_pT286 #R2_1
+  447 66 92 kf_pT286 #R2_1
+  448 66 86 kf_pT286 #R2_1
+  449 67 91 kf_pT286 #R2_1
+  450 67 87 kf_pT286 #R2_1
+  451 68 92 kf_pT286 #R2_1
+  452 68 91 kf_pT286 #R2_1
+  453 70 90 kf_pT286 #R2_1
+  454 7,55 11,55 kf_pT286_bg #R2_3
+  455 7,56 11,56 kf_pT286_bg #R2_3
+  456 7,57 11,57 kf_pT286_bg #R2_3
+  457 7,58 11,58 kf_pT286_bg #R2_3
+  458 7,59 11,59 kf_pT286_bg #R2_3
+  459 7,60 11,60 kf_pT286_bg #R2_3
+  460 7,61 11,61 kf_pT286_bg #R2_3
+  461 7,62 11,62 kf_pT286_bg #R2_3
+  462 7,63 11,63 kf_pT286_bg #R2_3
+  463 7,64 11,64 kf_pT286_bg #R2_3
+  464 7,65 11,65 kf_pT286_bg #R2_3
+  465 7,66 11,66 kf_pT286_bg #R2_3
+  466 7,67 11,67 kf_pT286_bg #R2_3
+  467 7,68 11,68 kf_pT286_bg #R2_3
+  468 7,69 11,69 kf_pT286_bg #R2_3
+  469 7,70 11,70 kf_pT286_bg #R2_3
+  470 7,71 11,71 kf_pT286_bg #R2_3
+  471 7,72 11,72 kf_pT286_bg #R2_3
+  472 55 3,26 kf_depho_PP1 #R4_1
+  473 56 3,13 kf_depho_PP1 #R4_1
+  474 57 3,14 kf_depho_PP1 #R4_1
+  475 58 3,15 kf_depho_PP1 #R4_1
+  476 59 3,13 kf_depho_PP1 #R4_1
+  477 60 3,30 kf_depho_PP1 #R4_1
+  478 60 3,57 kf_depho_PP1 #R4_1
+  479 61 3,31 kf_depho_PP1 #R4_1
+  480 61 3,58 kf_depho_PP1 #R4_1
+  481 62 3,32 kf_depho_PP1 #R4_1
+  482 62 3,59 kf_depho_PP1 #R4_1
+  483 63 3,34 kf_depho_PP1 #R4_1
+  484 63 3,33 kf_depho_PP1 #R4_1
+  485 64 3,35 kf_depho_PP1 #R4_1
+  486 64 3,34 kf_depho_PP1 #R4_1
+  487 65 3,36 kf_depho_PP1 #R4_1
+  488 65 3,35 kf_depho_PP1 #R4_1
+  489 66 3,28 2*kf_depho_PP1 #R4_1
+  490 67 3,29 kf_depho_PP1 #R4_1
+  491 67 3,30 kf_depho_PP1 #R4_1
+  492 68 3,27 kf_depho_PP1 #R4_1
+  493 68 3,31 kf_depho_PP1 #R4_1
+  494 69 3,17 kf_depho_PP1 #R4_1
+  495 69 3,35 kf_depho_PP1 #R4_1
+  496 70 3,33 kf_depho_PP1 #R4_1
+  497 70 3,17 kf_depho_PP1 #R4_1
+  498 71 3,17 kf_depho_PP1 #R4_1
+  499 71 3,34 kf_depho_PP1 #R4_1
+  500 72 3,37 kf_depho_PP1 #R4_1
+  501 72 3,69 kf_depho_PP1 #R4_1
+  502 72 3,65 kf_depho_PP1 #R4_1
+  503 3,73 55 kf_CaM4 #R1_1
+  504 3,75 93 kf_CaM4 #R1_1
+  505 3,75 60 kf_CaM4 #R1_1
+  506 3,76 93 kf_CaM4 #R1_1
+  507 3,76 61 kf_CaM4 #R1_1
+  508 3,77 93 kf_CaM4 #R1_1
+  509 3,77 62 kf_CaM4 #R1_1
+  510 3,80 94 kf_CaM4 #R1_1
+  511 3,80 66 kf_CaM4 #R1_1
+  512 3,81 94 kf_CaM4 #R1_1
+  513 3,81 67 kf_CaM4 #R1_1
+  514 3,82 95 kf_CaM4 #R1_1
+  515 3,82 66 kf_CaM4 #R1_1
+  516 3,83 95 kf_CaM4 #R1_1
+  517 3,83 67 kf_CaM4 #R1_1
+  518 3,84 96 kf_CaM4 #R1_1
+  519 3,84 68 kf_CaM4 #R1_1
+  520 3,85 96 kf_CaM4 #R1_1
+  521 3,85 68 kf_CaM4 #R1_1
+  522 3,86 97 kf_CaM4 #R1_1
+  523 3,87 97 kf_CaM4 #R1_1
+  524 3,88 98 kf_CaM4 #R1_1
+  525 3,88 99 kf_CaM4 #R1_1
+  526 3,88 70 kf_CaM4 #R1_1
+  527 3,88 69 kf_CaM4 #R1_1
+  528 3,89 100 2*kf_CaM4 #R1_1
+  529 3,89 71 2*kf_CaM4 #R1_1
+  530 3,90 101 kf_CaM4 #R1_1
+  531 3,90 102 kf_CaM4 #R1_1
+  532 3,90 72 kf_CaM4 #R1_1
+  533 3,91 103 kf_CaM4 #R1_1
+  534 3,92 104 kf_CaM4 #R1_1
+  535 73 3,56 kr_CaM4 #R1_1(reverse)
+  536 73 3,57 kr_CaM4 #R1_1(reverse)
+  537 73 3,58 kr_CaM4 #R1_1(reverse)
+  538 73 3,59 kr_CaM4 #R1_1(reverse)
+  539 74 3,60 kr_CaM4 #R1_1(reverse)
+  540 74 3,61 kr_CaM4 #R1_1(reverse)
+  541 74 3,62 kr_CaM4 #R1_1(reverse)
+  542 74 3,93 kr_CaM4 #R1_1(reverse)
+  543 75 3,63 kr_CaM4 #R1_1(reverse)
+  544 75 3,64 kr_CaM4 #R1_1(reverse)
+  545 76 3,63 kr_CaM4 #R1_1(reverse)
+  546 76 3,65 kr_CaM4 #R1_1(reverse)
+  547 77 3,64 kr_CaM4 #R1_1(reverse)
+  548 77 3,65 kr_CaM4 #R1_1(reverse)
+  549 78 3,66 kr_CaM4 #R1_1(reverse)
+  550 78 3,67 kr_CaM4 #R1_1(reverse)
+  551 78 3,94 kr_CaM4 #R1_1(reverse)
+  552 78 3,95 kr_CaM4 #R1_1(reverse)
+  553 79 3,68 2*kr_CaM4 #R1_1(reverse)
+  554 79 3,96 2*kr_CaM4 #R1_1(reverse)
+  555 80 3,69 kr_CaM4 #R1_1(reverse)
+  556 80 3,98 kr_CaM4 #R1_1(reverse)
+  557 81 3,69 kr_CaM4 #R1_1(reverse)
+  558 81 3,99 kr_CaM4 #R1_1(reverse)
+  559 82 3,70 kr_CaM4 #R1_1(reverse)
+  560 82 3,98 kr_CaM4 #R1_1(reverse)
+  561 83 3,70 kr_CaM4 #R1_1(reverse)
+  562 83 3,99 kr_CaM4 #R1_1(reverse)
+  563 84 3,71 kr_CaM4 #R1_1(reverse)
+  564 84 3,100 kr_CaM4 #R1_1(reverse)
+  565 85 3,71 kr_CaM4 #R1_1(reverse)
+  566 85 3,100 kr_CaM4 #R1_1(reverse)
+  567 86 3,72 kr_CaM4 #R1_1(reverse)
+  568 86 3,101 kr_CaM4 #R1_1(reverse)
+  569 87 3,72 kr_CaM4 #R1_1(reverse)
+  570 87 3,102 kr_CaM4 #R1_1(reverse)
+  571 91 3,105 kr_CaM4 #R1_1(reverse)
+  572 91 3,106 kr_CaM4 #R1_1(reverse)
+  573 92 3,107 kr_CaM4 #R1_1(reverse)
+  574 92 3,108 kr_CaM4 #R1_1(reverse)
+  575 73 94 kf_pT286 #R2_1
+  576 73 96 kf_pT286 #R2_1
+  577 73 95 kf_pT286 #R2_1
+  578 73 93 kf_pT286 #R2_1
+  579 74 97 2*kf_pT286 #R2_1
+  580 74 104 kf_pT286 #R2_1
+  581 74 103 kf_pT286 #R2_1
+  582 75 106 kf_pT286 #R2_1
+  583 75 101 kf_pT286 #R2_1
+  584 76 102 kf_pT286 #R2_1
+  585 77 108 kf_pT286 #R2_1
+  586 78 103 kf_pT286 #R2_1
+  587 78 109 kf_pT286 #R2_1
+  588 78 104 kf_pT286 #R2_1
+  589 78 97 kf_pT286 #R2_1
+  590 79 104 2*kf_pT286 #R2_1
+  591 79 103 2*kf_pT286 #R2_1
+  592 80 108 kf_pT286 #R2_1
+  593 81 105 kf_pT286 #R2_1
+  594 82 107 kf_pT286 #R2_1
+  595 82 101 kf_pT286 #R2_1
+  596 83 102 kf_pT286 #R2_1
+  597 84 105 kf_pT286 #R2_1
+  598 85 107 kf_pT286 #R2_1
+  599 85 106 kf_pT286 #R2_1
+  600 86 110 kf_pT286 #R2_1
+  601 87 110 kf_pT286 #R2_1
+  602 91 110 kf_pT286 #R2_1
+  603 92 110 kf_pT286 #R2_1
+  604 7,73 11,73 kf_pT286_bg #R2_3
+  605 7,74 11,74 kf_pT286_bg #R2_3
+  606 7,75 11,75 kf_pT286_bg #R2_3
+  607 7,76 11,76 kf_pT286_bg #R2_3
+  608 7,77 11,77 kf_pT286_bg #R2_3
+  609 7,78 11,78 kf_pT286_bg #R2_3
+  610 7,79 11,79 kf_pT286_bg #R2_3
+  611 7,80 11,80 kf_pT286_bg #R2_3
+  612 7,81 11,81 kf_pT286_bg #R2_3
+  613 7,82 11,82 kf_pT286_bg #R2_3
+  614 7,83 11,83 kf_pT286_bg #R2_3
+  615 7,84 11,84 kf_pT286_bg #R2_3
+  616 7,85 11,85 kf_pT286_bg #R2_3
+  617 7,86 11,86 kf_pT286_bg #R2_3
+  618 7,87 11,87 kf_pT286_bg #R2_3
+  619 7,88 11,88 kf_pT286_bg #R2_3
+  620 7,89 11,89 kf_pT286_bg #R2_3
+  621 7,90 11,90 kf_pT286_bg #R2_3
+  622 7,91 11,91 kf_pT286_bg #R2_3
+  623 7,92 11,92 kf_pT286_bg #R2_3
+  624 73 3,18 kf_depho_PP1 #R4_1
+  625 74 3,42 kf_depho_PP1 #R4_1
+  626 74 3,73 kf_depho_PP1 #R4_1
+  627 75 3,46 kf_depho_PP1 #R4_1
+  628 75 3,43 kf_depho_PP1 #R4_1
+  629 76 3,47 kf_depho_PP1 #R4_1
+  630 76 3,44 kf_depho_PP1 #R4_1
+  631 77 3,48 kf_depho_PP1 #R4_1
+  632 77 3,46 kf_depho_PP1 #R4_1
+  633 78 3,41 kf_depho_PP1 #R4_1
+  634 78 3,39 kf_depho_PP1 #R4_1
+  635 79 3,40 2*kf_depho_PP1 #R4_1
+  636 80 3,23 kf_depho_PP1 #R4_1
+  637 80 3,44 kf_depho_PP1 #R4_1
+  638 81 3,24 kf_depho_PP1 #R4_1
+  639 81 3,46 kf_depho_PP1 #R4_1
+  640 82 3,44 kf_depho_PP1 #R4_1
+  641 82 3,21 kf_depho_PP1 #R4_1
+  642 83 3,45 kf_depho_PP1 #R4_1
+  643 83 3,22 kf_depho_PP1 #R4_1
+  644 84 3,21 kf_depho_PP1 #R4_1
+  645 84 3,47 kf_depho_PP1 #R4_1
+  646 85 3,24 kf_depho_PP1 #R4_1
+  647 85 3,43 kf_depho_PP1 #R4_1
+  648 86 3,50 kf_depho_PP1 #R4_1
+  649 86 3,80 kf_depho_PP1 #R4_1
+  650 86 3,76 kf_depho_PP1 #R4_1
+  651 87 3,51 kf_depho_PP1 #R4_1
+  652 87 3,81 kf_depho_PP1 #R4_1
+  653 87 3,77 kf_depho_PP1 #R4_1
+  654 88 3,25 2*kf_depho_PP1 #R4_1
+  655 89 3,25 2*kf_depho_PP1 #R4_1
+  656 90 3,52 2*kf_depho_PP1 #R4_1
+  657 90 3,88 kf_depho_PP1 #R4_1
+  658 91 3,49 kf_depho_PP1 #R4_1
+  659 91 3,54 kf_depho_PP1 #R4_1
+  660 91 3,83 kf_depho_PP1 #R4_1
+  661 92 3,50 kf_depho_PP1 #R4_1
+  662 92 3,53 kf_depho_PP1 #R4_1
+  663 92 3,84 kf_depho_PP1 #R4_1
+  664 3,93 74 kf_CaM4 #R1_1
+  665 3,94 78 kf_CaM4 #R1_1
+  666 3,95 78 kf_CaM4 #R1_1
+  667 3,96 79 kf_CaM4 #R1_1
+  668 3,98 111 kf_CaM4 #R1_1
+  669 3,98 82 kf_CaM4 #R1_1
+  670 3,98 80 kf_CaM4 #R1_1
+  671 3,99 111 kf_CaM4 #R1_1
+  672 3,99 83 kf_CaM4 #R1_1
+  673 3,99 81 kf_CaM4 #R1_1
+  674 3,100 112 kf_CaM4 #R1_1
+  675 3,100 85 kf_CaM4 #R1_1
+  676 3,100 84 kf_CaM4 #R1_1
+  677 3,101 113 kf_CaM4 #R1_1
+  678 3,101 86 kf_CaM4 #R1_1
+  679 3,102 113 kf_CaM4 #R1_1
+  680 3,102 87 kf_CaM4 #R1_1
+  681 3,105 114 kf_CaM4 #R1_1
+  682 3,105 91 kf_CaM4 #R1_1
+  683 3,106 115 kf_CaM4 #R1_1
+  684 3,106 91 kf_CaM4 #R1_1
+  685 3,107 116 kf_CaM4 #R1_1
+  686 3,107 92 kf_CaM4 #R1_1
+  687 3,108 117 kf_CaM4 #R1_1
+  688 3,108 92 kf_CaM4 #R1_1
+  689 3,110 118 kf_CaM4 #R1_1
+  690 93 3,75 kr_CaM4 #R1_1(reverse)
+  691 93 3,76 kr_CaM4 #R1_1(reverse)
+  692 93 3,77 kr_CaM4 #R1_1(reverse)
+  693 94 3,80 kr_CaM4 #R1_1(reverse)
+  694 94 3,81 kr_CaM4 #R1_1(reverse)
+  695 94 3,111 kr_CaM4 #R1_1(reverse)
+  696 95 3,82 kr_CaM4 #R1_1(reverse)
+  697 95 3,83 kr_CaM4 #R1_1(reverse)
+  698 95 3,111 kr_CaM4 #R1_1(reverse)
+  699 96 3,84 kr_CaM4 #R1_1(reverse)
+  700 96 3,85 kr_CaM4 #R1_1(reverse)
+  701 96 3,112 kr_CaM4 #R1_1(reverse)
+  702 97 3,86 kr_CaM4 #R1_1(reverse)
+  703 97 3,87 kr_CaM4 #R1_1(reverse)
+  704 97 3,113 kr_CaM4 #R1_1(reverse)
+  705 98 3,88 kr_CaM4 #R1_1(reverse)
+  706 99 3,88 kr_CaM4 #R1_1(reverse)
+  707 100 3,89 kr_CaM4 #R1_1(reverse)
+  708 101 3,90 kr_CaM4 #R1_1(reverse)
+  709 102 3,90 kr_CaM4 #R1_1(reverse)
+  710 103 3,91 kr_CaM4 #R1_1(reverse)
+  711 103 3,114 kr_CaM4 #R1_1(reverse)
+  712 103 3,115 kr_CaM4 #R1_1(reverse)
+  713 104 3,92 kr_CaM4 #R1_1(reverse)
+  714 104 3,116 kr_CaM4 #R1_1(reverse)
+  715 104 3,117 kr_CaM4 #R1_1(reverse)
+  716 105 3,119 kr_CaM4 #R1_1(reverse)
+  717 106 3,119 kr_CaM4 #R1_1(reverse)
+  718 107 3,120 kr_CaM4 #R1_1(reverse)
+  719 108 3,120 kr_CaM4 #R1_1(reverse)
+  720 109 3,121 3*kr_CaM4 #R1_1(reverse)
+  721 110 3,122 kr_CaM4 #R1_1(reverse)
+  722 93 117 kf_pT286 #R2_1
+  723 93 115 kf_pT286 #R2_1
+  724 93 113 kf_pT286 #R2_1
+  725 94 114 kf_pT286 #R2_1
+  726 94 121 kf_pT286 #R2_1
+  727 94 117 kf_pT286 #R2_1
+  728 95 121 kf_pT286 #R2_1
+  729 95 116 kf_pT286 #R2_1
+  730 95 113 kf_pT286 #R2_1
+  731 96 116 kf_pT286 #R2_1
+  732 96 115 kf_pT286 #R2_1
+  733 96 114 kf_pT286 #R2_1
+  734 97 118 2*kf_pT286 #R2_1
+  735 97 123 kf_pT286 #R2_1
+  736 98 120 kf_pT286 #R2_1
+  737 100 119 kf_pT286 #R2_1
+  738 101 122 kf_pT286 #R2_1
+  739 103 123 kf_pT286 #R2_1
+  740 103 124 kf_pT286 #R2_1
+  741 103 118 kf_pT286 #R2_1
+  742 104 124 kf_pT286 #R2_1
+  743 104 118 kf_pT286 #R2_1
+  744 104 123 kf_pT286 #R2_1
+  745 106 122 kf_pT286 #R2_1
+  746 107 122 kf_pT286 #R2_1
+  747 109 123 3*kf_pT286 #R2_1
+  748 7,93 11,93 kf_pT286_bg #R2_3
+  749 7,94 11,94 kf_pT286_bg #R2_3
+  750 7,95 11,95 kf_pT286_bg #R2_3
+  751 7,96 11,96 kf_pT286_bg #R2_3
+  752 7,97 11,97 kf_pT286_bg #R2_3
+  753 7,98 11,98 kf_pT286_bg #R2_3
+  754 7,99 11,99 kf_pT286_bg #R2_3
+  755 7,100 11,100 kf_pT286_bg #R2_3
+  756 7,101 11,101 kf_pT286_bg #R2_3
+  757 7,102 11,102 kf_pT286_bg #R2_3
+  758 7,103 11,103 kf_pT286_bg #R2_3
+  759 7,104 11,104 kf_pT286_bg #R2_3
+  760 7,105 11,105 kf_pT286_bg #R2_3
+  761 7,106 11,106 kf_pT286_bg #R2_3
+  762 7,107 11,107 kf_pT286_bg #R2_3
+  763 7,108 11,108 kf_pT286_bg #R2_3
+  764 7,109 11,109 kf_pT286_bg #R2_3
+  765 7,110 11,110 kf_pT286_bg #R2_3
+  766 93 3,59 kf_depho_PP1 #R4_1
+  767 93 3,56 kf_depho_PP1 #R4_1
+  768 94 3,32 kf_depho_PP1 #R4_1
+  769 94 3,56 kf_depho_PP1 #R4_1
+  770 95 3,58 kf_depho_PP1 #R4_1
+  771 95 3,27 kf_depho_PP1 #R4_1
+  772 96 3,29 kf_depho_PP1 #R4_1
+  773 96 3,57 kf_depho_PP1 #R4_1
+  774 97 3,62 kf_depho_PP1 #R4_1
+  775 97 3,94 kf_depho_PP1 #R4_1
+  776 97 3,93 kf_depho_PP1 #R4_1
+  777 98 3,35 kf_depho_PP1 #R4_1
+  778 98 3,33 kf_depho_PP1 #R4_1
+  779 99 3,36 kf_depho_PP1 #R4_1
+  780 99 3,34 kf_depho_PP1 #R4_1
+  781 100 3,33 kf_depho_PP1 #R4_1
+  782 100 3,36 kf_depho_PP1 #R4_1
+  783 101 3,64 kf_depho_PP1 #R4_1
+  784 101 3,98 kf_depho_PP1 #R4_1
+  785 101 3,63 kf_depho_PP1 #R4_1
+  786 102 3,65 kf_depho_PP1 #R4_1
+  787 102 3,99 kf_depho_PP1 #R4_1
+  788 102 3,64 kf_depho_PP1 #R4_1
+  789 103 3,61 kf_depho_PP1 #R4_1
+  790 103 3,68 kf_depho_PP1 #R4_1
+  791 103 3,95 kf_depho_PP1 #R4_1
+  792 104 3,60 kf_depho_PP1 #R4_1
+  793 104 3,67 kf_depho_PP1 #R4_1
+  794 104 3,96 kf_depho_PP1 #R4_1
+  795 105 3,37 kf_depho_PP1 #R4_1
+  796 105 3,71 kf_depho_PP1 #R4_1
+  797 105 3,99 kf_depho_PP1 #R4_1
+  798 106 3,63 kf_depho_PP1 #R4_1
+  799 106 3,71 kf_depho_PP1 #R4_1
+  800 106 3,70 kf_depho_PP1 #R4_1
+  801 107 3,37 kf_depho_PP1 #R4_1
+  802 107 3,70 kf_depho_PP1 #R4_1
+  803 107 3,100 kf_depho_PP1 #R4_1
+  804 108 3,64 kf_depho_PP1 #R4_1
+  805 108 3,69 kf_depho_PP1 #R4_1
+  806 108 3,71 kf_depho_PP1 #R4_1
+  807 109 3,66 3*kf_depho_PP1 #R4_1
+  808 110 3,72 kf_depho_PP1 #R4_1
+  809 110 3,105 kf_depho_PP1 #R4_1
+  810 110 3,108 kf_depho_PP1 #R4_1
+  811 110 3,102 kf_depho_PP1 #R4_1
+  812 3,111 95 kf_CaM4 #R1_1
+  813 3,111 94 kf_CaM4 #R1_1
+  814 3,112 96 2*kf_CaM4 #R1_1
+  815 3,113 97 kf_CaM4 #R1_1
+  816 3,114 103 kf_CaM4 #R1_1
+  817 3,115 103 kf_CaM4 #R1_1
+  818 3,116 104 kf_CaM4 #R1_1
+  819 3,117 104 kf_CaM4 #R1_1
+  820 3,119 125 kf_CaM4 #R1_1
+  821 3,119 106 kf_CaM4 #R1_1
+  822 3,119 105 kf_CaM4 #R1_1
+  823 3,120 126 kf_CaM4 #R1_1
+  824 3,120 108 kf_CaM4 #R1_1
+  825 3,120 107 kf_CaM4 #R1_1
+  826 3,121 109 kf_CaM4 #R1_1
+  827 3,122 127 kf_CaM4 #R1_1
+  828 3,122 110 kf_CaM4 #R1_1
+  829 111 3,98 kr_CaM4 #R1_1(reverse)
+  830 111 3,99 kr_CaM4 #R1_1(reverse)
+  831 112 3,100 2*kr_CaM4 #R1_1(reverse)
+  832 113 3,101 kr_CaM4 #R1_1(reverse)
+  833 113 3,102 kr_CaM4 #R1_1(reverse)
+  834 114 3,105 kr_CaM4 #R1_1(reverse)
+  835 114 3,125 kr_CaM4 #R1_1(reverse)
+  836 115 3,106 kr_CaM4 #R1_1(reverse)
+  837 115 3,125 kr_CaM4 #R1_1(reverse)
+  838 116 3,107 kr_CaM4 #R1_1(reverse)
+  839 116 3,126 kr_CaM4 #R1_1(reverse)
+  840 117 3,108 kr_CaM4 #R1_1(reverse)
+  841 117 3,126 kr_CaM4 #R1_1(reverse)
+  842 118 3,110 kr_CaM4 #R1_1(reverse)
+  843 118 3,127 kr_CaM4 #R1_1(reverse)
+  844 121 3,128 2*kr_CaM4 #R1_1(reverse)
+  845 123 3,129 kr_CaM4 #R1_1(reverse)
+  846 123 3,130 kr_CaM4 #R1_1(reverse)
+  847 124 3,131 2*kr_CaM4 #R1_1(reverse)
+  848 111 128 kf_pT286 #R2_1
+  849 111 126 kf_pT286 #R2_1
+  850 112 125 2*kf_pT286 #R2_1
+  851 113 130 kf_pT286 #R2_1
+  852 113 127 kf_pT286 #R2_1
+  853 114 129 kf_pT286 #R2_1
+  854 114 131 kf_pT286 #R2_1
+  855 115 131 kf_pT286 #R2_1
+  856 115 127 kf_pT286 #R2_1
+  857 116 127 kf_pT286 #R2_1
+  858 116 129 kf_pT286 #R2_1
+  859 117 131 kf_pT286 #R2_1
+  860 117 130 kf_pT286 #R2_1
+  861 118 132 2*kf_pT286 #R2_1
+  862 121 130 kf_pT286 #R2_1
+  863 121 129 kf_pT286 #R2_1
+  864 123 132 2*kf_pT286 #R2_1
+  865 124 132 2*kf_pT286 #R2_1
+  866 7,111 11,111 kf_pT286_bg #R2_3
+  867 7,112 11,112 kf_pT286_bg #R2_3
+  868 7,113 11,113 kf_pT286_bg #R2_3
+  869 7,114 11,114 kf_pT286_bg #R2_3
+  870 7,115 11,115 kf_pT286_bg #R2_3
+  871 7,116 11,116 kf_pT286_bg #R2_3
+  872 7,117 11,117 kf_pT286_bg #R2_3
+  873 7,118 11,118 kf_pT286_bg #R2_3
+  874 7,119 11,119 kf_pT286_bg #R2_3
+  875 7,120 11,120 kf_pT286_bg #R2_3
+  876 7,121 11,121 kf_pT286_bg #R2_3
+  877 7,122 11,122 kf_pT286_bg #R2_3
+  878 7,123 11,123 kf_pT286_bg #R2_3
+  879 7,124 11,124 kf_pT286_bg #R2_3
+  880 111 3,48 kf_depho_PP1 #R4_1
+  881 111 3,43 kf_depho_PP1 #R4_1
+  882 112 3,45 2*kf_depho_PP1 #R4_1
+  883 113 3,77 kf_depho_PP1 #R4_1
+  884 113 3,111 kf_depho_PP1 #R4_1
+  885 113 3,75 kf_depho_PP1 #R4_1
+  886 114 3,51 kf_depho_PP1 #R4_1
+  887 114 3,85 kf_depho_PP1 #R4_1
+  888 114 3,111 kf_depho_PP1 #R4_1
+  889 115 3,76 kf_depho_PP1 #R4_1
+  890 115 3,84 kf_depho_PP1 #R4_1
+  891 115 3,82 kf_depho_PP1 #R4_1
+  892 116 3,49 kf_depho_PP1 #R4_1
+  893 116 3,83 kf_depho_PP1 #R4_1
+  894 116 3,112 kf_depho_PP1 #R4_1
+  895 117 3,75 kf_depho_PP1 #R4_1
+  896 117 3,81 kf_depho_PP1 #R4_1
+  897 117 3,85 kf_depho_PP1 #R4_1
+  898 118 3,87 kf_depho_PP1 #R4_1
+  899 118 3,114 kf_depho_PP1 #R4_1
+  900 118 3,117 kf_depho_PP1 #R4_1
+  901 118 3,113 kf_depho_PP1 #R4_1
+  902 119 3,52 kf_depho_PP1 #R4_1
+  903 119 3,89 kf_depho_PP1 #R4_1
+  904 119 3,88 kf_depho_PP1 #R4_1
+  905 120 3,52 kf_depho_PP1 #R4_1
+  906 120 3,88 kf_depho_PP1 #R4_1
+  907 120 3,89 kf_depho_PP1 #R4_1
+  908 121 3,53 kf_depho_PP1 #R4_1
+  909 121 3,82 kf_depho_PP1 #R4_1
+  910 121 3,80 kf_depho_PP1 #R4_1
+  911 122 3,90 2*kf_depho_PP1 #R4_1
+  912 122 3,119 kf_depho_PP1 #R4_1
+  913 122 3,120 kf_depho_PP1 #R4_1
+  914 123 3,86 kf_depho_PP1 #R4_1
+  915 123 3,92 kf_depho_PP1 #R4_1
+  916 123 3,121 kf_depho_PP1 #R4_1
+  917 123 3,115 kf_depho_PP1 #R4_1
+  918 124 3,91 2*kf_depho_PP1 #R4_1
+  919 124 3,116 2*kf_depho_PP1 #R4_1
+  920 3,125 115 kf_CaM4 #R1_1
+  921 3,125 114 kf_CaM4 #R1_1
+  922 3,126 117 kf_CaM4 #R1_1
+  923 3,126 116 kf_CaM4 #R1_1
+  924 3,127 118 kf_CaM4 #R1_1
+  925 3,128 121 2*kf_CaM4 #R1_1
+  926 3,129 123 kf_CaM4 #R1_1
+  927 3,130 123 kf_CaM4 #R1_1
+  928 3,131 124 kf_CaM4 #R1_1
+  929 125 3,119 kr_CaM4 #R1_1(reverse)
+  930 126 3,120 kr_CaM4 #R1_1(reverse)
+  931 127 3,122 kr_CaM4 #R1_1(reverse)
+  932 128 3,133 kr_CaM4 #R1_1(reverse)
+  933 129 3,134 kr_CaM4 #R1_1(reverse)
+  934 130 3,134 kr_CaM4 #R1_1(reverse)
+  935 131 3,135 kr_CaM4 #R1_1(reverse)
+  936 132 3,136 kr_CaM4 #R1_1(reverse)
+  937 125 135 kf_pT286 #R2_1
+  938 126 134 kf_pT286 #R2_1
+  939 127 136 kf_pT286 #R2_1
+  940 128 134 kf_pT286 #R2_1
+  941 129 136 kf_pT286 #R2_1
+  942 130 136 kf_pT286 #R2_1
+  943 131 136 kf_pT286 #R2_1
+  944 132 137 kf_pT286 #R2_1
+  945 7,125 11,125 kf_pT286_bg #R2_3
+  946 7,126 11,126 kf_pT286_bg #R2_3
+  947 7,127 11,127 kf_pT286_bg #R2_3
+  948 7,128 11,128 kf_pT286_bg #R2_3
+  949 7,129 11,129 kf_pT286_bg #R2_3
+  950 7,130 11,130 kf_pT286_bg #R2_3
+  951 7,131 11,131 kf_pT286_bg #R2_3
+  952 7,132 11,132 kf_pT286_bg #R2_3
+  953 125 3,65 kf_depho_PP1 #R4_1
+  954 125 3,100 kf_depho_PP1 #R4_1
+  955 125 3,98 kf_depho_PP1 #R4_1
+  956 126 3,63 kf_depho_PP1 #R4_1
+  957 126 3,99 kf_depho_PP1 #R4_1
+  958 126 3,100 kf_depho_PP1 #R4_1
+  959 127 3,102 kf_depho_PP1 #R4_1
+  960 127 3,125 kf_depho_PP1 #R4_1
+  961 127 3,126 kf_depho_PP1 #R4_1
+  962 127 3,101 kf_depho_PP1 #R4_1
+  963 128 3,69 kf_depho_PP1 #R4_1
+  964 128 3,70 kf_depho_PP1 #R4_1
+  965 128 3,98 kf_depho_PP1 #R4_1
+  966 129 3,72 kf_depho_PP1 #R4_1
+  967 129 3,107 kf_depho_PP1 #R4_1
+  968 129 3,128 kf_depho_PP1 #R4_1
+  969 129 3,125 kf_depho_PP1 #R4_1
+  970 130 3,101 kf_depho_PP1 #R4_1
+  971 130 3,108 kf_depho_PP1 #R4_1
+  972 130 3,128 kf_depho_PP1 #R4_1
+  973 130 3,106 kf_depho_PP1 #R4_1
+  974 131 3,105 kf_depho_PP1 #R4_1
+  975 131 3,107 kf_depho_PP1 #R4_1
+  976 131 3,106 kf_depho_PP1 #R4_1
+  977 131 3,126 kf_depho_PP1 #R4_1
+  978 132 3,127 kf_depho_PP1 #R4_1
+  979 132 3,110 kf_depho_PP1 #R4_1
+  980 132 3,129 kf_depho_PP1 #R4_1
+  981 132 3,131 kf_depho_PP1 #R4_1
+  982 132 3,130 kf_depho_PP1 #R4_1
+  983 3,133 128 3*kf_CaM4 #R1_1
+  984 3,134 130 kf_CaM4 #R1_1
+  985 3,134 129 kf_CaM4 #R1_1
+  986 3,135 131 2*kf_CaM4 #R1_1
+  987 3,136 132 kf_CaM4 #R1_1
+  988 7,133 11,133 kf_pT286_bg #R2_3
+  989 7,134 11,134 kf_pT286_bg #R2_3
+  990 7,135 11,135 kf_pT286_bg #R2_3
+  991 7,136 11,136 kf_pT286_bg #R2_3
+  992 7,137 11,137 kf_pT286_bg #R2_3
+  993 133 3,88 3*kf_depho_PP1 #R4_1
+  994 134 3,90 kf_depho_PP1 #R4_1
+  995 134 3,120 kf_depho_PP1 #R4_1
+  996 134 3,133 kf_depho_PP1 #R4_1
+  997 134 3,119 kf_depho_PP1 #R4_1
+  998 135 3,119 2*kf_depho_PP1 #R4_1
+  999 135 3,120 2*kf_depho_PP1 #R4_1
+ 1000 136 3,122 2*kf_depho_PP1 #R4_1
+ 1001 136 3,134 2*kf_depho_PP1 #R4_1
+ 1002 136 3,135 kf_depho_PP1 #R4_1
+ 1003 137 3,136 6*kf_depho_PP1 #R4_1
+end reactions
+begin groups
+    1 bCaMKII_K0           4
+    2 bCaMKII_K1           6,25
+    3 bCaMKII_K2           8,9,10,17,33,34,35,36,52,88,89
+    4 bCaMKII_K3           13,14,15,16,21,22,23,24,37,43,44,45,46,47,48,63,64,65,69,70,71,90,98,99,100,119,120,133
+    5 bCaMKII_K4           18,19,20,27,28,29,30,31,32,49,50,51,53,54,56,57,58,59,72,75,76,77,80,81,82,83,84,85,101,102,105,106,107,108,111,112,122,125,126,128,134,135
+    6 bCaMKII_K5           18,19,20,27,28,29,30,31,32,49,50,51,53,54,56,57,58,59,72,75,76,77,80,81,82,83,84,85,101,102,105,106,107,108,111,112,122,125,126,128,134,135
+    7 bCaMKII_K6           38,55,74,78,79,97,103,104,109,118,123,124,132,137
+    8 bCaMKII_T0           4,6,8,9,10,13,14,15,16,18,19,20,26,38
+    9 bCaMKII_T1           17,21,22,23,24,25,27,28,29,30,31,32,33,34,35,36,39,40,41,42,43,44,45,46,47,48,55,56,57,58,59,73
+   10 bCaMKII_T2           37,49,50,51,52,53,54,60,61,62,63,64,65,66,67,68,69,70,71,74,75,76,77,78,79,80,81,82,83,84,85,88,89,93,94,95,96,98,99,100,111,112
+   11 bCaMKII_T3           72,86,87,90,91,92,97,101,102,103,104,105,106,107,108,109,113,114,115,116,117,119,120,121,125,126,128,133
+   12 bCaMKII_T4           110,118,122,123,124,127,129,130,131,134,135
+   13 bCaMKII_T5           132,136
+   14 bCaMKII_T6           137
+end groups

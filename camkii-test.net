@@ -1,0 +1,369 @@
+# Created by BioNetGen UNKNOWN
+begin parameters
+    1 CaMCa4_init         5  # Constant
+    2 CaMKII_init         1  # Constant
+    3 kf1                 1/10000  # Constant
+    4 kr1                 1  # Constant
+    5 kf2                 1  # Constant
+    6 kf3                 1  # Constant
+    7 kf4                 1  # Constant
+    8 kr4                 0.08  # Constant
+    9 kf5                 10  # Constant
+end parameters
+begin species
+    1 CaMCa4(cmk) CaMCa4_init
+    2 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~0,L!3,R!4,T286~0,x~3).CaMKII(CaM~0,L!4,R!1,T286~0,x~4) CaMKII_init
+    3 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~0,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~0,x~1) 0
+    4 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!4,T286~0,x~3).CaMKII(CaM~0,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~2) 0
+    5 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~0,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~3) 0
+    6 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~0,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4) 0
+    7 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~0,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~0,x~2) 0
+    8 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~3) 0
+    9 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~4) 0
+   10 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!3,T286~0,x~3) 0
+   11 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~4) 0
+   12 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4) 0
+   13 CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~3) 0
+   14 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~4) 0
+   15 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~0,x~1).CaMKII(CaM~b,L!2,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!3,T286~0,x~4) 0
+   16 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4) 0
+   17 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~0,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2) 0
+   18 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~3) 0
+   19 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   20 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~4) 0
+   21 CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4) 0
+   22 CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!3,R!1,T286~0,x~3).CaMKII(CaM~b,L!2,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!3,T286~p,x~2) 0
+   23 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2) 0
+   24 CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~3) 0
+   25 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~3) 0
+   26 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~0,x~1).CaMKII(CaM~b,L!2,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!3,T286~p,x~4) 0
+   27 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   28 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!1,T286~0,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~1).CaMKII(CaM~b,L!2,R!4,T286~p,x~4) 0
+   29 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~4) 0
+   30 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~0,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2) 0
+   31 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~0,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~1) 0
+   32 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~3) 0
+   33 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!4,R!3,T286~0,x~3).CaMKII(CaM~b,L!2,R!4,T286~p,x~2) 0
+   34 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   35 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~3) 0
+   36 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~4) 0
+   37 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1) 0
+   38 CaMKII(CaM~b,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2) 0
+   39 CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~3) 0
+   40 CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   41 CaMKII(CaM~b,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~4) 0
+   42 CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~p,x~2) 0
+   43 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~2) 0
+   44 CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~p,x~1) 0
+   45 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!1,T286~0,x~2).CaMKII(CaM~b,L!2,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!3,T286~p,x~1) 0
+   46 CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~3) 0
+   47 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~3) 0
+   48 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~p,x~2) 0
+   49 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~0,x~1).CaMKII(CaM~b,L!2,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!3,T286~p,x~4) 0
+   50 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   51 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~0,x~1).CaMKII(CaM~b,L!4,R!3,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~p,x~3) 0
+   52 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~4) 0
+   53 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1) 0
+   54 CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~3) 0
+   55 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   56 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~p,x~1).CaMKII(CaM~b,L!2,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!3,T286~p,x~4) 0
+   57 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~4) 0
+   58 CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~p,x~2) 0
+   59 CaMKII(CaM~b,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1) 0
+   60 CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~3) 0
+   61 CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   62 CaMKII(CaM~b,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~3) 0
+   63 CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   64 CaMKII(CaM~b,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~p,x~1).CaMKII(CaM~b,L!2,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!3,T286~p,x~4) 0
+   65 CaMKII(CaM~b,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~4) 0
+   66 CaMKII(CaM~b,L!1,R!2,T286~p,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   67 CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~3) 0
+   68 CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+   69 CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~3) 0
+   70 CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~4) 0
+   71 CaMKII(CaM~b,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~3) 0
+   72 CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~4) 0
+end species
+begin reactions
+    1 1,2 3 kf1 #R1
+    2 1,2 4 kf1 #R1
+    3 1,2 5 kf1 #R1
+    4 1,2 6 kf1 #R1
+    5 1,3 7 kf1 #R1
+    6 1,3 8 kf1 #R1
+    7 1,3 9 kf1 #R1
+    8 1,4 7 kf1 #R1
+    9 1,4 10 kf1 #R1
+   10 1,4 11 kf1 #R1
+   11 1,5 8 kf1 #R1
+   12 1,5 10 kf1 #R1
+   13 1,5 12 kf1 #R1
+   14 1,6 9 kf1 #R1
+   15 1,6 11 kf1 #R1
+   16 1,6 12 kf1 #R1
+   17 1,7 13 kf1 #R1
+   18 1,7 14 kf1 #R1
+   19 1,8 13 kf1 #R1
+   20 1,8 15 kf1 #R1
+   21 1,9 14 kf1 #R1
+   22 1,9 15 kf1 #R1
+   23 1,10 13 kf1 #R1
+   24 1,10 16 kf1 #R1
+   25 1,11 14 kf1 #R1
+   26 1,11 16 kf1 #R1
+   27 1,12 15 kf1 #R1
+   28 1,12 16 kf1 #R1
+   29 7 17 kf2 #R2
+   30 10 18 kf2 #R2
+   31 12 19 kf2 #R2
+   32 9 20 kf2 #R2
+   33 1,13 21 kf1 #R1
+   34 1,14 21 kf1 #R1
+   35 1,15 21 kf1 #R1
+   36 1,16 21 kf1 #R1
+   37 1,17 22 kf1 #R1
+   38 1,17 23 kf1 #R1
+   39 1,18 24 kf1 #R1
+   40 1,18 25 kf1 #R1
+   41 1,19 26 kf1 #R1
+   42 1,19 27 kf1 #R1
+   43 1,20 28 kf1 #R1
+   44 1,20 29 kf1 #R1
+   45 13 22 kf2 #R2
+   46 14 23 kf2 #R2
+   47 13 24 kf2 #R2
+   48 16 25 kf2 #R2
+   49 15 26 kf2 #R2
+   50 16 27 kf2 #R2
+   51 14 28 kf2 #R2
+   52 15 29 kf2 #R2
+   53 17 30 kf4 #R4
+   54 17 31 kf4 #R4
+   55 18 32 kf4 #R4
+   56 18 33 kf4 #R4
+   57 19 34 kf4 #R4
+   58 19 35 kf4 #R4
+   59 20 36 kf4 #R4
+   60 20 37 kf4 #R4
+   61 1,22 38 kf1 #R1
+   62 1,23 38 kf1 #R1
+   63 1,24 39 kf1 #R1
+   64 1,25 39 kf1 #R1
+   65 1,26 40 kf1 #R1
+   66 1,27 40 kf1 #R1
+   67 1,28 41 kf1 #R1
+   68 1,29 41 kf1 #R1
+   69 1,30 42 kf1 #R1
+   70 1,30 43 kf1 #R1
+   71 1,31 44 kf1 #R1
+   72 1,31 45 kf1 #R1
+   73 1,32 46 kf1 #R1
+   74 1,32 47 kf1 #R1
+   75 1,33 42 kf1 #R1
+   76 1,33 48 kf1 #R1
+   77 1,34 49 kf1 #R1
+   78 1,34 50 kf1 #R1
+   79 1,35 51 kf1 #R1
+   80 1,35 47 kf1 #R1
+   81 1,36 52 kf1 #R1
+   82 1,36 49 kf1 #R1
+   83 1,37 45 kf1 #R1
+   84 1,37 53 kf1 #R1
+   85 21 38 kf2 #R2
+   86 21 39 kf2 #R2
+   87 21 40 kf2 #R2
+   88 21 41 kf2 #R2
+   89 24 54 kf3 #R3
+   90 30 17 kf3 #R3
+   91 27 55 kf3 #R3
+   92 32 18 kf3 #R3
+   93 29 56 kf3 #R3
+   94 34 19 kf3 #R3
+   95 23 57 kf3 #R3
+   96 37 20 kf3 #R3
+   97 28 57 kf3 #R3
+   98 31 17 kf3 #R3
+   99 22 54 kf3 #R3
+  100 33 18 kf3 #R3
+  101 25 55 kf3 #R3
+  102 35 19 kf3 #R3
+  103 26 56 kf3 #R3
+  104 36 20 kf3 #R3
+  105 22 42 kf4 #R4
+  106 22 44 kf4 #R4
+  107 23 43 kf4 #R4
+  108 23 45 kf4 #R4
+  109 24 46 kf4 #R4
+  110 24 42 kf4 #R4
+  111 25 47 kf4 #R4
+  112 25 48 kf4 #R4
+  113 26 49 kf4 #R4
+  114 26 51 kf4 #R4
+  115 27 50 kf4 #R4
+  116 27 47 kf4 #R4
+  117 28 52 kf4 #R4
+  118 28 45 kf4 #R4
+  119 29 49 kf4 #R4
+  120 29 53 kf4 #R4
+  121 30 7 kf4 #R4
+  122 31 7 kf4 #R4
+  123 32 10 kf4 #R4
+  124 33 10 kf4 #R4
+  125 34 12 kf4 #R4
+  126 35 12 kf4 #R4
+  127 36 9 kf4 #R4
+  128 37 9 kf4 #R4
+  129 1,42 58 kf1 #R1
+  130 1,43 58 kf1 #R1
+  131 1,44 59 kf1 #R1
+  132 1,45 59 kf1 #R1
+  133 1,46 60 kf1 #R1
+  134 1,47 60 kf1 #R1
+  135 1,48 58 kf1 #R1
+  136 1,49 61 kf1 #R1
+  137 1,50 61 kf1 #R1
+  138 1,51 60 kf1 #R1
+  139 1,52 61 kf1 #R1
+  140 1,53 59 kf1 #R1
+  141 1,54 62 kf1 #R1
+  142 1,55 63 kf1 #R1
+  143 1,56 64 kf1 #R1
+  144 1,57 65 kf1 #R1
+  145 40 66 kf2 #R2
+  146 46 54 kf2 #R2
+  147 52 57 kf2 #R2
+  148 41 66 kf2 #R2
+  149 44 54 kf2 #R2
+  150 50 55 kf2 #R2
+  151 38 66 kf2 #R2
+  152 48 55 kf2 #R2
+  153 53 56 kf2 #R2
+  154 39 66 kf2 #R2
+  155 43 57 kf2 #R2
+  156 51 56 kf2 #R2
+  157 39 62 kf3 #R3
+  158 42 22 kf3 #R3
+  159 43 23 kf3 #R3
+  160 40 63 kf3 #R3
+  161 46 24 kf3 #R3
+  162 47 25 kf3 #R3
+  163 41 64 kf3 #R3
+  164 49 26 kf3 #R3
+  165 50 27 kf3 #R3
+  166 38 65 kf3 #R3
+  167 45 28 kf3 #R3
+  168 53 29 kf3 #R3
+  169 41 65 kf3 #R3
+  170 44 22 kf3 #R3
+  171 45 23 kf3 #R3
+  172 38 62 kf3 #R3
+  173 42 24 kf3 #R3
+  174 48 25 kf3 #R3
+  175 39 63 kf3 #R3
+  176 47 27 kf3 #R3
+  177 51 26 kf3 #R3
+  178 40 64 kf3 #R3
+  179 49 29 kf3 #R3
+  180 52 28 kf3 #R3
+  181 38 58 kf4 #R4
+  182 38 59 kf4 #R4
+  183 39 60 kf4 #R4
+  184 39 58 kf4 #R4
+  185 40 61 kf4 #R4
+  186 40 60 kf4 #R4
+  187 41 61 kf4 #R4
+  188 41 59 kf4 #R4
+  189 42 13 kf4 #R4
+  190 43 14 kf4 #R4
+  191 44 13 kf4 #R4
+  192 45 14 kf4 #R4
+  193 46 13 kf4 #R4
+  194 47 16 kf4 #R4
+  195 48 16 kf4 #R4
+  196 49 15 kf4 #R4
+  197 50 16 kf4 #R4
+  198 51 15 kf4 #R4
+  199 52 14 kf4 #R4
+  200 53 15 kf4 #R4
+  201 54 24 kf4 #R4
+  202 54 67 kf4 #R4
+  203 54 22 kf4 #R4
+  204 55 27 kf4 #R4
+  205 55 68 kf4 #R4
+  206 55 25 kf4 #R4
+  207 56 26 kf4 #R4
+  208 56 29 kf4 #R4
+  209 56 69 kf4 #R4
+  210 57 70 kf4 #R4
+  211 57 28 kf4 #R4
+  212 57 23 kf4 #R4
+  213 1,67 71 kf1 #R1
+  214 1,68 72 kf1 #R1
+  215 1,69 71 kf1 #R1
+  216 1,70 72 kf1 #R1
+  217 60 62 kf2 #R2
+  218 61 65 kf2 #R2
+  219 59 62 kf2 #R2
+  220 61 63 kf2 #R2
+  221 58 63 kf2 #R2
+  222 59 64 kf2 #R2
+  223 58 65 kf2 #R2
+  224 60 64 kf2 #R2
+  225 58 38 kf3 #R3
+  226 63 66 2*kf3 #R3
+  227 70 57 2*kf3 #R3
+  228 60 39 kf3 #R3
+  229 64 66 2*kf3 #R3
+  230 67 54 2*kf3 #R3
+  231 61 40 kf3 #R3
+  232 65 66 2*kf3 #R3
+  233 68 55 2*kf3 #R3
+  234 59 41 kf3 #R3
+  235 62 66 2*kf3 #R3
+  236 69 56 2*kf3 #R3
+  237 59 38 kf3 #R3
+  238 58 39 kf3 #R3
+  239 60 40 kf3 #R3
+  240 61 41 kf3 #R3
+  241 58 21 kf4 #R4
+  242 59 21 kf4 #R4
+  243 60 21 kf4 #R4
+  244 61 21 kf4 #R4
+  245 62 39 kf4 #R4
+  246 62 71 kf4 #R4
+  247 62 38 kf4 #R4
+  248 63 40 kf4 #R4
+  249 63 72 kf4 #R4
+  250 63 39 kf4 #R4
+  251 64 40 kf4 #R4
+  252 64 41 kf4 #R4
+  253 64 71 kf4 #R4
+  254 65 72 kf4 #R4
+  255 65 41 kf4 #R4
+  256 65 38 kf4 #R4
+  257 66 63 kf4 #R4
+  258 66 64 kf4 #R4
+  259 66 65 kf4 #R4
+  260 66 62 kf4 #R4
+  261 67 46 kf4 #R4
+  262 67 44 kf4 #R4
+  263 68 50 kf4 #R4
+  264 68 48 kf4 #R4
+  265 69 51 kf4 #R4
+  266 69 53 kf4 #R4
+  267 70 52 kf4 #R4
+  268 70 43 kf4 #R4
+  269 72 65 2*kf3 #R3
+  270 71 62 2*kf3 #R3
+  271 72 63 2*kf3 #R3
+  272 71 64 2*kf3 #R3
+  273 71 60 kf4 #R4
+  274 71 59 kf4 #R4
+  275 72 61 kf4 #R4
+  276 72 58 kf4 #R4
+end reactions
+begin groups
+    1 CaMKII_autoinhibit   
+    2 CaMKII_bound         3,4,5,6,2*7,2*8,2*9,2*10,2*11,2*12,3*13,3*14,3*15,3*16,2*17,2*18,2*19,2*20,4*21,3*22,3*23,3*24,3*25,3*26,3*27,3*28,3*29,2*30,2*31,2*32,2*33,2*34,2*35,2*36,2*37,4*38,4*39,4*40,4*41,3*42,3*43,3*44,3*45,3*46,3*47,3*48,3*49,3*50,3*51,3*52,3*53,3*54,3*55,3*56,3*57,4*58,4*59,4*60,4*61,4*62,4*63,4*64,4*65,4*66,3*67,3*68,3*69,3*70,4*71,4*72
+    3 CaMKII_phosph        2*17,2*18,2*19,2*20,2*22,2*23,2*24,2*25,2*26,2*27,2*28,2*29,30,31,32,33,34,35,36,37,2*38,2*39,2*40,2*41,42,43,44,45,46,47,48,49,50,51,52,53,3*54,3*55,3*56,3*57,58,59,60,61,3*62,3*63,3*64,3*65,4*66,2*67,2*68,2*69,2*70,2*71,2*72
+end groups

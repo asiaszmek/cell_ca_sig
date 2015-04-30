@@ -71,19 +71,19 @@ foreach $each_species(@spd_species) {
 				$sub = 'N/A'; }
 			$str_track .= 't'.$track_index."\t".$spe_species[1]."\t".$sub."\n";
 			$species{$spe_species[0]}= 't'.$track_index;
-			print OUTPUT 'species t'.$track_index."\n";
+			#print OUTPUT 'species t'.$track_index."\n";
 			$track_index++; }
 		else {
 			$bak_species =~ s/,track~0//g;
 			$species{$spe_species[0]} = 's'.$species_index;
 			$substant{$bak_species} = $species_index;
-			print OUTPUT 'species s'.$species_index."\n";
+			#print OUTPUT 'species s'.$species_index."\n";
 			$species_index++; }}
 	else {																			# output species list
 		$species{$spe_species[0]} = 's'.$species_index;
-		print OUTPUT 'species s'.$species_index."\t# ".$spe_species[1]."\n";
+		#print OUTPUT 'species s'.$species_index."\t# ".$spe_species[1]."\n";
 		$species_index++; }}
-print OUTPUT "\n";
+#print OUTPUT "\n";
 
 # output the track.list.  This is usually not run
 if(!($str_track eq '')) {
@@ -93,11 +93,11 @@ if(!($str_track eq '')) {
 
 # extract obs from spd_obs.  I don't know what this does.
 $track_count = 0;
-print OBS "species";
+#print OBS "species";
 for($i = 1; $i <= scalar(@spd_species); $i++) {
 	print OBS " ".$species{$i}; }
-print OBS "\n";
-foreach $each_obs(@spd_obs){
+	print OBS "\n";
+	foreach $each_obs(@spd_obs){
 	@spe_obs = split(' ', $each_obs);
 	@s2_obs = split(',', $spe_obs[2]);
 	@m = ();
@@ -117,20 +117,22 @@ foreach $each_obs(@spd_obs){
 		if($m[$i]==1) { $species{$i+1}=$spe_obs[1]; }
 		
 	}
-		
+	#added
+	print OUTPUT 'species '.$spe_obs[1]."\n";		
 	print OBS "\n"; }
+print OUTPUT 'species '.$species{1}."\n";
 
 # extract reactions from spd_rxn and print them out
 foreach $each_rxn(@spd_rxn){
+	@rxn_cb[100]=();
 	@spe_rxn = split(' ', $each_rxn);
-	#$rxn_smol = 'reaction rxn'.$spe_rxn[0].' ';
-	$rxn_smol="";
+	@rxn_smol="";
 	@reactants = split(',', $spe_rxn[1]);
-	@c=1;
-	@rxn_pre="a";
+	@rxn_i=0;
 	@rxn_now="";
 	@print_flag=1;
 
+	$rxn_smol="";
 	foreach $reactant(@reactants) {
 		$reactant = $species{$reactant}; }
 	$rxn_smol .= join(' + ', @reactants);
@@ -142,36 +144,60 @@ foreach $each_rxn(@spd_rxn){
 	
 	# added
 	$rxn_now = $rxn_smol;
-	if($rxn_pre eq $rxn_now) { 
-		$c=$c+1;
-		$print_flag=0;
+	$rxn_i_tmp=$rxn_i;
+	$rxn_cb_val=TRUE;
+	for($tmp_i=0;$tmp_i<=$rxn_i_tmp;$tmp_i++){
+		$rxn_cb_val=($rxn_now ne $rxn_cb[$tmp_i])&& $rxn_cb_val;
 	}
-	else { $rxn_pre=$rxn_now;
-	       $c=1;	 
-	       $print_flag=1;	
+	if($rxn_cb_val){
+		$rxn_cb[$rxn_i]=$rxn_now;
+		$rxn_i+=1;
+		$print_flag=1;
 	}
+	else {$print_flag=0;}
 	
-	if($spe_rxn[3] =~ /\*/) {
-		@rate = split('\*', $spe_rxn[3]);
-		$rate_c = $rate[0] * $para{$rate[1]}; }
-	else {
-		$rate_c = $para{$spe_rxn[3]}; }
-	if(scalar(@reactants) > 1) {
-		$rate_c *= $c2p * $c2p * $c2p; }
-	$rate_c = $rate_c * $c;
-	$rxn_smol .= ' '.$rate_c;
-	$rxn_smol .= ' '.$c;
-
-	#$rxn_smol .= ' '.$rxn_now.' '.$rxn_pre;
-	if ($print_flag==0){
-		$tmp_pre='reaction rxn'.$spe_rxn[0].' '.$rxn_smol."   ".$spe_rxn[4]."\n";
-	}
 	if($print_flag==1){
-		print OUTPUT 'reaction rxn'.$spe_rxn[0].' '.$rxn_smol."   ".$spe_rxn[4]."\n";
-		print OUTPUT 'tmp_pre: '.$tmp_pre."\n";
+		print OUTPUT $rxn_i." ".$rxn_cb_val." ".$rxn_cb[$rxn_i-1]."\n";
 	}
 }
 
+
+foreach $each_rxn(@spd_rxn){
+		@rxn_smol="";
+		@spe_rxn = split(' ', $each_rxn);
+		@reactants = split(',', $spe_rxn[1]);
+		@products = split(',', $spe_rxn[2]);					
+		@rxn_rate[$rxn_i]=();		
+
+		$rxn_smol="";
+		foreach $reactant(@reactants) {
+			$reactant = $species{$reactant}; }
+		$rxn_smol .= join(' + ', @reactants);
+		$rxn_smol .= ' -> ';
+		foreach $product(@products) {
+			$product = $species{$product}; }
+		$rxn_smol .= join(' + ', @products);
+		
+		$rxn_tag=0;
+		for($tmp_i=0;$tmp_i<=$rxn_i-1;$tmp_i++){
+			if($rxn_smol eq $rxn_cb[$tmp_i]){ $rxn_tag=$tmp_i; }
+		}
+				
+		if($spe_rxn[3] =~ /\*/) {
+			@rate = split('\*', $spe_rxn[3]);
+			$rate_c = $rate[0] * $para{$rate[1]}; }
+		else {
+			$rate_c = $para{$spe_rxn[3]}; }
+		if(scalar(@reactants) > 1) {
+			$rate_c *= $c2p * $c2p * $c2p; }
+		$rxn_rate[$rxn_tag]+=$rate_c;		
+		$rxn_smol .= ' '.$rxn_rate[$rxn_tag];
+		#print OUTPUT 'reaction rxn'.$rxn_tag." ".$rxn_smol."\n";
+}
+
+for($tmp_i=0;$tmp_i<=$rxn_i-1;$tmp_i++){
+	print OUTPUT 'reaction rxn'.$tmp_i." ".$rxn_cb[$tmp_i]." ".$rxn_rate[$tmp_i]."\n";
+}
 print OUTPUT "\nend_file\n";
 close OUTPUT;
 close OBS;

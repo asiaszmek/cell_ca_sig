@@ -6,13 +6,13 @@
 units: nm ms
 */
 
-define ca_src  1
-#define ca_int  0.0001	#0.1 ca2+ per usec
+define ca_src  10
+#define ca_int  0.001	#1 ca2+ per 10 usec
 define ca_int  0.001
-#define cam_src 75398220
-define dfc_ca 500000
-define stimtime 5
-define graph_on
+#define dfc_ca 500000
+define dfc_ca 50000
+define stimtime 240
+#define graph_on
 
 #-------------General parameters-------
 
@@ -33,126 +33,204 @@ accuracy 10
 molperbox 3
 #boxsize 1
 
-boundaries 0 -6000 6000
-boundaries 1 -6000 6000
-boundaries 2 -6000 6000 
+boundaries 0 -500 500
+boundaries 1 -500 500
+boundaries 2 -5  5100  
 
 time_start 0
 time_stop  stimtime
-time_step  0.00001  #0.01 usec
+time_step  0.001 #1 usec step
 
 #-------------Molecules----------------
 species ca
-species cam
-species cam-ca1
-species cam-ca2	
-species cam-ca3
-#species cam-ca4
+#species cam
+species camca1
+#species camca2	
+species camca3
+#species camca4
 
-read_file camkii-test2.txt
+read_file camkii-test2_v4.txt
 
-molecule_lists calst camlst camkii
+molecule_lists calst camlst bcamkii gcamkii
 mol_list ca 	  calst
 mol_list cam* 	  camlst
-mol_list s*		  camkii
+mol_list b*		  bcamkii
+mol_list g*		  gcamkii
 
-define cam1_on		57018000 		#NT_on+CT_on
-define cam1_off 	162.6			#NT_off+CT_off
-define cam2_on		57346100 		#NT_on+NR_on+CT_on+CR_on
-define cam2_off		206.6130		#NT_off+NR_off+CT_off+CR_off
-define cam3_on		328100			#NR_on+CR_on
-define cam3_off		44.0130			#NR_off+CR_off
-define cam4_on		328100			#NR_on+CR_on
-define cam4_off		44.0130			#NR_off+CR_off
 
-reaction	cam1	ca + cam -> cam-ca1			cam1_on				
-reaction	cam1r   cam-ca1 -> ca + cam			cam1_off
-reaction	cam2	ca + cam-ca1 -> cam-ca2		cam2_on
-reaction	cam2r	cam-ca2 -> ca + cam-ca1		cam2_off
-reaction	cam3	ca + cam-ca2 -> cam-ca3		cam3_on
-reaction	cam3r	cam-ca3 -> ca + cam-ca2		cam3_off
-reaction 	cam4	ca + cam-ca3 -> cam-ca4		cam4_on
-reaction 	cam4r	cam-ca4 -> ca + cam-ca3		cam4_off
+define cam1_on		4250 
+define cam1_off 	0.05
+define cam2_on		150025
+define cam2_off		0.05
+define cam3_on		21250
+define cam3_off		1.25
+define cam4_on		425000
+define cam4_off		1.25
+
+reaction	cam1	ca + cam -> camca1			cam1_on				
+reaction	cam1r   camca1 -> ca + cam			cam1_off
+reaction	cam2	ca + camca1 -> camca2		cam2_on
+reaction	cam2r	camca2 -> ca + camca1		cam2_off
+reaction	cam3	ca + camca2 -> camca3		cam3_on
+reaction	cam3r	camca3 -> ca + camca2		cam3_off
+reaction 	cam4	ca + camca3 -> camca4		cam4_on
+reaction 	cam4r	camca4 -> ca + camca3		cam4_off
 
 
 difc ca			dfc_ca		#   nm^2 us^(-1)
-difc cam*		50000		#50 nm^2 us^(-1) -> 50000 nm^2 ms^(-1)
-difc s*			5000
-difc s2			0
+difc cam		0
+difc camca*		50000		#50 nm^2 us^(-1) -> 50000 nm^2 ms^(-1)
+difc b*			5000
+difc g*			10000
+difc g5			0
+difc b4			0
 
 #------------------Surfaces------------
 start_surface membrane
 action both all r
 color both grey 0.2
 polygon both edge
-panel sph 0 0 0 5000 20 20 #5 micron
+#panel rect +2 -250 -250 5000 500 500 #5 micron
+panel rect +2 -500 -500 5000 1000 1000 #5 micron
+end_surface
+
+start_surface sides
+action both all r
+color both grey 0.2
+polygon both e
+#panel tri -250 -250 5000 250 -250 5000 0 0 0 tri1
+#panel tri 250 -250 5000 250 250 5000 0 0 0	tri2
+#panel tri 250 250 5000 -250 250 5000 0 0 0 tri3
+#panel tri -250 250 5000 -250 -250 5000 0 0 0 tri4
+panel tri -500 -500 5000 500 -500 5000 0 0 0 tri1
+panel tri 500 -500 5000 500 500 5000 0 0 0	tri2
+panel tri 500 500 5000 -500 500 5000 0 0 0 	tri3
+panel tri -500 500 5000 -500 -500 5000 0 0 0 tri4
 end_surface
 
 start_surface n_membrane
 action both ca t
 action both cam* t
-action both s*	r 
+action both b* r
+action both g* t
 color both grey 0.5
 polygon both edge
-panel sph 0 0 0 2500 20 20 #2.5 micron
+#panel rect +2 -125 -125 2500 250 250 #2.5 micron
+panel rect +2 -250 -250 2500 500 500 #2.5 micron
 end_surface
 
 start_surface shell
 action both all t
 color both grey 0.5
 polygon both edge
-panel sph 0 0 0 4900 20 20 #2.5 micron
+#panel rect +2 -245 -245 4900 490 490 #0.1 micron
+panel rect +2 -490 -490 4900 980 980 #2.5 micron
 end_surface
+
+#-------------------------------------
+#example/S7/jump3.txt
+#P37 jumping panels should be parallel
+#P35 all panel front sides in a surface should face the same way; coincident panels -> unintentional leaks
+#the jump seems not to work properly. molecules after jumping tend to diffuse out of reflective boundaries.
+
+#start_surface jump1
+#action both all j
+#color both blue 0.5
+#polygon both edge
+#panel tri 249 249 4999 -249 249 4999 0 125 2500 tri5
+#panel tri -249 -249 4999 249 -249 4999 0 -125 2500 tri6
+#jump tri5 front -> tri6 front
+#jump tri6 back -> tri5 back
+#end_surface
+
+#start_surface jump2
+#action both all johio
+#color both blue 0.5
+#polygon both edge
+#panel tri -249 -249 4999 -249 249 4999 -125 0 2500 tri7
+#panel tri 249 -249 4999 249 249 4999 125 0 2500 tri8
+##jump tri8 back -> tri7 front
+##jump tri7 back -> tri8 front
+#jump tri8 front -> tri7 front
+#jump tri7 back -> tri8 back
+#end_surface
+#--------------------------------------
 
 start_compartment nano
 surface shell
 surface membrane
-point 4950 0 0
+surface sides
+#surface jumping
+point 0 0 4950
 end_compartment
 
 start_compartment cytol
 surface shell
 surface n_membrane
-point 4800 0 0
+#surface jumping
+surface sides
+surface membrane
+point 0 0 4800
 end_compartment
 
 start_compartment nucleus
 surface n_membrane
-point 0 0 0
+surface membrane
+#surface jumping
+surface sides
+point 0 0 100
 end_compartment
 
 
 #------------molecules in compartment--
 
-compartment_mol 1847507	cam 		nano	#100 uM
-compartment_mol 0   	cam-ca1	  	nano
-compartment_mol 0		cam-ca2		nano
-compartment_mol 0   	cam-ca3	  	nano
-compartment_mol 0   	cam-ca4	  	nano
-compartment_mol	7692428 cam cytol  #30 uM
+compartment_mol 58646   cam 	nano
+compartment_mol 146 	camca1  nano
+compartment_mol 13  	camca2  nano
+compartment_mol	9094	cam 	cytol
+compartment_mol 23 		camca1  cytol
+compartment_mol 2  		camca2  cytol  
 
-compartment_mol 258651   s2 nano		#14 uM
-compartment_mol 3589799  s2 cytol	#14 uM
+compartment_mol 588		b4 		nano	#10# uM
+compartment_mol 6912    b4		cytol	#10 uM
 
-compartment_mol 184750	ca nano		#10 uM
-compartment_mol 2564142	ca cytol	#10 uM
+compartment_mol 3528	g5 		nano	#10 uM
+compartment_mol 41472   g5		cytol	#10 uM
 
+compartment_mol 3		ca 		nano	#0.05 uM
+compartment_mol 45		ca 		cytol	#0.05 uM
 
 #------------commands------------------
-cmd i 0 stimtime ca_int pointsource ca ca_src 4999 0 0   #single ca channel 0.0936 /usec ~ 0.03 pA#
+cmd i 0 50 ca_int pointsource ca ca_src 0 0 4999.5   #single ca channel 0.0936 /usec ~ 0.03 pA#
+#cmd i 0 stimtime ca_int pointsource ca ca_src 0 0 -4200   #single ca channel 0.0936 /usec ~ 0.03 pA#
 
 ifdefine graph_on
-	display_size all 0.5
+	display_size all 2
 	color ca  			red
 	color cam* 			blue
-	color s*	  		black	
+	color b*		  black	
+	color g*		  purple
 
 	text_display ca
-	text_display cam
-	text_display cam-ca4
-	text_display s2
-	text_display s3
+	text_display camca1
+	text_display camca2
+	text_display camca3
+	text_display camca4
+	text_display b4
+	text_display b6
+	text_display g5
+	text_display g7
+	text_display time
 	cmd b pause
+else
+	output_root results_src10_int1us/
+	output_files nano.txt
+	output_files cytol.txt
+	output_files nucleus.txt
+
+	cmd e molcountincmpt nano nano.txt
+	cmd e molcountincmpt cytol cytol.txt
+	cmd e molcountincmpt nucleus nucleus.txt
 endif
 
 end_file

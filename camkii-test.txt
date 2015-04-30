@@ -1,0 +1,353 @@
+# Smoldyn reaction list converted automatically from BioNetGen output
+
+species s1	# CaMCa4(cmk)
+species s2	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~0,L!3,R!4,T286~0,x~3).CaMKII(CaM~0,L!4,R!1,T286~0,x~4)
+species s3	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~0,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~0,x~1)
+species s4	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!4,T286~0,x~3).CaMKII(CaM~0,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~2)
+species s5	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~0,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~3)
+species s6	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~0,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4)
+species s7	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~0,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~0,x~2)
+species s8	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~3)
+species s9	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~4)
+species s10	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!3,T286~0,x~3)
+species s11	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~4)
+species s12	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4)
+species s13	# CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~3)
+species s14	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~4)
+species s15	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~0,x~1).CaMKII(CaM~b,L!2,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!3,T286~0,x~4)
+species s16	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4)
+species s17	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~0,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2)
+species s18	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~3)
+species s19	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s20	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~4)
+species s21	# CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4)
+species s22	# CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!3,R!1,T286~0,x~3).CaMKII(CaM~b,L!2,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!3,T286~p,x~2)
+species s23	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2)
+species s24	# CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~3)
+species s25	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~3)
+species s26	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~0,x~1).CaMKII(CaM~b,L!2,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!3,T286~p,x~4)
+species s27	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s28	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!1,T286~0,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~1).CaMKII(CaM~b,L!2,R!4,T286~p,x~4)
+species s29	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~4)
+species s30	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~0,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2)
+species s31	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~0,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~1)
+species s32	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~3)
+species s33	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!4,R!3,T286~0,x~3).CaMKII(CaM~b,L!2,R!4,T286~p,x~2)
+species s34	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s35	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~0,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~3)
+species s36	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~4)
+species s37	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~0,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1)
+species s38	# CaMKII(CaM~b,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2)
+species s39	# CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!3,T286~p,x~3)
+species s40	# CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s41	# CaMKII(CaM~b,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~4)
+species s42	# CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~p,x~2)
+species s43	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~2)
+species s44	# CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~p,x~1)
+species s45	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!1,T286~0,x~2).CaMKII(CaM~b,L!2,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!3,T286~p,x~1)
+species s46	# CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~3)
+species s47	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~3)
+species s48	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~p,x~2)
+species s49	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~0,x~1).CaMKII(CaM~b,L!2,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!3,T286~p,x~4)
+species s50	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s51	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~0,x~1).CaMKII(CaM~b,L!4,R!3,T286~0,x~4).CaMKII(CaM~b,L!2,R!4,T286~p,x~3)
+species s52	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~4)
+species s53	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1)
+species s54	# CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~3)
+species s55	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s56	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~p,x~1).CaMKII(CaM~b,L!2,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!3,T286~p,x~4)
+species s57	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~4)
+species s58	# CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~p,x~2)
+species s59	# CaMKII(CaM~b,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1)
+species s60	# CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!4,R!1,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~p,x~3)
+species s61	# CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s62	# CaMKII(CaM~b,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!2,R!3,T286~p,x~1).CaMKII(CaM~b,L!3,R!4,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~3)
+species s63	# CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s64	# CaMKII(CaM~b,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!1,T286~p,x~1).CaMKII(CaM~b,L!2,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!3,T286~p,x~4)
+species s65	# CaMKII(CaM~b,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~4)
+species s66	# CaMKII(CaM~b,L!1,R!2,T286~p,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!3,R!4,T286~p,x~3).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s67	# CaMKII(CaM~0,L!1,R!2,T286~0,x~4).CaMKII(CaM~b,L!3,R!4,T286~0,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~3)
+species s68	# CaMKII(CaM~0,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+species s69	# CaMKII(CaM~0,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~3)
+species s70	# CaMKII(CaM~0,L!1,R!2,T286~0,x~3).CaMKII(CaM~b,L!3,R!4,T286~0,x~1).CaMKII(CaM~b,L!4,R!1,T286~p,x~2).CaMKII(CaM~b,L!2,R!3,T286~p,x~4)
+species s71	# CaMKII(CaM~b,L!1,R!2,T286~0,x~2).CaMKII(CaM~b,L!3,R!4,T286~0,x~4).CaMKII(CaM~b,L!4,R!1,T286~p,x~1).CaMKII(CaM~b,L!2,R!3,T286~p,x~3)
+species s72	# CaMKII(CaM~b,L!1,R!2,T286~0,x~1).CaMKII(CaM~b,L!3,R!4,T286~0,x~3).CaMKII(CaM~b,L!2,R!3,T286~p,x~2).CaMKII(CaM~b,L!4,R!1,T286~p,x~4)
+
+reaction rxn1 s1 + s2 -> s3 1   #R1
+reaction rxn2 s1 + s2 -> s4 1   #R1
+reaction rxn3 s1 + s2 -> s5 1   #R1
+reaction rxn4 s1 + s2 -> s6 1   #R1
+reaction rxn5 s1 + s3 -> s7 1   #R1
+reaction rxn6 s1 + s3 -> s8 1   #R1
+reaction rxn7 s1 + s3 -> s9 1   #R1
+reaction rxn8 s1 + s4 -> s7 1   #R1
+reaction rxn9 s1 + s4 -> s10 1   #R1
+reaction rxn10 s1 + s4 -> s11 1   #R1
+reaction rxn11 s1 + s5 -> s8 1   #R1
+reaction rxn12 s1 + s5 -> s10 1   #R1
+reaction rxn13 s1 + s5 -> s12 1   #R1
+reaction rxn14 s1 + s6 -> s9 1   #R1
+reaction rxn15 s1 + s6 -> s11 1   #R1
+reaction rxn16 s1 + s6 -> s12 1   #R1
+reaction rxn17 s1 + s7 -> s13 1   #R1
+reaction rxn18 s1 + s7 -> s14 1   #R1
+reaction rxn19 s1 + s8 -> s13 1   #R1
+reaction rxn20 s1 + s8 -> s15 1   #R1
+reaction rxn21 s1 + s9 -> s14 1   #R1
+reaction rxn22 s1 + s9 -> s15 1   #R1
+reaction rxn23 s1 + s10 -> s13 1   #R1
+reaction rxn24 s1 + s10 -> s16 1   #R1
+reaction rxn25 s1 + s11 -> s14 1   #R1
+reaction rxn26 s1 + s11 -> s16 1   #R1
+reaction rxn27 s1 + s12 -> s15 1   #R1
+reaction rxn28 s1 + s12 -> s16 1   #R1
+reaction rxn29 s7 -> s17 1   #R2
+reaction rxn30 s10 -> s18 1   #R2
+reaction rxn31 s12 -> s19 1   #R2
+reaction rxn32 s9 -> s20 1   #R2
+reaction rxn33 s1 + s13 -> s21 1   #R1
+reaction rxn34 s1 + s14 -> s21 1   #R1
+reaction rxn35 s1 + s15 -> s21 1   #R1
+reaction rxn36 s1 + s16 -> s21 1   #R1
+reaction rxn37 s1 + s17 -> s22 1   #R1
+reaction rxn38 s1 + s17 -> s23 1   #R1
+reaction rxn39 s1 + s18 -> s24 1   #R1
+reaction rxn40 s1 + s18 -> s25 1   #R1
+reaction rxn41 s1 + s19 -> s26 1   #R1
+reaction rxn42 s1 + s19 -> s27 1   #R1
+reaction rxn43 s1 + s20 -> s28 1   #R1
+reaction rxn44 s1 + s20 -> s29 1   #R1
+reaction rxn45 s13 -> s22 1   #R2
+reaction rxn46 s14 -> s23 1   #R2
+reaction rxn47 s13 -> s24 1   #R2
+reaction rxn48 s16 -> s25 1   #R2
+reaction rxn49 s15 -> s26 1   #R2
+reaction rxn50 s16 -> s27 1   #R2
+reaction rxn51 s14 -> s28 1   #R2
+reaction rxn52 s15 -> s29 1   #R2
+reaction rxn53 s17 -> s30 1   #R4
+reaction rxn54 s17 -> s31 1   #R4
+reaction rxn55 s18 -> s32 1   #R4
+reaction rxn56 s18 -> s33 1   #R4
+reaction rxn57 s19 -> s34 1   #R4
+reaction rxn58 s19 -> s35 1   #R4
+reaction rxn59 s20 -> s36 1   #R4
+reaction rxn60 s20 -> s37 1   #R4
+reaction rxn61 s1 + s22 -> s38 1   #R1
+reaction rxn62 s1 + s23 -> s38 1   #R1
+reaction rxn63 s1 + s24 -> s39 1   #R1
+reaction rxn64 s1 + s25 -> s39 1   #R1
+reaction rxn65 s1 + s26 -> s40 1   #R1
+reaction rxn66 s1 + s27 -> s40 1   #R1
+reaction rxn67 s1 + s28 -> s41 1   #R1
+reaction rxn68 s1 + s29 -> s41 1   #R1
+reaction rxn69 s1 + s30 -> s42 1   #R1
+reaction rxn70 s1 + s30 -> s43 1   #R1
+reaction rxn71 s1 + s31 -> s44 1   #R1
+reaction rxn72 s1 + s31 -> s45 1   #R1
+reaction rxn73 s1 + s32 -> s46 1   #R1
+reaction rxn74 s1 + s32 -> s47 1   #R1
+reaction rxn75 s1 + s33 -> s42 1   #R1
+reaction rxn76 s1 + s33 -> s48 1   #R1
+reaction rxn77 s1 + s34 -> s49 1   #R1
+reaction rxn78 s1 + s34 -> s50 1   #R1
+reaction rxn79 s1 + s35 -> s51 1   #R1
+reaction rxn80 s1 + s35 -> s47 1   #R1
+reaction rxn81 s1 + s36 -> s52 1   #R1
+reaction rxn82 s1 + s36 -> s49 1   #R1
+reaction rxn83 s1 + s37 -> s45 1   #R1
+reaction rxn84 s1 + s37 -> s53 1   #R1
+reaction rxn85 s21 -> s38 1   #R2
+reaction rxn86 s21 -> s39 1   #R2
+reaction rxn87 s21 -> s40 1   #R2
+reaction rxn88 s21 -> s41 1   #R2
+reaction rxn89 s24 -> s54 1   #R3
+reaction rxn90 s30 -> s17 1   #R3
+reaction rxn91 s27 -> s55 1   #R3
+reaction rxn92 s32 -> s18 1   #R3
+reaction rxn93 s29 -> s56 1   #R3
+reaction rxn94 s34 -> s19 1   #R3
+reaction rxn95 s23 -> s57 1   #R3
+reaction rxn96 s37 -> s20 1   #R3
+reaction rxn97 s28 -> s57 1   #R3
+reaction rxn98 s31 -> s17 1   #R3
+reaction rxn99 s22 -> s54 1   #R3
+reaction rxn100 s33 -> s18 1   #R3
+reaction rxn101 s25 -> s55 1   #R3
+reaction rxn102 s35 -> s19 1   #R3
+reaction rxn103 s26 -> s56 1   #R3
+reaction rxn104 s36 -> s20 1   #R3
+reaction rxn105 s22 -> s42 1   #R4
+reaction rxn106 s22 -> s44 1   #R4
+reaction rxn107 s23 -> s43 1   #R4
+reaction rxn108 s23 -> s45 1   #R4
+reaction rxn109 s24 -> s46 1   #R4
+reaction rxn110 s24 -> s42 1   #R4
+reaction rxn111 s25 -> s47 1   #R4
+reaction rxn112 s25 -> s48 1   #R4
+reaction rxn113 s26 -> s49 1   #R4
+reaction rxn114 s26 -> s51 1   #R4
+reaction rxn115 s27 -> s50 1   #R4
+reaction rxn116 s27 -> s47 1   #R4
+reaction rxn117 s28 -> s52 1   #R4
+reaction rxn118 s28 -> s45 1   #R4
+reaction rxn119 s29 -> s49 1   #R4
+reaction rxn120 s29 -> s53 1   #R4
+reaction rxn121 s30 -> s7 1   #R4
+reaction rxn122 s31 -> s7 1   #R4
+reaction rxn123 s32 -> s10 1   #R4
+reaction rxn124 s33 -> s10 1   #R4
+reaction rxn125 s34 -> s12 1   #R4
+reaction rxn126 s35 -> s12 1   #R4
+reaction rxn127 s36 -> s9 1   #R4
+reaction rxn128 s37 -> s9 1   #R4
+reaction rxn129 s1 + s42 -> s58 1   #R1
+reaction rxn130 s1 + s43 -> s58 1   #R1
+reaction rxn131 s1 + s44 -> s59 1   #R1
+reaction rxn132 s1 + s45 -> s59 1   #R1
+reaction rxn133 s1 + s46 -> s60 1   #R1
+reaction rxn134 s1 + s47 -> s60 1   #R1
+reaction rxn135 s1 + s48 -> s58 1   #R1
+reaction rxn136 s1 + s49 -> s61 1   #R1
+reaction rxn137 s1 + s50 -> s61 1   #R1
+reaction rxn138 s1 + s51 -> s60 1   #R1
+reaction rxn139 s1 + s52 -> s61 1   #R1
+reaction rxn140 s1 + s53 -> s59 1   #R1
+reaction rxn141 s1 + s54 -> s62 1   #R1
+reaction rxn142 s1 + s55 -> s63 1   #R1
+reaction rxn143 s1 + s56 -> s64 1   #R1
+reaction rxn144 s1 + s57 -> s65 1   #R1
+reaction rxn145 s40 -> s66 1   #R2
+reaction rxn146 s46 -> s54 1   #R2
+reaction rxn147 s52 -> s57 1   #R2
+reaction rxn148 s41 -> s66 1   #R2
+reaction rxn149 s44 -> s54 1   #R2
+reaction rxn150 s50 -> s55 1   #R2
+reaction rxn151 s38 -> s66 1   #R2
+reaction rxn152 s48 -> s55 1   #R2
+reaction rxn153 s53 -> s56 1   #R2
+reaction rxn154 s39 -> s66 1   #R2
+reaction rxn155 s43 -> s57 1   #R2
+reaction rxn156 s51 -> s56 1   #R2
+reaction rxn157 s39 -> s62 1   #R3
+reaction rxn158 s42 -> s22 1   #R3
+reaction rxn159 s43 -> s23 1   #R3
+reaction rxn160 s40 -> s63 1   #R3
+reaction rxn161 s46 -> s24 1   #R3
+reaction rxn162 s47 -> s25 1   #R3
+reaction rxn163 s41 -> s64 1   #R3
+reaction rxn164 s49 -> s26 1   #R3
+reaction rxn165 s50 -> s27 1   #R3
+reaction rxn166 s38 -> s65 1   #R3
+reaction rxn167 s45 -> s28 1   #R3
+reaction rxn168 s53 -> s29 1   #R3
+reaction rxn169 s41 -> s65 1   #R3
+reaction rxn170 s44 -> s22 1   #R3
+reaction rxn171 s45 -> s23 1   #R3
+reaction rxn172 s38 -> s62 1   #R3
+reaction rxn173 s42 -> s24 1   #R3
+reaction rxn174 s48 -> s25 1   #R3
+reaction rxn175 s39 -> s63 1   #R3
+reaction rxn176 s47 -> s27 1   #R3
+reaction rxn177 s51 -> s26 1   #R3
+reaction rxn178 s40 -> s64 1   #R3
+reaction rxn179 s49 -> s29 1   #R3
+reaction rxn180 s52 -> s28 1   #R3
+reaction rxn181 s38 -> s58 1   #R4
+reaction rxn182 s38 -> s59 1   #R4
+reaction rxn183 s39 -> s60 1   #R4
+reaction rxn184 s39 -> s58 1   #R4
+reaction rxn185 s40 -> s61 1   #R4
+reaction rxn186 s40 -> s60 1   #R4
+reaction rxn187 s41 -> s61 1   #R4
+reaction rxn188 s41 -> s59 1   #R4
+reaction rxn189 s42 -> s13 1   #R4
+reaction rxn190 s43 -> s14 1   #R4
+reaction rxn191 s44 -> s13 1   #R4
+reaction rxn192 s45 -> s14 1   #R4
+reaction rxn193 s46 -> s13 1   #R4
+reaction rxn194 s47 -> s16 1   #R4
+reaction rxn195 s48 -> s16 1   #R4
+reaction rxn196 s49 -> s15 1   #R4
+reaction rxn197 s50 -> s16 1   #R4
+reaction rxn198 s51 -> s15 1   #R4
+reaction rxn199 s52 -> s14 1   #R4
+reaction rxn200 s53 -> s15 1   #R4
+reaction rxn201 s54 -> s24 1   #R4
+reaction rxn202 s54 -> s67 1   #R4
+reaction rxn203 s54 -> s22 1   #R4
+reaction rxn204 s55 -> s27 1   #R4
+reaction rxn205 s55 -> s68 1   #R4
+reaction rxn206 s55 -> s25 1   #R4
+reaction rxn207 s56 -> s26 1   #R4
+reaction rxn208 s56 -> s29 1   #R4
+reaction rxn209 s56 -> s69 1   #R4
+reaction rxn210 s57 -> s70 1   #R4
+reaction rxn211 s57 -> s28 1   #R4
+reaction rxn212 s57 -> s23 1   #R4
+reaction rxn213 s1 + s67 -> s71 1   #R1
+reaction rxn214 s1 + s68 -> s72 1   #R1
+reaction rxn215 s1 + s69 -> s71 1   #R1
+reaction rxn216 s1 + s70 -> s72 1   #R1
+reaction rxn217 s60 -> s62 1   #R2
+reaction rxn218 s61 -> s65 1   #R2
+reaction rxn219 s59 -> s62 1   #R2
+reaction rxn220 s61 -> s63 1   #R2
+reaction rxn221 s58 -> s63 1   #R2
+reaction rxn222 s59 -> s64 1   #R2
+reaction rxn223 s58 -> s65 1   #R2
+reaction rxn224 s60 -> s64 1   #R2
+reaction rxn225 s58 -> s38 1   #R3
+reaction rxn226 s63 -> s66 2   #R3
+reaction rxn227 s70 -> s57 2   #R3
+reaction rxn228 s60 -> s39 1   #R3
+reaction rxn229 s64 -> s66 2   #R3
+reaction rxn230 s67 -> s54 2   #R3
+reaction rxn231 s61 -> s40 1   #R3
+reaction rxn232 s65 -> s66 2   #R3
+reaction rxn233 s68 -> s55 2   #R3
+reaction rxn234 s59 -> s41 1   #R3
+reaction rxn235 s62 -> s66 2   #R3
+reaction rxn236 s69 -> s56 2   #R3
+reaction rxn237 s59 -> s38 1   #R3
+reaction rxn238 s58 -> s39 1   #R3
+reaction rxn239 s60 -> s40 1   #R3
+reaction rxn240 s61 -> s41 1   #R3
+reaction rxn241 s58 -> s21 1   #R4
+reaction rxn242 s59 -> s21 1   #R4
+reaction rxn243 s60 -> s21 1   #R4
+reaction rxn244 s61 -> s21 1   #R4
+reaction rxn245 s62 -> s39 1   #R4
+reaction rxn246 s62 -> s71 1   #R4
+reaction rxn247 s62 -> s38 1   #R4
+reaction rxn248 s63 -> s40 1   #R4
+reaction rxn249 s63 -> s72 1   #R4
+reaction rxn250 s63 -> s39 1   #R4
+reaction rxn251 s64 -> s40 1   #R4
+reaction rxn252 s64 -> s41 1   #R4
+reaction rxn253 s64 -> s71 1   #R4
+reaction rxn254 s65 -> s72 1   #R4
+reaction rxn255 s65 -> s41 1   #R4
+reaction rxn256 s65 -> s38 1   #R4
+reaction rxn257 s66 -> s63 1   #R4
+reaction rxn258 s66 -> s64 1   #R4
+reaction rxn259 s66 -> s65 1   #R4
+reaction rxn260 s66 -> s62 1   #R4
+reaction rxn261 s67 -> s46 1   #R4
+reaction rxn262 s67 -> s44 1   #R4
+reaction rxn263 s68 -> s50 1   #R4
+reaction rxn264 s68 -> s48 1   #R4
+reaction rxn265 s69 -> s51 1   #R4
+reaction rxn266 s69 -> s53 1   #R4
+reaction rxn267 s70 -> s52 1   #R4
+reaction rxn268 s70 -> s43 1   #R4
+reaction rxn269 s72 -> s65 2   #R3
+reaction rxn270 s71 -> s62 2   #R3
+reaction rxn271 s72 -> s63 2   #R3
+reaction rxn272 s71 -> s64 2   #R3
+reaction rxn273 s71 -> s60 1   #R4
+reaction rxn274 s71 -> s59 1   #R4
+reaction rxn275 s72 -> s61 1   #R4
+reaction rxn276 s72 -> s58 1   #R4
+
+end_file
