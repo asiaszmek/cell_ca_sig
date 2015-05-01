@@ -5,6 +5,7 @@
 define dfc_ca 600000
 define graph_on
 define stimtime 5
+#define excluded_volume
 
 #--------------------General parameters--------------
 
@@ -23,9 +24,9 @@ accuracy 10
 
 molperbox 1
 
-boundaries	0	-50 50
-boundaries	1	-50	50
-boundaries	2	-50	50
+boundaries	0	-100 10000
+boundaries	1	-100 10000
+boundaries	2	-100 10000
 
 time_start 0
 time_stop	stimtime
@@ -39,9 +40,15 @@ species cam-ca2
 species cam-ca3
 species cam-ca4
 species bcamkii
-species bcamkii-cacam
-species bcamkii-cacam-pT286
+species bcamkii-camca4
+species bcamkii-camca4-pT286
 species bcamkii-pT286
+species gcamkii
+species gcamkii-camca4
+species gcamkii-camca4-pT286
+species gcamkii-camca4-pT286-dp334
+species gcamkii-camca4-dp334
+species gcamkii-dp334
 
 molecule_lists ca_lst cam_lst bcamkii_lst
 mol_list ca		ca_lst
@@ -59,8 +66,9 @@ endif
 
 difc ca			dfc_ca
 difc cam*		50000
-difc bcamkii	0
-difc bcamkii-*	
+difc bcamkii	0 
+difc bcamkii-*	1000	#Lu etal 2014 Deff_max in dendrite is 1 um^2/s
+difc gcamkii*	1000		
 
 define cam1_on		57018000 		#NT_on+CT_on
 define cam1_off 	162.6			#NT_off+CT_off
@@ -70,9 +78,15 @@ define cam3_on		328100			#NR_on+CR_on
 define cam3_off		44.0130			#NR_off+CR_off
 define cam4_on		328100			#NR_on+CR_on
 define cam4_off		44.0130			#NR_off+CR_off
+define cam4-bcamkii-on
+define cam4-bcamkii-pT286
+define 
 
 #------------surfaces------------------
-excluded volume
+ifdefine excluded_volume
+	
+
+endif
 
 
 start_surface cell

@@ -138,7 +138,7 @@ output_root results_dif/
 output_files simplemodel_nano.txt
 output_files simplemodel.txt
 output_files ca_track.txt
-output_files ca_molpos.txt
+#output_files ca_molpos.txt
 #output_files ca_molct_x.txt
 #output_files ca_molct_y.txt
 #output_files ca_molct_z.txt
@@ -150,7 +150,7 @@ cmd e trackmol 1 ca_track.txt
 #cmd e molcountspace ca y -50 50 25 -10 10 -10 10 0 ca_molct_y.txt
 #cmd e molcountspace ca z -50 50 25 -10 10 -10 10 0 ca_molct_z.txt
 
-cmd e writeVTK ../vtk/simplemodl
+#cmd e writeVTK ../vtk/simplemodl
 ifdefine rm_camca
 	cmd e killmol cam-ca4
 endif

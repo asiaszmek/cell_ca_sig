@@ -6,14 +6,13 @@
 units: nm ms
 */
 
-define ca_src  3
+#define ca_src  10
 #define ca_int  0.001	#1 ca2+ per 10 usec
 define ca_int  0.001
 #define dfc_ca 500000
 define dfc_ca 50000
 define stimtime 200
 #define graph_on
-define cam_gradient
 
 #-------------General parameters-------
 
@@ -184,19 +183,13 @@ end_compartment
 
 
 #------------molecules in compartment--
-ifdefine cam_gradient
-	compartment_mol 58646   cam 	nano
-	compartment_mol 146 	camca1  nano
-	compartment_mol 13  	camca2  nano
-	compartment_mol	9094	cam 	cytol
-	compartment_mol 23 		camca1  cytol
-	compartment_mol 2  		camca2  cytol  
-else
-	compartment_mol 4113    cam 	nano
-	compartment_mol 1	 	camca1  nano
-	compartment_mol	48350	cam 	cytol
-	compartment_mol 12 		camca1  cytol
-endif
+
+compartment_mol 58646   cam 	nano
+compartment_mol 146 	camca1  nano
+compartment_mol 13  	camca2  nano
+compartment_mol	9094	cam 	cytol
+compartment_mol 23 		camca1  cytol
+compartment_mol 2  		camca2  cytol  
 
 compartment_mol 588		b4 		nano	#10# uM
 compartment_mol 6912    b4		cytol	#10 uM
@@ -208,8 +201,8 @@ compartment_mol 3		ca 		nano	#0.05 uM
 compartment_mol 45		ca 		cytol	#0.05 uM
 
 #------------commands------------------
-#cmd i 0 35 ca_int pointsource ca ca_src 0 0 4999.5   #single ca channel 0.0936 /usec ~ 0.03 pA#
-read_file ica_burst_10usec.txt
+cmd i 0 50 ca_int pointsource ca ca_src 0 0 4999.5   #single ca channel 0.0936 /usec ~ 0.03 pA#
+#cmd i 0 stimtime ca_int pointsource ca ca_src 0 0 -4200   #single ca channel 0.0936 /usec ~ 0.03 pA#
 
 ifdefine graph_on
 	display_size all 2
@@ -230,7 +223,7 @@ ifdefine graph_on
 	text_display time
 	cmd b pause
 else
-	output_root results_burst_camgradient/
+	output_root results_src10_int1us/
 	output_files nano.txt
 	output_files cytol.txt
 	output_files nucleus.txt

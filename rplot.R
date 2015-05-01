@@ -19,8 +19,9 @@ bT4<-as.numeric(unlist(strsplit(toString(observs$V2[12]),",")))+4
 bT5<-as.numeric(unlist(strsplit(toString(observs$V2[13]),",")))+4
 bT6<-as.numeric(unlist(strsplit(toString(observs$V2[14]),",")))+4
 
+file_path<-"/home/neuro/Documents/cell_ca_sig/results_src10_int1us"
 library("ggplot2")
-setwd("/home/neuro/Documents/cell_ca_sig/results_src10_int10us")
+setwd(file_path)
 data_nano<-read.table("nano.txt")
 names(data_nano)<-names
 unbound_b<-data_nano[,bK0]
@@ -35,7 +36,7 @@ data_nano$phos_total<-phos_total
 #gs<-ggplot(data=data_nano, aes(x=time, y=b4)) + geom_line()+ xlab("time")
 gs<-ggplot(data=data_nano, aes(x=time, y=(camca1+2*camca2+3*camca3+4*camca4+bound_total)/ca)) + geom_line()+ xlab("time")
 
-setwd("/home/neuro/Documents/cell_ca_sig/results_src10_int10us")
+setwd(file_path)
 data_cytol<-read.table("cytol.txt")
 names(data_cytol)<-names
 unbound_b<-data_cytol[,bK0]
@@ -50,7 +51,16 @@ data_cytol$phos_total<-phos_total
 #gc<-ggplot(data=data_cytol, aes(x=time, y=b4)) + geom_line()+ xlab("time")
 gc<-ggplot(data=data_cytol, aes(x=time, y=(camca1+2*camca2+3*camca3+4*camca4+bound_total)/ca)) + geom_line()+ xlab("time")
 
-setwd("/home/neuro/Documents/cell_ca_sig/results_src10_int10us")
+setwd(file_path)
 data_nucleus<-read.table("nucleus.txt")
 names(data_nucleus)<-names
+unbound_b<-data_cytol[,bK0]
+bound_b<-rowSums(cbind(data_cytol[,bK1],2*data_cytol[,bK2],3*data_cytol[,bK3],4*data_cytol[,bK4],5*data_cytol[,bK5],6*data_cytol[,bK6]))
+phos_b<-rowSums(cbind(data_cytol[,bT1],2*data_cytol[,bT2],3*data_cytol[,bT3],4*data_cytol[,bT4],5*data_cytol[,bT5],6*data_cytol[,bT6]))
+bound_total<-rowSums(cbind(bound_b,data_cytol$g7,data_cytol$g11))
+phos_total<-rowSums(cbind(phos_b,data_cytol$g11,data_cytol$g12))
+data_cytol$bound_b<-bound_b
+data_cytol$phos_b<-phos_b
+data_cytol$bound_total<-bound_total
+data_cytol$phos_total<-phos_total
 gn<-ggplot(data_nucleus, aes(x=time, y=ca)) + geom_line()+ xlab("time")
